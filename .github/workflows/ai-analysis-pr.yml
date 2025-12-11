@@ -1,0 +1,113 @@
+name: AI Analysis (PR) — Checklist and Comment
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  analyze-pr:
+    runs-on: ubuntu-latest
+    name: Run checks and comment on PR
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run checks and collect logs
+        run: |
+          mkdir -p reports
+
+          run_cmd() {
+            name="$1"; shift
+            outfile="reports/${name}.log"
+            statusfile="reports/${name}.status"
+            echo "=== Running $name ==="
+            if "$@" >"$outfile" 2>&1; then
+              echo "PASS" > "$statusfile"
+            else
+              echo "FAIL" > "$statusfile"
+            fi
+          }
+
+          # typecheck
+          if node -e "process.exit(require('./package.json').scripts && require('./package.json').scripts.typecheck ? 0 : 1)"; then
+            run_cmd typecheck npm run typecheck
+          else
+            echo "SKIP" > reports/typecheck.status
+            echo "typecheck script not found" > reports/typecheck.log
+          fi
+
+          # build
+          run_cmd build npm run build
+
+          # lint
+          if node -e "process.exit(require('./package.json').scripts && require('./package.json').scripts.lint ? 0 : 1)"; then
+            run_cmd lint npm run lint
+          else
+            echo "SKIP" > reports/lint.status
+            echo "lint script not found" > reports/lint.log
+          fi
+
+          # test
+          if node -e "process.exit(require('./package.json').scripts && require('./package.json').scripts.test ? 0 : 1)"; then
+            run_cmd test npm test --silent
+          else
+            echo "SKIP" > reports/test.status
+            echo "test script not found" > reports/test.log
+          fi
+
+          # bundle sizes
+          echo "## Bundle sizes" > reports/summary.md
+          if [ -d dist/assets ]; then
+            for f in dist/assets/*; do
+              [ -f "$f" ] || continue
+              size=$(stat -c%s "$f")
+              echo "- $(basename "$f"): ${size} bytes" >> reports/summary.md
+            done
+          else
+            echo "- dist/assets not found" >> reports/summary.md
+          fi
+
+          # summary of checks
+          echo "# AI Analysis Summary" > reports/summary_full.md
+          for name in typecheck build lint test; do
+            status=$(cat reports/${name}.status 2>/dev/null || echo SKIP)
+            echo "## ${name} — ${status}" >> reports/summary_full.md
+            echo '```' >> reports/summary_full.md
+            tail -n 200 reports/${name}.log 2>/dev/null || true
+            echo '```' >> reports/summary_full.md
+          done
+          cat reports/summary.md >> reports/summary_full.md
+
+      - name: Comment summary on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue_number = context.issue.number;
+            const marker = '<!-- ai-analysis -->\n';
+            const body = fs.readFileSync('reports/summary_full.md','utf8');
+            const commentBody = marker + body;
+
+            // Find existing comment by this workflow (marker)
+            const { data: comments } = await github.rest.issues.listComments({ owner, repo, issue_number });
+            const existing = comments.find(c => c.body && c.body.startsWith(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body: commentBody });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body: commentBody });
+            }
