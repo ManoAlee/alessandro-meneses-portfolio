@@ -4,6 +4,7 @@ import { Menu, X, Github, Linkedin, Home, User, Briefcase, Cpu, Code, Mail } fro
 import { useLocation, useNavigate } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import { useScrollSpy } from "../hooks/useScrollSpy";
+import { useGame } from "../context/GameContext"; // NEW
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,6 +13,7 @@ export default function Navbar() {
   const { scrollY } = useScroll();
   const location = useLocation();
   const navigate = useNavigate();
+  const { isGameStarted } = useGame(); // NEW
 
   // Smart Scroll Direction Detection
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -54,6 +56,9 @@ export default function Navbar() {
     { name: "Contato", id: "contact", icon: <Mail size={16} /> },
   ];
 
+  // Hide if game not started
+  if (!isGameStarted) return null;
+
   return (
     <>
         <motion.nav
@@ -83,7 +88,7 @@ export default function Navbar() {
                 {/* Desktop Nav Items */}
                 <ul className="hidden md:flex items-center gap-1 mx-2">
                     {navLinks.map((link) => (
-                        <li key={link.id}>
+                        <li key={link.id} className="relative">
                             <button
                                 onClick={() => handleNavClick(link.id)}
                                 className={`
@@ -124,6 +129,14 @@ export default function Navbar() {
                     </div>
 
                     {/* Mobile Toggle */}
+                    <a 
+                        href="/cv" 
+                        target="_blank"
+                        className="hidden md:flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary border border-primary/50 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-black transition-all shadow-[0_0_10px_rgba(6,182,212,0.2)]"
+                    >
+                        Sys.View_CV
+                    </a>
+
                     <button 
                         className="md:hidden p-2 rounded-full text-white hover:bg-white/10" 
                         onClick={() => setIsOpen(!isOpen)}

@@ -1,88 +1,76 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useGame } from "../context/GameContext";
 
 export default function SystemHUD() {
-  const [time, setTime] = useState("");
-  const [coords, setCoords] = useState({ x: 0, y: 0 });
-  const [scroll, setScroll] = useState(0);
+  const [time, setTime] = useState(new Date());
+  
+  // Connect to Game Engine
+  const { level, xp, isGameStarted } = useGame();
+
+  // Level 1: 0-1000, Level 2: 1000-2000, etc.
+  const nextLevelXp = level * 1000;
+  const currentLevelBase = (level - 1) * 1000;
+  const progress = Math.min(100, Math.max(0, ((xp - currentLevelBase) / (nextLevelXp - currentLevelBase)) * 100));
 
   useEffect(() => {
-    // Clock
-    const timer = setInterval(() => {
-      setTime(new Date().toLocaleTimeString('pt-BR', { hour12: false }));
-    }, 1000);
-
-    // Mouse Tracker
-    const handleMouseMove = (e: MouseEvent) => {
-      setCoords({ x: e.clientX, y: e.clientY });
-    };
-
-    // Scroll Tracker
-    const handleScroll = () => {
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      setScroll(Math.round(scrolled));
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      clearInterval(timer);
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("scroll", handleScroll);
-    };
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
   }, []);
 
+  // Hide if game not started (Moved after all hooks)
+  if (!isGameStarted) return null;
+
   return (
-    <div className="fixed inset-0 pointer-events-none z-[100] overflow-hidden hidden md:block">
-      {/* Scanlines Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%] pointer-events-none z-[101]" />
+    <div className="fixed inset-0 pointer-events-none z-40">
+      {/* SCANLINES OVERLAY */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[size:100%_4px,3px_100%] pointer-events-none" />
+
+      {/* Top Left: System Bio & RPG Stats */}
+      <div className="absolute top-4 left-4 md:top-8 md:left-8 flex flex-col gap-4 pointer-events-auto">
+          {/* Metadata - Hidden on mobile */}
+          <div className="hidden md:block text-[10px] font-mono text-primary/60 tracking-widest uppercase mb-2">
+            <div>SYS.VER: 3.0.0-GAMIFIED</div>
+            <div>USR: ADMIN</div>
+            <div>NET: SECURE</div>
+            <div className="mt-2 text-white animate-pulse">PRESS [CTRL+K] FOR CMD</div>
+          </div>
+
+          {/* RPG Level Badge - Compact on Mobile */}
+          <div className="flex items-center gap-3 bg-[#0f1623]/80 backdrop-blur-md p-2 md:p-3 rounded border border-white/10 shadow-lg scale-90 md:scale-100 origin-top-left transition-transform">
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded bg-primary/20 flex items-center justify-center border border-primary text-primary font-bold text-sm md:text-lg">
+                  {level}
+              </div>
+              <div className="flex flex-col gap-1 w-24 md:w-32">
+                  <div className="flex justify-between text-[8px] md:text-[10px] text-primary uppercase font-bold">
+                      <span>Level {level}</span>
+                      <span>{Math.floor(xp)} XP</span>
+                  </div>
+                  {/* XP Bar */}
+                  <div className="w-full h-1 md:h-1.5 bg-white/10 rounded-full overflow-hidden">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        animate={{ width: `${progress}%` }}
+                        transition={{ duration: 1 }}
+                        className="h-full bg-gradient-to-r from-primary to-purple-500"
+                      />
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      {/* Bottom Rights: Metrics - Hidden on mobile to save space */}
+      <div className="hidden md:block absolute bottom-8 right-8 text-right font-mono text-[10px] text-primary/40">
+         <div>CPU: 12%</div>
+         <div>MEM: 480MB</div>
+         <div>{time.toLocaleTimeString()}</div>
+      </div>
       
-      {/* Top Left: System Bio */}
-      <div className="absolute top-8 left-8 text-[10px] font-mono text-primary/60 tracking-widest uppercase">
-        <div>SYS.VER: 2.5.0-RC</div>
-        <div>USR: ANONYMOUS</div>
-        <div>NET: CONNECTED_SECURE</div>
-        <div className="mt-2 text-white animate-pulse">PRESS [CTRL+K] FOR CMD</div>
-      </div>
-
-      {/* Top Right: Clock */}
-      <div className="absolute top-8 right-8 text-xs font-mono text-primary font-bold">
-        [{time}]
-      </div>
-
-      {/* Bottom Left: Coords */}
-      <div className="absolute bottom-8 left-8 text-[10px] font-mono text-slate-500">
-        <div>POS: X:{coords.x} Y:{coords.y}</div>
-        <div>MEM: OPTIMIZED</div>
-      </div>
-
-      {/* Bottom Right: Scroll */}
-      <div className="absolute bottom-8 right-8 text-[10px] font-mono text-primary flex items-center gap-2">
-        <span>SCROLL_DEPTH</span>
-        <div className="w-24 h-1 bg-white/10 rounded-full overflow-hidden">
-             <div className="h-full bg-primary transition-all duration-100 ease-linear" style={{ width: `${scroll}%` }} />
-        </div>
-        <span>{scroll}%</span>
-      </div>
-
-      {/* Crosshairs */}
-      <div className="absolute top-1/2 left-8 w-2 h-2 border-l border-t border-white/20" />
-      <div className="absolute top-1/2 right-8 w-2 h-2 border-r border-t border-white/20" />
-      <div className="absolute bottom-8 left-1/2 w-2 h-2 border-l border-b border-white/20" />
-
-      {/* Custom Cursor Circle Interaction */}
-      <motion.div
-        className="fixed w-8 h-8 rounded-full border border-primary/50 mix-blend-exclusion pointer-events-none z-[102]"
-        animate={{ x: coords.x - 16, y: coords.y - 16 }}
-        transition={{ type: "tween", ease: "backOut", duration: 0.1 }}
-      />
-      <div 
-        className="fixed w-1 h-1 bg-white rounded-full mix-blend-exclusion pointer-events-none z-[102]"
-        style={{ left: coords.x, top: coords.y }}
-      />
+      {/* Corner Accents - Subtle on mobile */}
+      <div className="absolute top-0 left-0 w-8 h-8 md:w-16 md:h-16 border-t border-l border-white/10 rounded-tl-3xl opacity-50" />
+      <div className="absolute top-0 right-0 w-8 h-8 md:w-16 md:h-16 border-t border-r border-white/10 rounded-tr-3xl opacity-50" />
+      <div className="absolute bottom-0 left-0 w-8 h-8 md:w-16 md:h-16 border-b border-l border-white/10 rounded-bl-3xl opacity-50" />
+      <div className="absolute bottom-0 right-0 w-8 h-8 md:w-16 md:h-16 border-b border-r border-white/10 rounded-br-3xl opacity-50" />
     </div>
   );
 }

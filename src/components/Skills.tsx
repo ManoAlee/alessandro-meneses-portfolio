@@ -1,6 +1,7 @@
 import { userData } from "../data/user";
 import Reveal from "./Reveal";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion"; // NEW
 
 export default function Skills() {
   return (
@@ -18,9 +19,23 @@ export default function Skills() {
           </Reveal>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={{
+                visible: { transition: { staggerChildren: 0.1 } }
+            }}
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
           {Object.entries(userData.skills).map(([category, skills], index) => (
-            <Reveal key={index} width="100%">
+            <motion.div 
+                key={index} 
+                variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0 }
+                }}
+            >
                 <div className="h-full bg-[#0f1623] border border-white/5 rounded-2xl p-8 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-all duration-300 group hover:-translate-y-2">
                 <h3 className="text-xl font-bold text-white mb-6 capitalize border-b border-white/10 pb-4 group-hover:border-primary/50 transition-colors">
                     {category}
@@ -37,9 +52,9 @@ export default function Skills() {
                     ))}
                 </div>
                 </div>
-            </Reveal>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

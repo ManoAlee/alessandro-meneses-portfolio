@@ -1,8 +1,17 @@
+import { useState } from "react"; // NEW
 import { userData } from "../data/user";
-import { Mail, Linkedin, Github, Send, Terminal } from "lucide-react";
+import { Mail, Linkedin, Github, Send, Terminal, Copy, Check } from "lucide-react"; // Added Copy, Check
 import Reveal from "./Reveal";
 
 export default function Contact() {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(userData.profile.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <section id="contact" className="py-32 bg-[#050a14] relative overflow-hidden">
         {/* Matrix Rain / Hex Background */}
@@ -37,18 +46,28 @@ export default function Contact() {
                                 <Terminal size={18} /> CANAIS_DIRETOS:
                             </h3>
                             
-                            <a 
-                                href={`mailto:${userData.profile.email}`}
-                                className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-primary/10 hover:border-primary/50 transition-all group"
-                            >
-                                <div className="p-3 rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-black transition-colors">
-                                    <Mail size={24} />
-                                </div>
-                                <div>
-                                    <div className="text-xs text-slate-500 uppercase tracking-wider">Email Protocol</div>
-                                    <div className="text-white font-mono text-sm md:text-base">{userData.profile.email}</div>
-                                </div>
-                            </a>
+                            <div className="relative group">
+                                <a 
+                                    href={`mailto:${userData.profile.email}`}
+                                    className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-primary/10 hover:border-primary/50 transition-all pr-16"
+                                >
+                                    <div className="p-3 rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-black transition-colors">
+                                        <Mail size={24} />
+                                    </div>
+                                    <div>
+                                        <div className="text-xs text-slate-500 uppercase tracking-wider">Email Protocol</div>
+                                        <div className="text-white font-mono text-sm md:text-base">{userData.profile.email}</div>
+                                    </div>
+                                </a>
+                                
+                                <button
+                                    onClick={(e) => { e.preventDefault(); handleCopy(); }}
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 text-slate-400 hover:text-white transition-all"
+                                    title="Copiar Email"
+                                >
+                                    {copied ? <Check size={18} className="text-green-400" /> : <Copy size={18} />}
+                                </button>
+                            </div>
 
                             <div className="flex gap-4">
                                 <a 

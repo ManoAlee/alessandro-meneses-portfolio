@@ -7,10 +7,12 @@ interface ProjectModalProps {
   project: any;
 }
 
+import { createPortal } from "react-dom"; // NEW
+
 export default function ProjectModal({ isOpen, onClose, project }: ProjectModalProps) {
   if (!project) return null;
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <>
@@ -124,6 +126,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
           </div>
         </>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }

@@ -5,6 +5,7 @@ interface GameState {
   xp: number;
   level: number;
   achievements: string[];
+  isGameStarted: boolean; // NEW
   quests: {
     visitedHero: boolean;
     visitedAbout: boolean;
@@ -19,6 +20,7 @@ interface GameContextType extends GameState {
   addXp: (amount: number) => void;
   unlockAchievement: (id: string) => void;
   completeQuest: (questId: keyof GameState['quests']) => void;
+  startGame: () => void; // NEW
 }
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
@@ -26,6 +28,7 @@ const GameContext = createContext<GameContextType | undefined>(undefined);
 export function GameProvider({ children }: { children: ReactNode }) {
   const [xp, setXp] = useState(0);
   const [level, setLevel] = useState(1);
+  const [isGameStarted, setIsGameStarted] = useState(false); // NEW
   const [achievements, setAchievements] = useState<string[]>([]);
   const [quests, setQuests] = useState({
     visitedHero: false,
@@ -36,7 +39,9 @@ export function GameProvider({ children }: { children: ReactNode }) {
     foundEasterEgg: false,
   });
 
-  // Level Up Logic
+  const startGame = () => setIsGameStarted(true);
+  
+  // ... existing effects ...
   useEffect(() => {
     const nextLevelXp = level * 1000;
     if (xp >= nextLevelXp) {
@@ -91,7 +96,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <GameContext.Provider value={{ xp, level, achievements, quests, addXp, unlockAchievement, completeQuest }}>
+    <GameContext.Provider value={{ xp, level, achievements, quests, isGameStarted, addXp, unlockAchievement, completeQuest, startGame }}>
       {children}
       <Toaster />
     </GameContext.Provider>

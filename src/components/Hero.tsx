@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { motion, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { ArrowRight, Terminal, Cpu, Network } from "lucide-react";
 import { userData } from "../data/user";
 import Reveal from "./Reveal";
@@ -146,6 +146,14 @@ export default function Hero() {
                         className="text-slate-500 hover:text-white transition-colors text-sm"
                     >
                         Ver Experiência
+                    </a>
+                    
+                    <a 
+                        href="/cv" 
+                        target="_blank"
+                        className="md:hidden flex items-center gap-2 text-primary/80 text-sm border border-primary/20 px-4 py-2 rounded-full hover:bg-primary/10 transition-colors"
+                    >
+                        Ver CV Completo
                     </a>
                 </motion.div>
             </div>

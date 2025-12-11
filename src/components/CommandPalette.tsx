@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Monitor, User, Code, Mail, Terminal } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { SystemContext } from "../App";
+import { SystemContext } from "../context/SystemContext"; // Updated Import
 
 export default function CommandPalette() {
   const [isOpen, setIsOpen] = useState(false);
@@ -109,7 +109,7 @@ export default function CommandPalette() {
                     key={index}
                     onClick={() => handleSelect(index)}
                     onMouseEnter={() => setSelectedIndex(index)}
-                    className={`w-full px-4 py-3 flex items-center justify-between transition-colors ${
+                    className={`w-full px-4 py-3 flex items-center justify-between transition-colors relative ${
                       index === selectedIndex ? "bg-primary/10 text-primary" : "text-slate-300 hover:bg-white/5"
                     }`}
                   >
