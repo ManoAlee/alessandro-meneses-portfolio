@@ -1,0 +1,113 @@
+name: AI Analysis — Checklist & Report
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [ main ]
+
+jobs:
+  analyze:
+    name: Run AI analysis checklist and publish report
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run analysis and create report
+        run: |
+          mkdir -p reports
+
+          run_cmd() {
+            name="$1"; shift
+            outfile="reports/${name}.log"
+            statusfile="reports/${name}.status"
+            echo "=== Running $name ==="
+            if "$@" >"$outfile" 2>&1; then
+              echo "PASS" > "$statusfile"
+            else
+              echo "FAIL" > "$statusfile"
+            fi
+          }
+
+          # typecheck (if script exists)
+          if node -e "process.exit(require('./package.json').scripts && require('./package.json').scripts.typecheck ? 0 : 1)"; then
+            run_cmd typecheck npm run typecheck
+          else
+            echo "SKIP" > reports/typecheck.status
+            echo "typecheck script not found" > reports/typecheck.log
+          fi
+
+          # build (always attempt)
+          run_cmd build npm run build
+
+          # lint (if script exists)
+          if node -e "process.exit(require('./package.json').scripts && require('./package.json').scripts.lint ? 0 : 1)"; then
+            run_cmd lint npm run lint
+          else
+            echo "SKIP" > reports/lint.status
+            echo "lint script not found" > reports/lint.log
+          fi
+
+          # test (if script exists)
+          if node -e "process.exit(require('./package.json').scripts && require('./package.json').scripts.test ? 0 : 1)"; then
+            run_cmd test npm test --silent
+          else
+            echo "SKIP" > reports/test.status
+            echo "test script not found" > reports/test.log
+          fi
+
+          # collect bundle sizes
+          echo '{"bundles":{' > reports/bundle.json
+          first=true
+          if [ -d dist/assets ]; then
+            for f in dist/assets/*; do
+              [ -f "$f" ] || continue
+              size=$(stat -c%s "$f")
+              name=$(basename "$f")
+              if [ "$first" = true ]; then first=false; else echo "," >> reports/bundle.json; fi
+              printf '"%s":%s' "$name" "$size" >> reports/bundle.json
+            done
+          fi
+          echo '}}' >> reports/bundle.json
+
+          # assemble JSON report (trim logs to avoid huge files)
+          python3 - <<'PY'
+import json, os
+report = {"status":"OK","checks":{},"artifacts":{}}
+for name in ["typecheck","build","lint","test"]:
+    status_file = f"reports/{name}.status"
+    log_file = f"reports/{name}.log"
+    status = "MISSING"
+    if os.path.exists(status_file):
+        status = open(status_file).read().strip()
+    log = ""
+    if os.path.exists(log_file):
+        data = open(log_file,'rb').read()
+        try:
+            log = data.decode('utf-8',errors='replace')
+        except:
+            log = str(data)[:20000]
+    report["checks"][name] = {"status": status, "log": log[:20000]}
+if os.path.exists('reports/bundle.json'):
+    try:
+        report['artifacts'] = json.load(open('reports/bundle.json'))
+    except Exception as e:
+        report['artifacts'] = {"error": str(e)}
+open('reports/report.json','w',encoding='utf-8').write(json.dumps(report, ensure_ascii=False, indent=2))
+print('Written reports/report.json')
+PY
+
+      - name: Upload AI analysis report
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-analysis-report
+          path: reports
