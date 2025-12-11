@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useGame } from "../context/GameContext";
+import { ChevronRight } from "lucide-react";
 
 export default function SystemHUD() {
   const [time, setTime] = useState(new Date());
-  
+
   // Connect to Game Engine
   const { level, xp, isGameStarted } = useGame();
 
@@ -18,6 +19,13 @@ export default function SystemHUD() {
     return () => clearInterval(timer);
   }, []);
 
+  // Interaction State
+  const [isHovered, setIsHovered] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+
+  // Combine states: open if hovered OR clicked
+  const isOpen = isHovered || isClicked;
+
   // Hide if game not started (Moved after all hooks)
   if (!isGameStarted) return null;
 
@@ -28,49 +36,75 @@ export default function SystemHUD() {
 
       {/* Top Left: System Bio & RPG Stats */}
       <div className="absolute top-4 left-4 md:top-8 md:left-8 flex flex-col gap-4 pointer-events-auto">
-          {/* Metadata - Hidden on mobile */}
-          <div className="hidden md:block text-[10px] font-mono text-primary/60 tracking-widest uppercase mb-2">
-            <div>SYS.VER: 3.0.0-GAMIFIED</div>
-            <div>USR: ADMIN</div>
-            <div>NET: SECURE</div>
-            <div className="mt-2 text-white animate-pulse">PRESS [CTRL+K] FOR CMD</div>
+        {/* Metadata - Hidden by default for clean UX */}
+
+        {/* RPG Level Badge */}
+        <div
+          className={`
+                flex items-center gap-3 bg-[#0f1623]/90 backdrop-blur-xl border rounded-full p-2 shadow-2xl cursor-pointer group transition-all duration-300
+                ${isOpen ? 'border-primary/50 pr-6' : 'border-white/10 hover:border-white/30'}
+            `}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onClick={() => setIsClicked(!isClicked)}
+        >
+          {/* Level Circle */}
+          <div className="w-10 h-10 shrink-0 rounded-full bg-primary/20 flex items-center justify-center border border-primary text-primary font-bold text-sm shadow-[0_0_10px_rgba(6,182,212,0.3)] relative z-10">
+            {level}
           </div>
 
-          {/* RPG Level Badge - Compact on Mobile */}
-          <div className="flex items-center gap-3 bg-[#0f1623]/80 backdrop-blur-md p-2 md:p-3 rounded border border-white/10 shadow-lg scale-90 md:scale-100 origin-top-left transition-transform">
-              <div className="w-8 h-8 md:w-10 md:h-10 rounded bg-primary/20 flex items-center justify-center border border-primary text-primary font-bold text-sm md:text-lg">
-                  {level}
-              </div>
-              <div className="flex flex-col gap-1 w-24 md:w-32">
-                  <div className="flex justify-between text-[8px] md:text-[10px] text-primary uppercase font-bold">
+          {/* Collapsible Info */}
+          <div className="relative overflow-hidden">
+            <AnimatePresence mode="wait">
+              {isOpen && (
+                <motion.div
+                  initial={{ width: 0, opacity: 0 }}
+                  animate={{ width: "auto", opacity: 1 }}
+                  exit={{ width: 0, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: "circOut" }}
+                  className="flex flex-col gap-1 whitespace-nowrap pl-1"
+                >
+                  <div className="w-32">
+                    <div className="flex justify-between text-[10px] text-primary uppercase font-bold mb-1 px-1">
                       <span>Level {level}</span>
                       <span>{Math.floor(xp)} XP</span>
-                  </div>
-                  {/* XP Bar */}
-                  <div className="w-full h-1 md:h-1.5 bg-white/10 rounded-full overflow-hidden">
-                      <motion.div 
+                    </div>
+                    {/* XP Bar */}
+                    <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                      <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${progress}%` }}
-                        transition={{ duration: 1 }}
-                        className="h-full bg-gradient-to-r from-primary to-purple-500"
+                        className="h-full bg-gradient-to-r from-primary to-purple-500 shadow-[0_0_5px_currentColor]"
                       />
+                    </div>
                   </div>
-              </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
+
+          {/* Chevron Hint */}
+          <motion.div
+            animate={{ rotate: isOpen ? 180 : 0 }}
+            className="text-slate-500 hidden md:block"
+          >
+            <ChevronRight size={14} />
+          </motion.div>
+        </div>
       </div>
 
-      {/* Bottom Rights: Metrics - Hidden on mobile to save space */}
-      <div className="hidden md:block absolute bottom-8 right-8 text-right font-mono text-[10px] text-primary/40">
-         <div>CPU: 12%</div>
-         <div>MEM: 480MB</div>
-         <div>{time.toLocaleTimeString()}</div>
+      {/* Bottom Rights: Metrics */}
+      <div className="hidden md:block absolute bottom-8 right-8 text-right font-mono text-[10px] text-primary/40 pointer-events-auto hover:text-primary transition-colors cursor-help">
+        <div>CPU: 12%</div>
+        <div>MEM: 480MB</div>
+        <div>{time.toLocaleTimeString()}</div>
       </div>
-      
-      {/* Corner Accents - Subtle on mobile */}
-      <div className="absolute top-0 left-0 w-8 h-8 md:w-16 md:h-16 border-t border-l border-white/10 rounded-tl-3xl opacity-50" />
-      <div className="absolute top-0 right-0 w-8 h-8 md:w-16 md:h-16 border-t border-r border-white/10 rounded-tr-3xl opacity-50" />
-      <div className="absolute bottom-0 left-0 w-8 h-8 md:w-16 md:h-16 border-b border-l border-white/10 rounded-bl-3xl opacity-50" />
-      <div className="absolute bottom-0 right-0 w-8 h-8 md:w-16 md:h-16 border-b border-r border-white/10 rounded-br-3xl opacity-50" />
+
+      {/* Corner Accents */}
+      <div className="fixed top-0 left-0 w-8 h-8 md:w-16 md:h-16 border-t border-l border-white/5 rounded-tl-3xl opacity-30 pointer-events-none" />
+      <div className="fixed top-0 right-0 w-8 h-8 md:w-16 md:h-16 border-t border-r border-white/5 rounded-tr-3xl opacity-30 pointer-events-none" />
+      <div className="fixed bottom-0 left-0 w-8 h-8 md:w-16 md:h-16 border-b border-l border-white/5 rounded-bl-3xl opacity-30 pointer-events-none" />
+      <div className="fixed bottom-0 right-0 w-8 h-8 md:w-16 md:h-16 border-b border-r border-white/5 rounded-br-3xl opacity-30 pointer-events-none" />
     </div>
   );
 }

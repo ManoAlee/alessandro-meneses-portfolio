@@ -28,7 +28,7 @@ const GameContext = createContext<GameContextType | undefined>(undefined);
 export function GameProvider({ children }: { children: ReactNode }) {
   const [xp, setXp] = useState(0);
   const [level, setLevel] = useState(1);
-  const [isGameStarted, setIsGameStarted] = useState(false);
+  const [isGameStarted, setIsGameStarted] = useState(true);
   const [achievements, setAchievements] = useState<string[]>([]);
   const [quests, setQuests] = useState({
     visitedHero: false,
@@ -50,11 +50,11 @@ export function GameProvider({ children }: { children: ReactNode }) {
     if (xp >= nextLevelXp) {
       setLevel((prev) => prev + 1);
       toast.custom((t) => (
-        <SystemToast 
-            t={t} 
-            title="SYSTEM UPGRADE" 
-            message={`Clearance Level ${level + 1} Granted`} 
-            type="level" 
+        <SystemToast
+          t={t}
+          title="SYSTEM UPGRADE"
+          message={`Clearance Level ${level + 1} Granted`}
+          type="level"
         />
       ));
     }
@@ -65,11 +65,11 @@ export function GameProvider({ children }: { children: ReactNode }) {
       setAchievements((prev) => [...prev, id]);
       addXp(500);
       toast.custom((t) => (
-        <SystemToast 
-            t={t} 
-            title="ACHIEVEMENT UNLOCKED" 
-            message={id} 
-            type="achievement" 
+        <SystemToast
+          t={t}
+          title="ACHIEVEMENT UNLOCKED"
+          message={id}
+          type="achievement"
         />
       ));
     }
@@ -80,11 +80,11 @@ export function GameProvider({ children }: { children: ReactNode }) {
       setQuests((prev) => ({ ...prev, [questId]: true }));
       addXp(200);
       toast.custom((t) => (
-        <SystemToast 
-            t={t} 
-            title="QUEST COMPLETE" 
-            message={questId.replace('visited', 'Explore ')} 
-            type="quest" 
+        <SystemToast
+          t={t}
+          title="QUEST COMPLETE"
+          message={questId.replace('visited', 'Explore ')}
+          type="quest"
         />
       ), { duration: 4000 });
     }

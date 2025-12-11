@@ -1,5 +1,5 @@
 
-$log = "debug_output.log"
+$log = "debug_output.txt"
 "Starting..." | Out-File $log
 try {
     # Check node

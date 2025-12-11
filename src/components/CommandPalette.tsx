@@ -13,7 +13,8 @@ import {
   Moon,
   Sun,
   Laptop,
-  FileText
+  FileText,
+  Activity
 } from "lucide-react";
 import { useGame } from "../context/GameContext";
 
@@ -46,6 +47,7 @@ export default function CommandPalette() {
     }, 100);
   };
 
+  // Only show if game is active or user knows the shortcut
   // Only show if game is active or user knows the shortcut
   if (!isGameStarted) return null;
 
@@ -89,6 +91,7 @@ export default function CommandPalette() {
 
             <Command.Group heading="System" className="text-xs font-medium text-slate-500 mb-2 px-2">
               <SystemItem icon={FileText} label="View Resume (CV)" onSelect={() => runCommand(() => window.open("/cv", "_blank"))} />
+              <SystemItem icon={Activity} label="Open Operations Center" onSelect={() => runCommand(() => navigate("/ops-center"))} />
               <SystemItem icon={Laptop} label="System Diagnostics" onSelect={() => runCommand(() => console.log("Running diagnostics..."))} />
             </Command.Group>
 

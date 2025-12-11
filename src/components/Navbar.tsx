@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import { Menu, X, Github, Linkedin, Home, User, Briefcase, Cpu, Code, Mail } from "lucide-react";
+import { Menu, X, Github, Linkedin, Home, User, Briefcase, Cpu, Code, Mail, Activity } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import { useScrollSpy } from "../hooks/useScrollSpy";
@@ -34,6 +34,12 @@ export default function Navbar() {
     // Handle Navigation Click
     const handleNavClick = (id: string) => {
         setIsOpen(false);
+
+        if (id.startsWith("/")) {
+            navigate(id);
+            return;
+        }
+
         if (location.pathname !== "/") {
             navigate("/");
             // Wait for route change then scroll
@@ -53,10 +59,12 @@ export default function Navbar() {
         { name: "Exp", id: "experience", icon: <Briefcase size={16} /> },
         { name: "Skills", id: "skills", icon: <Cpu size={16} /> },
         { name: "Projetos", id: "projects", icon: <Code size={16} /> },
+        { name: "Ops", id: "/ops-center", icon: <Activity size={16} /> }, // NEW
         { name: "Contato", id: "contact", icon: <Mail size={16} /> },
     ];
 
     // Hide if game not started
+    // Hide if game is not started
     if (!isGameStarted) return null;
 
     return (

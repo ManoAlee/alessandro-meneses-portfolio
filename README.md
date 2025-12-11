@@ -209,10 +209,14 @@ Para rodar este projeto, você precisa ter o Node.js instalado. Siga os passos a
 
 ## Funcionalidades
 
-- Navegação entre páginas (Home e About).
-- Exibição de projetos com detalhes.
-- Design responsivo e moderno.
+- **OpsCenter Dashboard (Novo):** Visualização gamificada de carreira, skills e projetos estilo "Centro de Comando".
+- **Resume Editor V2 (Novo):** Editor de CV completo (Experiência, Projetos, Educação) com exportação otimizada para PDF.
+- **SystemHUD Inteativo:** Elemento de nível/XP colapsável e responsivo.
+- **Command Palette:** Navegação rápida via `Ctrl+K`.
+- **Navegação entre páginas:** Home, About, OpsCenter, Resume.
+- **Exibição de projetos:** Detalhes ricos com tags e links.
+- **Design:** Responsivo, moderno com temas Cyberpunk/Sci-Fi.
 
 ## Contato
 
-Para entrar em contato, você pode me encontrar nas redes sociais ou enviar um e-mail para [seu-email@example.com].
+Para entrar em contato, você pode me encontrar nas redes sociais ou enviar um e-mail para [ale_meneses2004@hotmail.com].

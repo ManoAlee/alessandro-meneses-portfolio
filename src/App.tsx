@@ -17,8 +17,9 @@ import { SystemContext } from "./context/SystemContext"; // NEW import
 // Pages
 import Home from "./pages/Home";
 import SkillDetail from "./pages/SkillDetail";
-import NotFound from "./pages/NotFound"; 
-import Resume from "./pages/Resume"; // NEW
+import NotFound from "./pages/NotFound";
+import Resume from "./pages/Resume";
+import OpsCenter from "./pages/OpsCenter"; // NEW
 import { useEffect } from "react";
 
 // (Removed inline SystemContext export)
@@ -39,8 +40,12 @@ const PageWrapper = ({ children }: { children: React.ReactNode }) => (
     initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
     animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
     exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
-    transition={{ duration: 0.5, ease: "anticipate" }}
-    className="w-full relative"
+    transition={{
+      duration: 0.5,
+      ease: "anticipate",
+      filter: { duration: 0.5, ease: "easeInOut" } // Separate smooth ease for filter to avoid overshooting 
+    }}
+    className="w-full relative will-change-[transform,opacity,filter]"
   >
     {children}
   </motion.div>
@@ -48,28 +53,29 @@ const PageWrapper = ({ children }: { children: React.ReactNode }) => (
 
 // Wrapper to handle location-based effects
 function Content() {
-    const location = useLocation();
-    
-    return (
-        <div className="bg-background text-foreground min-h-screen font-sans antialiased selection:bg-primary/30 selection:text-white relative">
-            <ScrollToTop /> {/* Handle Scroll */}
-            <SystemHUD />
-            <Navbar />
-            <CommandPalette />
-            
-            <AnimatePresence mode="wait">
-                <Routes location={location} key={location.pathname}>
-                    <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
-                    <Route path="/skill/:skillId" element={<PageWrapper><SkillDetail /></PageWrapper>} />
-                    <Route path="/cv" element={<Resume />} /> {/* NEW */}
-                    <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} /> {/* Catch-all */}
-                </Routes>
-            </AnimatePresence>
-            
-            {/* Show Avatar Guide only on Home */}
-            {location.pathname === "/" && <AvatarGuide />}
-        </div>
-    );
+  const location = useLocation();
+
+  return (
+    <div className="bg-background text-foreground min-h-screen font-sans antialiased selection:bg-primary/30 selection:text-white relative">
+      <ScrollToTop /> {/* Handle Scroll */}
+      <SystemHUD />
+      <Navbar />
+      <CommandPalette />
+
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
+          <Route path="/skill/:skillId" element={<PageWrapper><SkillDetail /></PageWrapper>} />
+          <Route path="/cv" element={<Resume />} />
+          <Route path="/ops-center" element={<PageWrapper><OpsCenter /></PageWrapper>} /> {/* NEW OpsCenter */}
+          <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} /> {/* Catch-all */}
+        </Routes>
+      </AnimatePresence>
+
+      {/* Show Avatar Guide only on Home */}
+      {location.pathname === "/" && <AvatarGuide />}
+    </div>
+  );
 }
 
 function App() {
@@ -78,24 +84,24 @@ function App() {
   const [isLowPower, setIsLowPower] = useState(false);
 
   return (
-    <GameProvider> 
-        <SystemContext.Provider value={{ 
-            matrixMode, 
-            toggleMatrix: () => setMatrixMode(!matrixMode),
-            isLowPower,
-            toggleLowPower: () => setIsLowPower(!isLowPower)
-        }}>
-            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-            {matrixMode && !isLowPower && <MatrixRain />}
-            {/* Conditional Effects based on Power Mode would go here */}
-            
-            <AnimatePresence mode="wait">
-                {!booted && <SystemBoot onComplete={() => setBooted(true)} />}
-            </AnimatePresence>
-            
-            {booted && <Content />}
-            </BrowserRouter>
-        </SystemContext.Provider>
+    <GameProvider>
+      <SystemContext.Provider value={{
+        matrixMode,
+        toggleMatrix: () => setMatrixMode(!matrixMode),
+        isLowPower,
+        toggleLowPower: () => setIsLowPower(!isLowPower)
+      }}>
+        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+          {matrixMode && !isLowPower && <MatrixRain />}
+          {/* Conditional Effects based on Power Mode would go here */}
+
+          <AnimatePresence mode="wait">
+            {!booted && <SystemBoot onComplete={() => setBooted(true)} />}
+          </AnimatePresence>
+
+          {booted && <Content />}
+        </BrowserRouter>
+      </SystemContext.Provider>
     </GameProvider>
   );
 }
