@@ -123,5 +123,19 @@ export const userData = {
     "Fundamentos do Power BI",
     "Administrando Banco de Dados",
     "Microsoft Excel 2016"
-  ]
+  ],
+  setup: {
+    workstation: [
+      { name: "OS", value: "Windows 11 Pro / Ubuntu 22.04 LTS" },
+      { name: "Terminal", value: "Windows Terminal + PowerShell 7" },
+      { name: "Code Editor", value: "VS Code (Dracula Theme)" },
+      { name: "Browser", value: "Brave (Privacy Focus)" },
+    ],
+    hardware: [
+      { name: "CPU", value: "AMD Ryzen 7 5700X" },
+      { name: "RAM", value: "32GB DDR4 3200MHz" },
+      { name: "GPU", value: "NVIDIA RTX 3060 12GB" },
+      { name: "Monitor", value: "2x LG UltraGear 27' 144Hz" },
+    ]
+  }
 };

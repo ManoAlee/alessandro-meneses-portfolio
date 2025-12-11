@@ -1,5 +1,7 @@
 # Alessandro Meneses — Portfólio
 
+[![Pages build & deploy](https://github.com/ManoAlee/alessandro-meneses-portfolio/actions/workflows/pages.yml/badge.svg)](https://github.com/ManoAlee/alessandro-meneses-portfolio/actions)
+
 Repositório oficial do portfólio de Alessandro Meneses (GitHub: `manoalee`). Este projeto foi criado com Vite + React + Tailwind CSS e contém a aplicação, scripts de desenvolvimento e CI para build.
 
 Resumo do projeto
@@ -66,6 +68,37 @@ Se quiser, eu posso:
 - Criar os arquivos de caso de estudo (2–3) e imagens otimizadas para `public/`.
 - Gerar o comando `gh repo create` pronto com seu usuário GitHub (já usei `ManoAlee` como exemplo).
 - Configurar deploy automático no GitHub Pages via Actions.
+
+- Configurar deploy automático no GitHub Pages via Actions.
+
+## Deploy (guia rápido)
+
+Build localmente e verifique a saída:
+
+```powershell
+npm ci
+npm run build
+```
+
+Servir o build para verificação (preview):
+
+```powershell
+npm run serve
+# por padrão o preview estará em http://localhost:5173
+```
+
+Publicação automática:
+
+- O workflow `.github/workflows/pages.yml` (adicionado) builda `dist/` e publica usando GitHub Pages quando você dá push em `main`.
+- Se preferir publicar manualmente, instale `gh-pages` e publique:
+
+```powershell
+npm install --save-dev gh-pages
+npm run build
+npx gh-pages -d dist
+```
+
+Badge de status do CI no topo do README mostra o status do build/deploy.
 
 # Meu Portfolio — Setup e execução
 

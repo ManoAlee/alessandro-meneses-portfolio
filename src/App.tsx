@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, createContext, useContext } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -8,10 +8,20 @@ import AvatarGuide from "./components/AvatarGuide";
 import SystemHUD from "./components/SystemHUD";
 import SystemBoot from "./components/SystemBoot";
 import CommandPalette from "./components/CommandPalette";
+import MatrixRain from "./components/MatrixRain";
+
+// Context
+import { GameProvider } from "./context/GameContext"; // NEW
 
 // Pages
 import Home from "./pages/Home";
 import SkillDetail from "./pages/SkillDetail";
+
+// Simple System Context
+export const SystemContext = createContext({
+    matrixMode: false,
+    toggleMatrix: () => {},
+});
 
 const PageWrapper = ({ children }: { children: React.ReactNode }) => (
   <motion.div
@@ -50,15 +60,22 @@ function Content() {
 
 function App() {
   const [booted, setBooted] = useState(false);
+  const [matrixMode, setMatrixMode] = useState(false);
 
   return (
-    <BrowserRouter>
-      <AnimatePresence mode="wait">
-        {!booted && <SystemBoot onComplete={() => setBooted(true)} />}
-      </AnimatePresence>
-      
-      {booted && <Content />}
-    </BrowserRouter>
+    <GameProvider> 
+        <SystemContext.Provider value={{ matrixMode, toggleMatrix: () => setMatrixMode(!matrixMode) }}>
+            <BrowserRouter>
+            {matrixMode && <MatrixRain />}
+            
+            <AnimatePresence mode="wait">
+                {!booted && <SystemBoot onComplete={() => setBooted(true)} />}
+            </AnimatePresence>
+            
+            {booted && <Content />}
+            </BrowserRouter>
+        </SystemContext.Provider>
+    </GameProvider>
   );
 }
 
