@@ -86,6 +86,28 @@ npm install
 npm run dev
 ```
 
+## Makefile e atalhos rápidos
+
+Este repositório inclui um `Makefile` com alvos úteis e scripts PowerShell para acelerar o fluxo de desenvolvimento. Você pode usar o `make` (no WSL ou sistemas Unix) ou os atalhos npm abaixo no Windows.
+
+Exemplos com Make:
+
+```bash
+make help        # lista os alvos disponíveis
+make install     # npm install
+make dev         # inicia o servidor de desenvolvimento
+make build       # build de produção
+make quick-push MSG="mensagem" VERIFY=1 FORCE=1   # usa o scripts/quick-push.ps1
+make reverify    # roda a verificação completa e empurra se tudo ok
+```
+
+Atalhos npm (Windows / cross-platform):
+
+```powershell
+npm run quick-push     # abre prompt para mensagem e faz commit/push (usa scripts/quick-push.ps1)
+npm run reverify-push  # executa verificação completa (typecheck + build) e faz push se passar
+```
+
 ## Contato
 
 Para entrar em contato, envie um e-mail para: ale_meneses2004@hotmail.com
