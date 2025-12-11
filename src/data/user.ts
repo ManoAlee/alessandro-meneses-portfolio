@@ -1,64 +1,67 @@
-import { Facebook, Github, Linkedin, Mail, MapPin } from "lucide-react";
-
 export const userData = {
   profile: {
     name: "Alessandro Meneses",
-    role: "Especialista em Infraestrutura & Automação",
-    bio: "Orquestrando infraestruturas resilientes e automatizando fluxos de trabalho críticos para maximizar a eficiência operacional.",
+    role: "Graduado em Gestão da Tecnologia da Informação | Assistente de Infraestrutura JR | HelpDesk | Suporte Técnico",
+    bio: "Especialista em Suporte Técnico, Infraestrutura de TI e Automação. Graduado em Gestão da TI, com foco em transformar operações complexas em fluxos eficientes através de virtualização, backup seguro e automação de scripts.",
     email: "ale_meneses2004@hotmail.com",
-    linkedin: "https://www.linkedin.com/in/alessandro-meneses/",
+    phone: "+55 (15) 99801-7732",
+    address: "Av. Alexandrina Bertoldi Vercellino, 461, Boituva - SP",
+    linkedin: "https://www.linkedin.com/in/alessandromeneses/",
     github: "https://github.com/ManoAlee",
-    location: "São Paulo, SP"
+    location: "Boituva, São Paulo, Brasil"
   },
   skills: {
     infrastructure: [
-      "Windows Server", "Linux", "Active Directory (AD)", "DNS/DHCP", "VPN", "TCP/IP", "Hyper-V", "VMware", "Proxmox", "Office 365", "Azure AD"
+      "Windows Server", "Linux", "Active Directory (AD)", "DNS/DHCP", "VPN/SSH", "TCP/IP", "Hyper-V", "VMware", "Proxmox", "Office 365", "Azure AD", "Hardware & Cabling"
     ],
     automation: [
-      "PowerShell", "Bash", "Python", "Restic", "Rclone"
+      "PowerShell", "Bash", "Python", "Restic", "Rclone", "Log Analysis"
     ],
     support: [
-      "Troubleshooting", "Service Desk", "Hardware Maintenance", "Cabling", "Network Administration", "ITIL"
+      "Troubleshooting", "Service Desk", "Gestão de Ativos", "Manutenção Preventiva", "Documentação Técnica", "Suporte Remoto (RDP/VNC)", "ITIL"
     ],
     data: [
-      "SQL", "Power BI", "Excel", "Data Analysis"
+      "SQL", "Power BI", "Excel Avançado", "Pesquisa e Análise", "Administração de Banco de Dados"
+    ],
+    languages: [
+      "Português (Nativo)", "Inglês (Elementar)"
     ]
   },
   experience: [
     {
       company: "Automotion",
       role: "Assistente de TI JR",
-      period: "Jun 2025 - Presente", 
-      description: "Lidero a modernização da infraestrutura on-premise, migrando 100% dos servidores físicos para virtualização Proxmox. Implementei rotinas de backup criptografado (Restic) protegendo 5TB+ de dados críticos. Reduzi o tempo de resolução de chamados em 30% através da automação de scripts PowerShell.",
-      tags: ["Virtualização", "Backup Strategy", "Automação", "Windows Server"]
+      period: "Jun 2025 - Presente",
+      description: "Planejamento e administração de infraestrutura focada em alta disponibilidade. Migração de servidores físicos para Proxmox, implementação de backup robusto (Restic/Rclone) e automação via PowerShell/Bash. Gerenciamento de ativos, AD, GPO, redes (TCP/IP, VPN, Firewall) e suporte N1/N2/N3.",
+      tags: ["Proxmox", "Restic", "PowerShell", "Windows Server", "AD/GPO", "Office 365"]
     },
     {
       company: "Bellacor Indústria",
       role: "Assistente de Produção",
       period: "Abr 2024 - Dez 2024",
-      description: "Otimizei o fluxo de linha de produção, garantindo 99% de conformidade com os padrões de qualidade. Atuei na manutenção preventiva de maquinário, reduzindo paradas operacionais não planejadas.",
-      tags: ["Eficiência Operacional", "Qualidade", "Processos"]
+      description: "Operação e monitoramento de máquinas de envase, preparação de insumos e controle de qualidade visual e etiquetagem, mantendo a organização do setor.",
+      tags: ["Produção", "Qualidade", "Organização"]
     },
     {
       company: "BR Conecta",
-      role: "Analista de Rede e Comunicação de Dados Jr.",
+      role: "Analista de Rede e Comunicação de Dados Jr",
       period: "Jan 2024 - Fev 2024",
-      description: "Gerenciei incidentes de conectividade para carteira de clientes corporativos. Realizei diagnóstico e troubleshooting de redes (TCP/IP, DNS), mantendo SLA de atendimento acima de 95%.",
-      tags: ["Redes", "SLA Management", "Troubleshooting"]
+      description: "Suporte técnico focado em conectividade e infraestrutura. Atendimento ao cliente, resolução de problemas de rede e troubleshooting ágil para garantir SLA e satisfação do cliente.",
+      tags: ["Redes", "Atendimento", "Troubleshooting"]
     },
     {
       company: "Schmersal Brasil",
       role: "Assistente Administrativo",
       period: "Jan 2023 - Dez 2023",
-      description: "Digitalizei e organizei mais de 1000 documentos técnicos, facilitando auditorias de qualidade ISO. Otimizei processos de controle interno, reduzindo redundâncias administrativas.",
-      tags: ["Gestão Documental", "ISO 9001", "Processos"]
+      description: "Controle de qualidade e documentação técnica. Auditorias internas/externas (ISO), registros e inspeção de embalagens para garantia de conformidade.",
+      tags: ["ISO", "Documentação", "Qualidade"]
     },
     {
       company: "Coocerqui",
       role: "Repositor / Empacotador",
       period: "Set 2020 - Jan 2023",
-      description: "Desenvolvi soft skills de comunicação e resolução de conflitos em ambiente de alto volume. Responsável pela organização logística e controle de estoque do setor.",
-      tags: ["Logística", "Atendimento", "Trabalho em Equipe"]
+      description: "Atuação na logística interna, reposição e atendimento ao cliente.",
+      tags: ["Logística", "Atendimento"]
     }
   ],
   education: [
@@ -79,13 +82,19 @@ export const userData = {
       period: "Dez 2023"
     }
   ],
+  certifications: [
+    "Administrando Banco de Dados",
+    "Fundamentos de Data Science e IA",
+    "Fundamentos do Power BI",
+    "Microsoft Excel 2016"
+  ],
   projects: [
     {
       title: "AutoBackup-365",
-      description: "Sistema de backup automatizado utilizando Restic e Rclone. Criptografa dados sensíveis localmente e sincroniza com versionamento para o OneDrive/SharePoint, garantindo proteção contra ransomware.",
-      details: "Desenvolvi este script para resolver a falta de versionamento confiável em backups locais. A solução utiliza criptografia AES-256 (Restic) antes do upload, garantindo que os dados no OneDrive estejam seguros mesmo em caso de comprometimento da conta.",
-      impact: "Redução de 90% no tempo de recuperação de arquivos (RTO) e economia de 100% em licenças de software de backup proprietário.",
-      codeSnippet: "restic backup --verbose --exclude-file=excludes.txt /data\nrclone sync /local/repo remote:backup --transfers=8",
+      description: "Sistema de backup automatizado utilizando Restic e Rclone. Criptografa dados sensíveis localmente e sincroniza com versionamento para o OneDrive/SharePoint.",
+      details: "Solução para garantir DRP (Disaster Recovery Plan) com criptografia AES-256 antes do upload para a nuvem.",
+      impact: "Proteção de 5TB+ de dados críticos contra ransomware.",
+      codeSnippet: "restic backup --verbose --exclude-file=excludes.txt /data",
       tech: ["PowerShell", "Restic", "Rclone", "Azure Blob"],
       type: "Automação / Segurança",
       complexity: 85,
@@ -93,43 +102,26 @@ export const userData = {
     },
     {
       title: "AD User Manager Pro",
-      description: "Ferramenta CLI interativa para 'onboarding' e 'offboarding' de usuários no Active Directory. Automatiza criação de contas, atribuição de grupos por setor e criação de caixas de correio no Exchange/Office 365.",
-      details: "Para padronizar a entrada de novos funcionários, criei este utilitário que recebe um CSV do RH ou input manual. Ele gera senhas fortes, configura atributos do AD (Cargo, Depto) e sincroniza com o Azure AD Connect.",
-      impact: "Eliminação de erros manuais na criação de usuários e redução do tempo de onboarding de 20min para 30 segundos.",
-      codeSnippet: "New-ADUser -Name $User -SamAccountName $Logon -UserPrincipalName \"$Logon@domain.com\" -Enabled $true\nAdd-ADGroupMember -Identity $DeptGroup -Members $Logon",
+      description: "Ferramenta CLI para onboarding/offboarding no Active Directory. Automatiza criação de contas, grupos e caixas de correio.",
+      details: "Padronização de entrada de funcionários com geração de credenciais e sincronização Azure AD.",
+      impact: "Redução do tempo de onboarding de 20min para segundos.",
+      codeSnippet: "New-ADUser -Name $User -SamAccountName $Logon",
       tech: ["PowerShell", "Active Directory", "Exchange Online"],
       type: "Infraestrutura",
       complexity: 70,
       stats: { "Time Saved": "98%", "Errors": "0%", "Type": "CLI" }
     },
     {
-      title: "NetWatch Python Monitor",
-      description: "Dashboard de monitoramento leve que verifica latência (Ping), disponibilidade de portas (TCP) e serviços críticos em servidores Windows/Linux, enviando alertas via Webhook (Discord/Slack).",
-      details: "Uma alternativa leve ao Zabbix/Nagios para ambientes menores. O script roda como um serviço systemd (Linux) ou Windows Service, verificando cada alvo a cada 60s e reportando downtime imediatamente.",
-      impact: "Detecção proativa de quedas de link e travamento de serviços, permitindo resposta antes do chamado do usuário.",
-      codeSnippet: "def check_ping(host):\n    response = ping(host, timeout=2)\n    return 'ONLINE' if response else 'OFFLINE'\n\nif check_ping('192.168.1.1') == 'OFFLINE':\n    send_discord_alert('Router Down!')",
-      tech: ["Python", "Flask", "Ping3", "Webhooks"],
+      title: "NetWatch Monitor",
+      description: "Dashboard de monitoramento leve para latência e serviços críticos em servidores Windows/Linux.",
+      details: "Serviço de monitoramento com alertas via Webhook.",
+      impact: "Detecção proativa de quedas de link.",
+      codeSnippet: "if check_ping('192.168.1.1') == 'OFFLINE': send_alert()",
+      tech: ["Python", "Network", "Ping3"],
       type: "Monitoramento",
       complexity: 60,
       stats: { "Latency": "<1ms", "Alerts": "Real-time", "Platform": "Cross" }
-    },
-    {
-      title: "Secure File Server Setup",
-      description: "Script de provisionamento para servidores de arquivos Linux (Samba) com integração ao AD via Winbind/SSSD, incluindo configuração automática de permissões ACL e auditoria de acesso.",
-      details: "Automatiza a configuração 'hardened' de um servidor Samba, incluindo VFS modules para lixeira (Recycle Bin) e auditoria (Audit). Integra-se perfeitamente ao AD para autenticação transparente.",
-      impact: "Criação de servidores de arquivos padronizados e seguros em menos de 10 minutos, com logs de auditoria completos para conformidade.",
-      codeSnippet: "[global]\n   security = ADS\n   realm = DOMAIN.LOCAL\n   vfs objects = acl_xattr full_audit recycle\n   full_audit:success = connect open mkdir write unlink rename",
-      tech: ["Bash", "Linux", "Samba", "Security"],
-      type: "Linux / Infra",
-      complexity: 90,
-      stats: { "Security": "Hardened", "Integr": "AD/LDAP", "Audit": "Full" }
     }
-  ],
-  certifications: [
-    "Fundamentos de Data Science e IA",
-    "Fundamentos do Power BI",
-    "Administrando Banco de Dados",
-    "Microsoft Excel 2016"
   ],
   setup: {
     workstation: [
