@@ -75,12 +75,19 @@ function Content() {
 function App() {
   const [booted, setBooted] = useState(false);
   const [matrixMode, setMatrixMode] = useState(false);
+  const [isLowPower, setIsLowPower] = useState(false);
 
   return (
     <GameProvider> 
-        <SystemContext.Provider value={{ matrixMode, toggleMatrix: () => setMatrixMode(!matrixMode) }}>
+        <SystemContext.Provider value={{ 
+            matrixMode, 
+            toggleMatrix: () => setMatrixMode(!matrixMode),
+            isLowPower,
+            toggleLowPower: () => setIsLowPower(!isLowPower)
+        }}>
             <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-            {matrixMode && <MatrixRain />}
+            {matrixMode && !isLowPower && <MatrixRain />}
+            {/* Conditional Effects based on Power Mode would go here */}
             
             <AnimatePresence mode="wait">
                 {!booted && <SystemBoot onComplete={() => setBooted(true)} />}

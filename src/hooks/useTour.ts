@@ -7,13 +7,13 @@ export type TourStep = {
 };
 
 const TOUR_STEPS: TourStep[] = [
-  { id: "hero", message: "Bem-vindo ao meu Sistema. Eu sou Alessandro, seu Arquiteto de Infraestrutura.", delay: 5000 },
-  { id: "about", message: "Aqui inicio os processos. Minha base é transformar complexidade em eficiência.", delay: 6000 },
-  { id: "experience", message: "Minha linha do tempo operacional. De suporte tático à engenharia estratégica.", delay: 7000 },
-  { id: "skills", message: "Meu arsenal técnico. Ferramentas de alta precisão para servidores e automação.", delay: 6000 },
-  { id: "setup", message: "A Battle Station. O hardware onde a mágica acontece.", delay: 5000 },
-  { id: "projects", message: "Projetos implantados. Soluções reais, impacto mensurável.", delay: 7000 },
-  { id: "contact", message: "Canal de comunicação aberto. Vamos iniciar um protocolo de conexão?", delay: 5000 },
+  { id: "hero", message: "Sistema Online. Bem-vindo ao ambiente digital de Alessandro Meneses. Acesso Autorizado.", delay: 5000 },
+  { id: "about", message: "Núcleo de Processamento. Transformando infraestrutura complexa em operações eficientes.", delay: 6000 },
+  { id: "experience", message: "Logs do Sistema. Análise cronológica de evolução técnica e impacto operacional.", delay: 7000 },
+  { id: "skills", message: "Inventário Técnico. Ferramentas de alta precisão para servidores, redes e automação.", delay: 6000 },
+  { id: "setup", message: "Battle Station. O hardware onde a execução acontece.", delay: 5000 },
+  { id: "projects", message: "Módulos Implantados. Soluções validadas em produção com resultados reais.", delay: 7000 },
+  { id: "contact", message: "Protocolo de Comunicação. Inicie uma conexão segura agora.", delay: 5000 },
 ];
 
 export function useTour() {

@@ -3,7 +3,7 @@ import { Facebook, Github, Linkedin, Mail, MapPin } from "lucide-react";
 export const userData = {
   profile: {
     name: "Alessandro Meneses",
-    role: "Architect | Infrastructure & Automation",
+    role: "Especialista em Infraestrutura & Automação",
     bio: "Orquestrando infraestruturas resilientes e automatizando fluxos de trabalho críticos para maximizar a eficiência operacional.",
     email: "ale_meneses2004@hotmail.com",
     linkedin: "https://www.linkedin.com/in/alessandro-meneses/",
@@ -87,7 +87,9 @@ export const userData = {
       impact: "Redução de 90% no tempo de recuperação de arquivos (RTO) e economia de 100% em licenças de software de backup proprietário.",
       codeSnippet: "restic backup --verbose --exclude-file=excludes.txt /data\nrclone sync /local/repo remote:backup --transfers=8",
       tech: ["PowerShell", "Restic", "Rclone", "Azure Blob"],
-      type: "Automação / Segurança"
+      type: "Automação / Segurança",
+      complexity: 85,
+      stats: { "RTO": "-90%", "Savings": "100%", "Encryption": "AES-256" }
     },
     {
       title: "AD User Manager Pro",
@@ -96,7 +98,9 @@ export const userData = {
       impact: "Eliminação de erros manuais na criação de usuários e redução do tempo de onboarding de 20min para 30 segundos.",
       codeSnippet: "New-ADUser -Name $User -SamAccountName $Logon -UserPrincipalName \"$Logon@domain.com\" -Enabled $true\nAdd-ADGroupMember -Identity $DeptGroup -Members $Logon",
       tech: ["PowerShell", "Active Directory", "Exchange Online"],
-      type: "Infraestrutura"
+      type: "Infraestrutura",
+      complexity: 70,
+      stats: { "Time Saved": "98%", "Errors": "0%", "Type": "CLI" }
     },
     {
       title: "NetWatch Python Monitor",
@@ -105,7 +109,9 @@ export const userData = {
       impact: "Detecção proativa de quedas de link e travamento de serviços, permitindo resposta antes do chamado do usuário.",
       codeSnippet: "def check_ping(host):\n    response = ping(host, timeout=2)\n    return 'ONLINE' if response else 'OFFLINE'\n\nif check_ping('192.168.1.1') == 'OFFLINE':\n    send_discord_alert('Router Down!')",
       tech: ["Python", "Flask", "Ping3", "Webhooks"],
-      type: "Monitoramento"
+      type: "Monitoramento",
+      complexity: 60,
+      stats: { "Latency": "<1ms", "Alerts": "Real-time", "Platform": "Cross" }
     },
     {
       title: "Secure File Server Setup",
@@ -114,7 +120,9 @@ export const userData = {
       impact: "Criação de servidores de arquivos padronizados e seguros em menos de 10 minutos, com logs de auditoria completos para conformidade.",
       codeSnippet: "[global]\n   security = ADS\n   realm = DOMAIN.LOCAL\n   vfs objects = acl_xattr full_audit recycle\n   full_audit:success = connect open mkdir write unlink rename",
       tech: ["Bash", "Linux", "Samba", "Security"],
-      type: "Linux / Infra"
+      type: "Linux / Infra",
+      complexity: 90,
+      stats: { "Security": "Hardened", "Integr": "AD/LDAP", "Audit": "Full" }
     }
   ],
   certifications: [

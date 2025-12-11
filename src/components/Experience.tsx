@@ -1,88 +1,99 @@
-import { userData } from "../data/user";
-import { Briefcase } from "lucide-react";
-import Reveal from "./Reveal";
-import { motion, useScroll, useSpring } from "framer-motion";
 import { useRef } from "react";
+import { userData } from "../data/user";
+import { Briefcase, Cpu, Network, Database, Box } from "lucide-react";
+import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
+import { DecryptText } from "./DecryptText";
 
 export default function Experience() {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end end"]
-  });
-  
-  const scaleY = useSpring(scrollYProgress, {
-      stiffness: 100,
-      damping: 30,
-      restDelta: 0.001
+    offset: ["start start", "end end"]
   });
 
   return (
-    <section id="experience" className="py-32 bg-[#0b0f19] relative" ref={containerRef}>
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-24 max-w-3xl mx-auto">
-          <Reveal width="100%">
-             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Experiência Profissional</h2>
-          </Reveal>
-          <Reveal width="100%">
-            <p className="text-slate-400 text-lg">Minha trajetória e evoluçao na área de tecnologia.</p>
-          </Reveal>
+    <section id="experience" className="py-0 relative bg-[#030712]" ref={containerRef}>
+      <div className="container mx-auto px-4 py-32">
+        <div className="text-center mb-32 relative z-10">
+            <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+            >
+                <div className="inline-block px-4 py-1 mb-4 border border-cyan-500/30 rounded-full bg-cyan-900/10 backdrop-blur-md">
+                    <span className="text-cyan-400 font-mono text-xs tracking-[0.2em] uppercase">System_Memory_Log</span>
+                </div>
+                <h2 className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-500 mb-6">
+                    CAREER_PATH
+                </h2>
+            </motion.div>
         </div>
 
-        <div className="relative max-w-5xl mx-auto">
-          {/* Vertical Line Base */}
-          <div className="absolute left-[19px] md:left-1/2 md:-ml-0.5 h-full w-0.5 bg-white/10" />
-          
-          {/* Glowing Path Indicator */}
-          <motion.div 
-            style={{ scaleY, transformOrigin: "top" }}
-            className="absolute left-[19px] md:left-1/2 md:-ml-0.5 h-full w-0.5 bg-gradient-to-b from-primary via-purple-500 to-primary" 
-          />
+        <div className="max-w-6xl mx-auto relative">
+          {/* Central Data Line */}
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-cyan-500/50 to-transparent md:-translate-x-1/2 hidden md:block" />
 
-          <div className="space-y-16">
-            {userData.experience.map((job, index) => (
-              <div key={index} className={`relative flex flex-col md:flex-row ${index % 2 === 0 ? "md:flex-row-reverse" : ""} items-start w-full group`}>
+          <div className="space-y-32">
+            {userData.experience.map((job, index) => {
+                const isEven = index % 2 === 0;
                 
-                {/* Timeline Dot */}
-                <div className="absolute left-0 md:left-1/2 md:-ml-[20px] w-10 h-10 rounded-full bg-[#0b0f19] border-4 border-white/10 z-10 flex items-center justify-center group-hover:border-primary transition-colors shadow-xl"> 
-                   <div className="w-3 h-3 rounded-full bg-slate-500 group-hover:bg-primary transition-colors" />
-                </div>
+                return (
+                    <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ margin: "-100px" }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        className={`flex flex-col md:flex-row items-center gap-12 ${isEven ? "" : "md:flex-row-reverse"}`}
+                    >
+                        {/* Timeline Node */}
+                        <div className="absolute left-0 md:left-1/2 w-4 h-4 bg-[#030712] border border-cyan-500 rounded-full md:-translate-x-1/2 z-20 shadow-[0_0_15px_rgba(6,182,212,0.5)] hidden md:block">
+                            <div className="absolute inset-0 bg-cyan-400 rounded-full animate-ping opacity-20" />
+                        </div>
 
-                {/* Spacer */}
-                <div className="flex-1 w-full md:w-1/2" />
+                        {/* Content Side */}
+                        <div className="flex-1 w-full relative group perspective-1000">
+                             <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                             
+                             <div className="relative p-8 rounded-2xl bg-[#0a0f1c]/90 border border-white/5 backdrop-blur-xl overflow-hidden hover:border-cyan-500/30 transition-all duration-500 group-hover:transform group-hover:rotate-x-2 group-hover:scale-[1.02]">
+                                {/* Holographic Scan Effect */}
+                                <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent -translate-x-full group-hover:animate-scan" />
+                                
+                                <div className="flex justify-between items-start mb-6 border-b border-white/5 pb-6">
+                                    <div>
+                                        <h3 className="text-2xl font-bold text-white mb-2">
+                                            <DecryptText text={job.company} />
+                                        </h3>
+                                        <div className="text-primary font-mono text-sm tracking-wider">
+                                            <DecryptText text={job.role} />
+                                        </div>
+                                    </div>
+                                    <div className="text-right">
+                                        <div className="px-3 py-1 rounded bg-white/5 border border-white/10 text-xs font-mono text-slate-400">
+                                            {job.period}
+                                        </div>
+                                    </div>
+                                </div>
 
-                {/* Card */}
-                <div className="flex-1 w-full md:w-1/2 pl-16 md:pl-0 md:px-12">
-                  <Reveal width="100%">
-                    <div className="p-8 rounded-2xl bg-[#111827] border border-white/5 hover:border-primary/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl relative overflow-hidden">
-                       <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                          <Briefcase size={60} />
-                       </div>
-                       
-                       <span className="inline-block px-3 py-1 mb-4 text-xs font-mono text-primary bg-primary/10 rounded-full border border-primary/20">
-                          {job.period}
-                       </span>
+                                <p className="text-slate-400 leading-relaxed mb-8 text-lg font-light">
+                                    {job.description}
+                                </p>
 
-                       <h3 className="text-2xl font-bold text-white mb-1">{job.company}</h3>
-                       <h4 className="text-lg text-slate-300 mb-6">{job.role}</h4>
-                       
-                       <p className="text-slate-400 leading-relaxed mb-6">
-                         {job.description}
-                       </p>
+                                <div className="flex flex-wrap gap-2">
+                                    {job.tags.map((tag, i) => (
+                                        <span key={i} className="px-3 py-1 text-xs font-medium text-cyan-200/70 bg-cyan-900/20 rounded border border-cyan-500/10">
+                                            #{tag}
+                                        </span>
+                                    ))}
+                                </div>
+                             </div>
+                        </div>
 
-                       <div className="flex flex-wrap gap-2">
-                         {job.tags.map((tag, i) => (
-                           <span key={i} className="text-xs px-3 py-1 rounded-md bg-black/40 text-slate-300 border border-white/5 font-medium">
-                             {tag}
-                           </span>
-                         ))}
-                       </div>
-                    </div>
-                  </Reveal>
-                </div>
-
-              </div>
-            ))}
+                        {/* Empty Side for layout balance */}
+                        <div className="flex-1 hidden md:block" />
+                    </motion.div>
+                );
+            })}
           </div>
         </div>
       </div>

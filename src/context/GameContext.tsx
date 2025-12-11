@@ -1,11 +1,12 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import SystemToast from "../components/SystemToast";
 
 interface GameState {
   xp: number;
   level: number;
   achievements: string[];
-  isGameStarted: boolean; // NEW
+  isGameStarted: boolean;
   quests: {
     visitedHero: boolean;
     visitedAbout: boolean;
@@ -20,15 +21,14 @@ interface GameContextType extends GameState {
   addXp: (amount: number) => void;
   unlockAchievement: (id: string) => void;
   completeQuest: (questId: keyof GameState['quests']) => void;
-  startGame: () => void; // NEW
+  startGame: () => void;
 }
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
-
 export function GameProvider({ children }: { children: ReactNode }) {
   const [xp, setXp] = useState(0);
   const [level, setLevel] = useState(1);
-  const [isGameStarted, setIsGameStarted] = useState(false); // NEW
+  const [isGameStarted, setIsGameStarted] = useState(false);
   const [achievements, setAchievements] = useState<string[]>([]);
   const [quests, setQuests] = useState({
     visitedHero: false,
@@ -40,42 +40,38 @@ export function GameProvider({ children }: { children: ReactNode }) {
   });
 
   const startGame = () => setIsGameStarted(true);
-  
-  // ... existing effects ...
+
+  const addXp = (amount: number) => {
+    setXp((prev) => prev + amount);
+  };
+
   useEffect(() => {
     const nextLevelXp = level * 1000;
     if (xp >= nextLevelXp) {
       setLevel((prev) => prev + 1);
-      toast.success(`LEVEL UP! You represent Level ${level + 1}`, {
-        icon: '🆙',
-        style: {
-          background: '#0f1623',
-          color: '#06b6d4',
-          border: '1px solid #06b6d4',
-        },
-      });
+      toast.custom((t) => (
+        <SystemToast 
+            t={t} 
+            title="SYSTEM UPGRADE" 
+            message={`Clearance Level ${level + 1} Granted`} 
+            type="level" 
+        />
+      ));
     }
   }, [xp, level]);
-
-  const addXp = (amount: number) => {
-    setXp((prev) => {
-        const newXp = prev + amount;
-        return newXp;
-    });
-  };
 
   const unlockAchievement = (id: string) => {
     if (!achievements.includes(id)) {
       setAchievements((prev) => [...prev, id]);
       addXp(500);
-      toast(`Achievement Unlocked: ${id}`, {
-        icon: '🏆',
-        style: {
-          background: '#0f1623',
-          color: '#a855f7',
-          border: '1px solid #a855f7',
-        },
-      });
+      toast.custom((t) => (
+        <SystemToast 
+            t={t} 
+            title="ACHIEVEMENT UNLOCKED" 
+            message={id} 
+            type="achievement" 
+        />
+      ));
     }
   };
 
@@ -83,22 +79,21 @@ export function GameProvider({ children }: { children: ReactNode }) {
     if (!quests[questId]) {
       setQuests((prev) => ({ ...prev, [questId]: true }));
       addXp(200);
-      toast(`Quest Complete: ${questId.replace('visited', 'Explore ')}`, {
-        icon: '⚔️',
-        position: 'bottom-right',
-        style: {
-          background: '#0f1623',
-          color: '#10b981',
-          fontFamily: 'monospace',
-        },
-      });
+      toast.custom((t) => (
+        <SystemToast 
+            t={t} 
+            title="QUEST COMPLETE" 
+            message={questId.replace('visited', 'Explore ')} 
+            type="quest" 
+        />
+      ), { duration: 4000 });
     }
   };
 
   return (
     <GameContext.Provider value={{ xp, level, achievements, quests, isGameStarted, addXp, unlockAchievement, completeQuest, startGame }}>
       {children}
-      <Toaster />
+      <Toaster position="top-center" reverseOrder={false} /> {/* Changed Position to avoid Avatar overlap */}
     </GameContext.Provider>
   );
 }
