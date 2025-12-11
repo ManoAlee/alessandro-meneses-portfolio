@@ -1,0 +1,46 @@
+{
+  "name": "alessandro-meneses-portfolio",
+  "version": "1.0.0",
+  "description": "Portfólio profissional de Alessandro Meneses — Infraestrutura, Automação, Suporte Técnico e Data-driven operations.",
+  "main": "src/main.tsx",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview",
+    "kill-port": "npx kill-port 5173",
+    "restart": "npm run kill-port && npm run dev",
+    "start": "npm run dev",
+    "check": "powershell -ExecutionPolicy Bypass -File .\\scripts\\check-env.ps1"
+  },
+  "keywords": [
+    "portfolio",
+    "react",
+    "vite",
+    "typescript"
+  ],
+  "author": "Alessandro Meneses <alessandro@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ManoAlee/alessandro-meneses-portfolio.git"
+  },
+  "homepage": "https://ManoAlee.github.io/alessandro-meneses-portfolio",
+  "dependencies": {
+    "framer-motion": "^10.16.4",
+    "lucide-react": "^0.292.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.18.0"
+  },
+  "devDependencies": {
+  "@types/react": "^18.2.37",
+  "@types/react-dom": "^18.2.15",
+  "@vitejs/plugin-react": "^5.0.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0"
+  }
+}
