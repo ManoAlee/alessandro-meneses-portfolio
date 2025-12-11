@@ -32,6 +32,7 @@
   "homepage": "https://manoalee.github.io/alessandro-meneses-portfolio",
   "dependencies": {
     "@studio-freight/lenis": "^1.0.42",
+    "cmdk": "^1.1.1",
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.292.0",
     "react": "^18.2.0",
