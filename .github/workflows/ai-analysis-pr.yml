@@ -25,7 +25,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run checks and collect logs
+      - id: run_checks
+        name: Run checks and collect logs
         run: |
           mkdir -p reports
 
@@ -91,7 +92,15 @@ jobs:
           done
           cat reports/summary.md >> reports/summary_full.md
 
+          # decide whether to comment: if any status file contains FAIL -> should_comment=true
+          if grep -q "FAIL" reports/*.status 2>/dev/null; then
+            echo "should_comment=true" >> $GITHUB_OUTPUT
+          else
+            echo "should_comment=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Comment summary on PR
+        if: ${{ steps.run_checks.outputs.should_comment == 'true' }}
         uses: actions/github-script@v7
         with:
           script: |
