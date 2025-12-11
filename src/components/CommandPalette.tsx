@@ -1,182 +1,122 @@
-import { useEffect, useState, useContext } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { 
-    Search, Monitor, User, Code, Mail, Terminal, FileText, 
-    Download, Copy, Cpu, Shield, Zap 
-} from "lucide-react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { SystemContext } from "../context/SystemContext";
-import toast from "react-hot-toast";
-import SystemToast from "./SystemToast";
+import { Command } from "cmdk";
+import {
+  Search,
+  Terminal,
+  Home,
+  User,
+  Briefcase,
+  Cpu,
+  Code,
+  Mail,
+  Moon,
+  Sun,
+  Laptop,
+  FileText
+} from "lucide-react";
+import { useGame } from "../context/GameContext";
 
 export default function CommandPalette() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [query, setQuery] = useState("");
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  
-  const { toggleMatrix, isLowPower, toggleLowPower } = useContext(SystemContext);
+  const { isGameStarted } = useGame();
 
-
-  const commands = [
-    // NAVIGATION
-    { category: "Navigation", title: "Go Home", icon: <Monitor size={16} />, action: () => navigate("/") },
-    { category: "Navigation", title: "Go to About", icon: <User size={16} />, action: () => { navigate("/"); setTimeout(() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" }), 100); } },
-    { category: "Navigation", title: "Go to Projects", icon: <Code size={16} />, action: () => { navigate("/"); setTimeout(() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" }), 100); } },
-    { category: "Navigation", title: "Contact Me", icon: <Mail size={16} />, action: () => { navigate("/"); setTimeout(() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }), 100); } },
-    
-    // TOOLS
-    { category: "Tools", title: "Identity Editor (CV Builder)", icon: <FileText size={16} />, action: () => navigate("/cv") },
-    { category: "Tools", title: "Download Resume PDF", icon: <Download size={16} />, action: () => window.open("/cv.pdf", "_blank") },
-    { category: "Tools", title: "Copy Email Address", icon: <Copy size={16} />, action: () => { 
-        navigator.clipboard.writeText("dev@byale.com"); // Replace with actual email
-        toast.custom((t) => <SystemToast t={t} title="COPIED" message="Email copied to clipboard" type="success" />);
-    }},
-
-    // SYSTEM
-    { category: "System", title: "Toggle Matrix Mode", icon: <Terminal size={16} />, action: () => toggleMatrix(), value: "matrix" },
-    { category: "System", title: isLowPower ? "Enable High Performance" : "Enable Low Power Mode", icon: <Zap size={16} />, action: () => toggleLowPower() },
-    { category: "System", title: "Run Diagnostics", icon: <Cpu size={16} />, action: () => {
-         toast.custom((t) => <SystemToast t={t} title="DIAGNOSTICS" message="All Systems Nominal. Kernel: v4.2" type="info" />);
-    }},
-    { category: "System", title: "Security Scan", icon: <Shield size={16} />, action: () => {
-         toast.custom((t) => <SystemToast t={t} title="SECURITY" message="No intrusions detected. Firewall Active." type="success" />);
-    }},
-  ];
-
-  // Filter commands
-  const filteredCommands = commands.filter(cmd => 
-    cmd.title.toLowerCase().includes(query.toLowerCase()) || 
-    (cmd.value && cmd.value.includes(query.toLowerCase())) ||
-    cmd.category.toLowerCase().includes(query.toLowerCase())
-  );
-
-  const handleSelect = (index: number) => {
-    const command = filteredCommands[index];
-    if (command) {
-        command.action();
-        setIsOpen(false);
-    }
-  };
-
+  // Toggle with Ctrl+K
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
+    const down = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
-        setIsOpen((prev) => !prev);
-        setQuery("");
-        setSelectedIndex(0);
-      }
-      if (e.key === "Escape") setIsOpen(false);
-      
-      if (isOpen) {
-          if (e.key === "ArrowDown") {
-              e.preventDefault();
-              setSelectedIndex(prev => (prev + 1) % filteredCommands.length);
-          }
-          if (e.key === "ArrowUp") {
-              e.preventDefault();
-              setSelectedIndex(prev => (prev - 1 + filteredCommands.length) % filteredCommands.length);
-          }
-          if (e.key === "Enter") {
-              e.preventDefault();
-              handleSelect(selectedIndex);
-          }
+        setOpen((open) => !open);
       }
     };
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, []);
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, selectedIndex, query, filteredCommands]);
+  const runCommand = (command: () => void) => {
+    setOpen(false);
+    command();
+  };
+
+  const handleScroll = (id: string) => {
+    navigate("/");
+    setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  };
+
+  // Only show if game is active or user knows the shortcut
+  if (!isGameStarted) return null;
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-start justify-center pt-[15vh] px-4">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setIsOpen(false)}
-            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-          />
-          
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: -20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            className="w-full max-w-xl bg-[#0f1623] border border-cyan-500/30 rounded-xl shadow-[0_0_50px_rgba(6,182,212,0.15)] overflow-hidden relative z-10"
-          >
-            {/* Search Bar */}
-            <div className="flex items-center border-b border-white/10 px-4 py-4 relative">
-              <Search className="text-cyan-400 mr-4" size={24} />
-              <input
-                autoFocus
-                type="text"
-                placeholder="What is your command, User?"
-                className="w-full bg-transparent border-none outline-none text-white placeholder-slate-600 font-mono text-lg"
-                value={query}
-                onChange={(e) => { setQuery(e.target.value); setSelectedIndex(0); }}
-              />
-              <div className="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] text-slate-500 font-mono px-2 py-1 border border-white/5 rounded bg-white/5">ESC</div>
-            </div>
+    <div className={open ? "fixed inset-0 z-[999]" : "hidden"}>
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+        onClick={() => setOpen(false)}
+      />
 
-            {/* Results */}
-            <div className="max-h-[60vh] overflow-y-auto py-2">
-              {filteredCommands.length === 0 ? (
-                <div className="px-4 py-12 text-center text-slate-500 font-mono">
-                  &gt; ERROR: COMMAND_NOT_FOUND
-                </div>
-              ) : (
-                <div className="py-1">
-                    {/* Render Grouped logic could go here, but flat list is fine for speed */}
-                    {filteredCommands.map((command, index) => (
-                    <button
-                        key={index}
-                        onClick={() => handleSelect(index)}
-                        onMouseEnter={() => setSelectedIndex(index)}
-                        className={`w-full px-4 py-3 flex items-center justify-between transition-all relative group
-                        ${index === selectedIndex ? "bg-cyan-500/10 border-l-2 border-cyan-500" : "border-l-2 border-transparent hover:bg-white/5"}
-                        `}
-                    >
-                        <div className="flex items-center gap-4">
-                            <div className={`p-2 rounded-lg ${index === selectedIndex ? "bg-cyan-500/20 text-cyan-400" : "bg-white/5 text-slate-400"}`}>
-                                {command.icon}
-                            </div>
-                            <div className="text-left">
-                                <span className={`block text-sm font-medium ${index === selectedIndex ? "text-white" : "text-slate-300"}`}>
-                                    {command.title}
-                                </span>
-                                <span className="text-[10px] text-slate-500 uppercase tracking-wider font-mono">
-                                    {command.category}
-                                </span>
-                            </div>
-                        </div>
-                        {index === selectedIndex && (
-                            <motion.div layoutId="arrow" className="text-xs font-mono text-cyan-500 flex items-center gap-1">
-                                EXECUTE <span className="text-[10px] border border-cyan-500/50 px-1 rounded">↵</span>
-                            </motion.div>
-                        )}
-                    </button>
-                    ))}
-                </div>
-              )}
+      <div className="fixed top-[20%] left-1/2 -translate-x-1/2 w-full max-w-[640px] px-4">
+        <Command
+          label="System Command Palette"
+          className="w-full bg-[#0f1623] border border-white/10 rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200"
+        >
+          <div className="flex items-center gap-3 px-4 py-3 border-b border-white/10">
+            <Terminal size={18} className="text-cyan-500" />
+            <Command.Input
+              placeholder="Type a command or search..."
+              className="flex-1 bg-transparent text-white placeholder:text-slate-500 outline-none text-sm font-mono"
+            />
+            <div className="flex gap-1">
+              <span className="text-[10px] bg-white/10 px-1.5 py-0.5 rounded text-slate-400">ESC</span>
             </div>
-            
-            {/* Footer */}
-            <div className="bg-[#0a0f18] px-4 py-2 text-[10px] text-slate-500 border-t border-white/5 flex justify-between font-mono">
-                <div className="flex gap-4">
-                     <span>Use <span className="text-slate-300">↑↓</span> to navigate</span>
-                     <span><span className="text-slate-300">↵</span> to select</span>
-                </div>
-                <div className="flex gap-2 items-center">
-                    <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                    SYSTEM ONLINE
-                </div>
+          </div>
+
+          <Command.List className="max-h-[300px] overflow-y-auto overflow-x-hidden p-2 scrollbar-thin scrollbar-thumb-white/10">
+            <Command.Empty className="py-6 text-center text-sm text-slate-500">
+              No results found.
+            </Command.Empty>
+
+            <Command.Group heading="Navigation" className="text-xs font-medium text-slate-500 mb-2 px-2">
+              <SystemItem icon={Home} label="Go to Home" onSelect={() => runCommand(() => handleScroll("hero"))} />
+              <SystemItem icon={User} label="Go to About" onSelect={() => runCommand(() => handleScroll("about"))} />
+              <SystemItem icon={Briefcase} label="Go to Experience" onSelect={() => runCommand(() => handleScroll("experience"))} />
+              <SystemItem icon={Cpu} label="Go to Skills" onSelect={() => runCommand(() => handleScroll("skills"))} />
+              <SystemItem icon={Code} label="Go to Projects" onSelect={() => runCommand(() => handleScroll("projects"))} />
+              <SystemItem icon={Mail} label="Go to Contact" onSelect={() => runCommand(() => handleScroll("contact"))} />
+            </Command.Group>
+
+            <Command.Group heading="System" className="text-xs font-medium text-slate-500 mb-2 px-2">
+              <SystemItem icon={FileText} label="View Resume (CV)" onSelect={() => runCommand(() => window.open("/cv", "_blank"))} />
+              <SystemItem icon={Laptop} label="System Diagnostics" onSelect={() => runCommand(() => console.log("Running diagnostics..."))} />
+            </Command.Group>
+
+          </Command.List>
+
+          <div className="px-4 py-2 border-t border-white/10 bg-black/20 flex justify-between items-center text-[10px] text-slate-500">
+            <div>
+              <span className="text-cyan-500">SYSTEM.OS</span> v2.0.4
             </div>
-          </motion.div>
-        </div>
-      )}
-    </AnimatePresence>
+            <div className="flex gap-2">
+              <span>Use <kbd className="bg-white/10 px-1 rounded">↑</kbd> <kbd className="bg-white/10 px-1 rounded">↓</kbd> to navigate</span>
+              <span><kbd className="bg-white/10 px-1 rounded">↵</kbd> to select</span>
+            </div>
+          </div>
+        </Command>
+      </div>
+    </div>
+  );
+}
+
+function SystemItem({ icon: Icon, label, onSelect }: { icon: any, label: string, onSelect: () => void }) {
+  return (
+    <Command.Item
+      onSelect={onSelect}
+      className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-300 data-[selected=true]:bg-cyan-500/10 data-[selected=true]:text-cyan-400 cursor-pointer transition-colors"
+    >
+      <Icon size={16} />
+      <span>{label}</span>
+    </Command.Item>
   );
 }
