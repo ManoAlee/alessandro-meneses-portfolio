@@ -1,6 +1,6 @@
-# Alessandro Meneses — Portfólio (Repository)
+# Alessandro Meneses — Portfólio
 
-Repositório profissional para o portfólio digital de Alessandro Meneses (Infraestrutura, Automação, Suporte Técnico).
+Repositório oficial do portfólio de Alessandro Meneses (GitHub: `manoalee`). Este projeto foi criado com Vite + React + Tailwind CSS e contém a aplicação, scripts de desenvolvimento e CI para build.
 
 Resumo do projeto
 

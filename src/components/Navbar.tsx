@@ -3,11 +3,11 @@ import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-
 import { Menu, X, Github, Linkedin, Home, User, Briefcase, Cpu, Code, Mail } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
+import { useScrollSpy } from "../hooks/useScrollSpy";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
   
   const { scrollY } = useScroll();
   const location = useLocation();
@@ -23,30 +23,11 @@ export default function Navbar() {
     }
   });
 
-  // Active Section Spy (Only on Home)
-  useEffect(() => {
-    if (location.pathname !== "/") {
-        setActiveSection("");
-        return;
-    }
-
-    const sections = ["hero", "about", "experience", "skills", "projects", "contact"];
-    
-    const handleScroll = () => {
-        const current = sections.find(section => {
-            const element = document.getElementById(section);
-            if (element) {
-                const rect = element.getBoundingClientRect();
-                return rect.top <= 150 && rect.bottom >= 150;
-            }
-            return false;
-        });
-        if (current) setActiveSection(current);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [location.pathname]);
+  // Use Custom Hook for Active State
+  const activeSection = useScrollSpy(
+    ["hero", "about", "experience", "skills", "projects", "contact"],
+    200 // Offset
+  );
 
   // Handle Navigation Click
   const handleNavClick = (id: string) => {

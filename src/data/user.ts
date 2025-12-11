@@ -3,13 +3,12 @@ import { Facebook, Github, Linkedin, Mail, MapPin } from "lucide-react";
 export const userData = {
   profile: {
     name: "Alessandro Meneses",
-    role: "Analista de Infraestrutura & Suporte TI",
-    headline: "Transformando problemas complexos em soluções de infraestrutura robustas.",
-    location: "Boituva, São Paulo, Brasil",
+    role: "Architect | Infrastructure & Automation",
+    bio: "Orquestrando infraestruturas resilientes e automatizando fluxos de trabalho críticos para maximizar a eficiência operacional.",
     email: "ale_meneses2004@hotmail.com",
     linkedin: "https://www.linkedin.com/in/alessandro-meneses/",
     github: "https://github.com/ManoAlee",
-    about: "Graduado em Gestão da Tecnologia da Informação com experiência sólida em suporte técnico e administração de infraestrutura. Especialista em resolver problemas (troubleshooting), gerenciar servidores (Windows/Linux) e automatizar processos com scripts (PowerShell, Bash, Python). Foco em alta disponibilidade, segurança e otimização de recursos.",
+    location: "São Paulo, SP"
   },
   skills: {
     infrastructure: [

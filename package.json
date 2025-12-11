@@ -19,13 +19,13 @@
     "vite",
     "typescript"
   ],
-  "author": "Alessandro Meneses <alessandro@example.com>",
+  "author": "Alessandro Meneses <ale_meneses2004@hotmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ManoAlee/alessandro-meneses-portfolio.git"
   },
-  "homepage": "https://ManoAlee.github.io/alessandro-meneses-portfolio",
+  "homepage": "https://manoalee.github.io/alessandro-meneses-portfolio",
   "dependencies": {
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.292.0",
