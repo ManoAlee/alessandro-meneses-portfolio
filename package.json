@@ -21,7 +21,15 @@
     "portfolio",
     "react",
     "vite",
-    "typescript"
+    "typescript",
+    "tailwindcss",
+    "framer-motion",
+    "ui-ux",
+    "frontend",
+    "devops",
+    "cloud-computing",
+    "system-administration",
+    "interactive-design"
   ],
   "author": "Alessandro Meneses <ale_meneses2004@hotmail.com>",
   "license": "MIT",
