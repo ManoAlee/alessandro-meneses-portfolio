@@ -2,10 +2,10 @@
 export const SERVICES_DATA = [
   {
     id: "services-support",
-    title: "Suporte Técnico & Help Desk",
+    title: "Sustentação & ITIL Operations", // More professional than "Suporte Técnico"
     iconName: "Headphones",
-    description: "Operações de Nível 1, 2 e 3, garantindo continuidade de negócios e resolução ágil de incidentes.",
-    skills: ["Service Desk", "SLA Management", "Hardware Troubleshooting", "Gestão de Ativos", "Office 365", "Jira / ServiceNow", "Acesso Remoto", "Manutenção Desktop"],
+    description: "Gestão de incidentes baseada em práticas ITIL v4. Operação de Service Desk N1/N2/N3 com foco em SLA agressivo, troubleshooting avançado de hardware e administração de tenant Microsoft 365.",
+    skills: ["ITIL v4 Governance", "SLA/SLO Management", "Hardware Lifecycle", "Asset Management", "Microsoft 365 Admin", "ServiceNow / Jira", "Remote Support (AnyDesk)", "User Onboarding"],
     link: "/expertise/help-desk"
   },
   {
@@ -13,39 +13,39 @@ export const SERVICES_DATA = [
     title: "Infraestrutura Híbrida",
     iconName: "Server",
     description: "Gerenciamento especializado de ambientes virtualizados com Proxmox, Hyper-V e VMware. Migração segura de servidores e administração de Active Directory e redes corporativas (VPN/TCP-IP).",
-    skills: ["Windows Server (2012-2022)", "Linux (Ubuntu/Debian)", "Active Directory", "Group Policy (GPO)", "DNS / DHCP", "PowerShell", "Bash", "Backup Management"],
+    skills: ["Windows Server (2012-2022)", "Linux (Ubuntu/Debian)", "Active Directory", "Group Policy (GPO)", "DNS / DHCP", "PowerShell", "Bash", "Backup Strategies"],
     link: "/expertise/sysadmin"
   },
   {
     id: "services-cloud",
-    title: "Cloud Computing & FinOps",
+    title: "Arquitetura Multi-Cloud",
     iconName: "Cloud",
-    description: "Arquitetura de nuvem escalável e otimização de custos em ambientes híbridos.",
-    skills: ["AWS (EC2, S3, RDS)", "Azure (AD, VMs)", "Google Cloud", "Terraform (IaC)", "Cloudflare", "FinOps", "Cloud Migration"],
+    description: "Desenho e implementação de infraestrutura escalável em AWS e Azure. Foco em Alta Disponibilidade (HA), Disaster Recovery (DR) e práticas de FinOps para otimização de custos (OpEx).",
+    skills: ["AWS Solutions (EC2/S3/RDS)", "Azure Admin", "Terraform (IaC)", "Cloudflare Security", "FinOps & Cost Mgmt", "Hybrid Cloud Networking", "Migration Strategies"],
     link: "/expertise/cloud"
   },
   {
     id: "services-security",
-    title: "Segurança de Dados",
+    title: "Engenharia de Segurança",
     iconName: "ShieldCheck",
-    description: "Estratégias de backup imutável automatizadas com Restic e Rclone. Criptografia AES-256 para proteção contra ransomware e auditoria de conformidade (ISO/LGPD).",
-    skills: ["Firewall Config", "VPN (OpenVPN/WireGuard)", "Vulnerability Analysis", "LGPD Compliance", "ISO 27001", "IAM", "Antivirus Management"],
+    description: "Estratégias de backup imutável automatizadas com Restic e Rclone. Criptografia AES-256 para proteção contra ransomware e auditoria de conformidade (ISO 27001 / LGPD).",
+    skills: ["Firewall (PfSense/Fortigate)", "VPN Tunnels", "Vulnerability Assessment", "LGPD/GDPR", "ISO 27001 Controls", "Identity Mgmt (IAM)", "Endpoint Protection"],
     link: "/expertise/security"
   },
   {
     id: "services-devops",
-    title: "Automação & Scripting",
-    iconName: "Infinity", // or Terminal
-    description: "Eliminação de tarefas repetitivas através de scripts avançados em PowerShell, Bash e Python. Criação de ferramentas CLI para onboarding de usuários e gestão de infraestrutura.",
-    skills: ["Docker & Containers", "Kubernetes (K8s)", "CI/CD (GitHub Actions)", "Git", "Jenkins", "Ansible", "Infra Automation"],
+    title: "DevOps & SRE",
+    iconName: "Infinity", 
+    description: "Eliminação de tarefas repetitivas (Toil) através de scripts em PowerShell/Python. Criação de ferramentas CLI e pipelines CI/CD para entrega contínua de software.",
+    skills: ["Docker & Kubernetes", "CI/CD (GitHub Actions)", "Git Flow", "Ansible Configuration", "Python Automation", "Infrastructure as Code", "Monitoring (Grafana)"],
     link: "/expertise/devops"
   },
   {
     id: "services-data",
-    title: "Dados & Analytics",
+    title: "Data Intelligence & BI",
     iconName: "Database",
-    description: "Transformando dados brutos em inteligência de negócios acionável.",
-    skills: ["SQL (MySQL/PostgreSQL)", "Power BI", "Data Modeling", "ETL Processes", "Excel MVP", "Python Pandas"],
+    description: "Transformação de dados brutos em insights estratégicos. Desenvolvimento de pipelines ETL e dashboards executivos para tomada de decisão baseada em fatos (Data-Driven).",
+    skills: ["SQL Advanced", "Power BI Dashboards", "ETL Pipelines", "Python (Pandas/NumPy)", "Data Modeling", "Business Intelligence", "Excel Automation"],
     link: "/expertise/data"
   }
 ];

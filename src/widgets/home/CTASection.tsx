@@ -18,9 +18,14 @@ export function CTASection() {
               Vamos discutir como otimizar seus processos, reduzir custos de nuvem e garantir a segurança dos seus dados.
             </p>
           </div>
-          <Button size="lg" className="px-8 h-12 text-lg shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all hover:scale-105" onClick={() => navigate("/contact")}>
-            Iniciar Conversa
-          </Button>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Button size="lg" className="px-8 h-12 text-lg shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all hover:scale-105" onClick={() => navigate("/contact")}>
+              Iniciar Conversa
+            </Button>
+            <Button size="lg" variant="outline" className="px-8 h-12 text-lg border-primary/20 hover:bg-primary/5" onClick={() => navigate("/resume")}>
+              Currículo PDF
+            </Button>
+          </div>
         </div>
       </div>
     </section>

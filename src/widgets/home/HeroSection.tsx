@@ -31,12 +31,22 @@ export function HeroSection() {
           <span className="text-foreground font-semibold"> Administração de Sistemas</span>. 
           Transformando complexidade técnica em estabilidade operacional.
         </motion.p>
+
+        {/* Terminal Effect */}
+        <motion.div variants={FADE_UP_VARIANTS} className="font-mono text-sm text-primary/80 bg-primary/5 px-4 py-2 rounded border border-primary/10 mt-2 inline-flex items-center gap-2">
+            <span className="text-green-500">➜</span> 
+            <span className="text-blue-400">~/infrastructure</span>
+            <span className="animate-pulse">_</span>
+        </motion.div>
         
-        <motion.div variants={FADE_UP_VARIANTS} className="flex gap-4 mt-2">
+        <motion.div variants={FADE_UP_VARIANTS} className="flex flex-wrap gap-4 mt-2">
           <Button size="lg" className="text-base px-8 h-12 shadow-lg shadow-primary/20" onClick={() => navigate("/expertise")}>
             Ver Expertise
           </Button>
-          <Button size="lg" variant="outline" className="text-base px-8 h-12" onClick={() => navigate("/contact")}>
+          <Button size="lg" variant="outline" className="text-base px-8 h-12 border-primary/20 hover:bg-primary/10" onClick={() => navigate("/resume")}>
+            Ver Currículo
+          </Button>
+          <Button size="lg" variant="ghost" className="text-base px-8 h-12 text-muted-foreground" onClick={() => navigate("/contact")}>
             Fale Comigo
           </Button>
         </motion.div>

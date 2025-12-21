@@ -6,10 +6,12 @@ import { Toaster } from "react-hot-toast";
 import OpenSourcePage from "@/pages/OpenSource";
 import ServicesPage from "@/pages/ServicesPage";
 import NotFoundPage from "@/pages/NotFoundPage";
-import ContactPage from "@/pages/ContactPage"; // New import for ContactPage
+import ContactPage from "@/pages/ContactPage";
+import ResumePage from "@/pages/ResumePage";
 
 // Removed: const ContactPage = () => <div className="p-8">Contact Module Loading...</div>;
 
+// Global navigation routes configuration
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,7 +25,8 @@ const router = createBrowserRouter([
       
       { path: "opensource", element: <OpenSourcePage /> },
       { path: "services", element: <ServicesPage /> },
-      { path: "contact", element: <ContactPage /> }, // Routed ContactPage
+      { path: "contact", element: <ContactPage /> },
+      { path: "resume", element: <ResumePage /> },
       
       // Catch-all
       { path: "*", element: <NotFoundPage /> },
@@ -34,7 +37,7 @@ const router = createBrowserRouter([
 export default function App() {
   return (
     <>
-      <RouterProvider router={router} />
+      <RouterProvider router={router} future={{ v7_startTransition: true }} />
       <Toaster position="bottom-right" />
     </>
   );
