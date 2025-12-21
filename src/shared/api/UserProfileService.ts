@@ -1,5 +1,5 @@
 // Simulates a backend service for fetching user data
-import { userData } from "../data/user";
+import { userData } from "@/entities/user/data/user";
 
 export interface LinkedInProfile {
   connections: number;
