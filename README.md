@@ -3,8 +3,11 @@
 ### Infraestrutura | Cloud | DevOps | Segurança
 
 ![Status](https://img.shields.io/badge/Status-Complete-success)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/your-site-id/deploy-status)](https://am-infrastructure.netlify.app/)
 ![Stack](https://img.shields.io/badge/Stack-React_|_TypeScript_|_Tailwind_|_Framer_Motion-blue)
 ![Theme](https://img.shields.io/badge/Theme-Dark%20%26%20Light_Mode-blueviolet)
+
+> 🚀 **Acesse o Projeto Online:** [https://am-infrastructure.netlify.app/](https://am-infrastructure.netlify.app/)
 
 Este repositório contém o código-fonte do portfólio profissional de **Alessandro Meneses**. O projeto foi arquitetado não apenas como um site de apresentação, mas como uma demonstração técnica de desenvolvimento frontend moderno, UX avançada e organização de código.
 
@@ -23,8 +26,10 @@ Uma experiência visual imersiva e interativa:
 
 Uma nova página dedicada (`/services`) apresentando as capacidades técnicas:
 
+- **Infraestrutura Híbrida**: Gerenciamento de Proxmox/VMware, migração de servidores e administração de AD/Redes.
+- **Segurança de Dados**: Backups imutáveis (Restic/Rclone), criptografia AES-256 e conformidade LGPD.
+- **Automação & Scripting**: Scripts avançados (PowerShell/Python) para eliminar tarefas repetitivas e criar ferramentas CLI.
 - **Visual Recursivo**: Um renderizador 3D abstrato com esferas aninhadas e rotação perpétua.
-- **Cards Glassmorphism**: Design translúcido premium para exibir domínios como Cloud, DevOps e Segurança.
 - **Navegação Inteligente**: Links diretos para detalhes técnicos profundos.
 
 ### 3. Sistema de Temas (Dark/Light) 🌗

@@ -37,7 +37,7 @@
     "type": "git",
     "url": "git+https://github.com/ManoAlee/alessandro-meneses-portfolio.git"
   },
-  "homepage": "https://manoalee.github.io/alessandro-meneses-portfolio",
+  "homepage": "https://am-infrastructure.netlify.app/",
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",
     "@studio-freight/lenis": "^1.0.42",

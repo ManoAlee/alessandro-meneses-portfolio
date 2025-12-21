@@ -10,9 +10,9 @@ export const SERVICES_DATA = [
   },
   {
     id: "services-sysadmin",
-    title: "Administração de Sistemas",
+    title: "Infraestrutura Híbrida",
     iconName: "Server",
-    description: "Gerenciamento robusto de servidores Windows e Linux, focando em segurança e estabilidade.",
+    description: "Gerenciamento especializado de ambientes virtualizados com Proxmox, Hyper-V e VMware. Migração segura de servidores e administração de Active Directory e redes corporativas (VPN/TCP-IP).",
     skills: ["Windows Server (2012-2022)", "Linux (Ubuntu/Debian)", "Active Directory", "Group Policy (GPO)", "DNS / DHCP", "PowerShell", "Bash", "Backup Management"],
     link: "/expertise/sysadmin"
   },
@@ -26,17 +26,17 @@ export const SERVICES_DATA = [
   },
   {
     id: "services-security",
-    title: "Cibersegurança & Compliance",
+    title: "Segurança de Dados",
     iconName: "ShieldCheck",
-    description: "Implementação de defesa em profundidade, análise de vulnerabilidades e conformidade LGPD.",
+    description: "Estratégias de backup imutável automatizadas com Restic e Rclone. Criptografia AES-256 para proteção contra ransomware e auditoria de conformidade (ISO/LGPD).",
     skills: ["Firewall Config", "VPN (OpenVPN/WireGuard)", "Vulnerability Analysis", "LGPD Compliance", "ISO 27001", "IAM", "Antivirus Management"],
     link: "/expertise/security"
   },
   {
     id: "services-devops",
-    title: "DevOps & Automação",
+    title: "Automação & Scripting",
     iconName: "Infinity", // or Terminal
-    description: "Criação de pipelines CI/CD e cultura de automação para acelerar entregas.",
+    description: "Eliminação de tarefas repetitivas através de scripts avançados em PowerShell, Bash e Python. Criação de ferramentas CLI para onboarding de usuários e gestão de infraestrutura.",
     skills: ["Docker & Containers", "Kubernetes (K8s)", "CI/CD (GitHub Actions)", "Git", "Jenkins", "Ansible", "Infra Automation"],
     link: "/expertise/devops"
   },
