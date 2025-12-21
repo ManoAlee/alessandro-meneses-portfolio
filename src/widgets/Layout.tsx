@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { GooeyNavBar } from "@/widgets/GooeyNavBar";
 import { MagneticCursor } from "@/widgets/MagneticCursor";
 import Lenis from "@studio-freight/lenis";
+import { AnimatePresence, motion } from "framer-motion";
 import { SystemMonitor } from "@/widgets/SystemMonitor";
 
 import { Github, Linkedin } from "lucide-react";
@@ -136,9 +137,29 @@ export function MainLayout() {
        {/* <SystemMonitor />  Persona System Disabled by User Request */}
        <MagneticCursor />
        <GooeyNavBar />
-       <main className="flex-1 pt-24 relative"> 
-         <Outlet />
-       </main>
+
+       {/* Cinema Grain Texture (Global Overlay) */}
+       <div className="pointer-events-none fixed inset-0 z-[99] opacity-[0.03] mix-blend-overlay">
+         <svg className="h-full w-full">
+           <filter id="noiseFilter">
+             <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+           </filter>
+           <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+         </svg>
+       </div>
+
+       <AnimatePresence mode="wait">
+         <motion.main 
+           key={pathname}
+           initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+           exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
+           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+           className="flex-1 pt-24 relative"
+         > 
+           <Outlet />
+         </motion.main>
+       </AnimatePresence>
        <Footer />
     </div>
   );
