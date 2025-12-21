@@ -41,7 +41,7 @@ export default function ResumePage() {
   );
 
   return (
-    <div className="min-h-screen pt-32 pb-20 container max-w-5xl animate-fade-in relative selection:bg-primary/30">
+    <div className="min-h-screen pt-24 md:pt-32 pb-20 container max-w-5xl animate-fade-in relative selection:bg-primary/30 px-4 md:px-8">
         
         {/* Controls - Hidden on Print */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 print:hidden">
@@ -96,10 +96,10 @@ export default function ResumePage() {
             <div className="absolute top-0 w-full h-1.5 bg-gradient-to-r from-primary via-blue-500 to-purple-600 print:h-1" />
 
             {/* Header / Personal Info */}
-            <div className="p-12 md:p-16 border-b border-white/5 bg-background/50 print:bg-white print:p-10 print:pt-14">
+            <div className="p-6 md:p-16 border-b border-white/5 bg-background/50 print:bg-white print:p-10 print:pt-14">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
                     <div className="flex-1">
-                        <h1 className="text-4xl md:text-5xl font-bold font-display text-primary mb-2 tracking-tight print:text-black">
+                        <h1 className="text-3xl md:text-5xl font-bold font-display text-primary mb-2 tracking-tight print:text-black leading-tight">
                             <EditableSpan path="personal.name" value={data.personal.name} />
                         </h1>
                         <p className="text-xl md:text-2xl text-muted-foreground font-light print:text-gray-700">
@@ -125,7 +125,7 @@ export default function ResumePage() {
 
             <div className="grid md:grid-cols-[2fr_1fr] print:flex print:flex-row">
                 {/* Main Content (Left) */}
-                <div className="p-12 md:p-16 space-y-12 border-r border-white/5 print:p-10 print:border-r print:border-gray-200 print:w-2/3">
+                <div className="p-6 md:p-16 space-y-12 border-r border-white/5 print:p-10 print:border-r print:border-gray-200 print:w-2/3">
                     
                     {/* Summary */}
                     <section>
@@ -177,7 +177,7 @@ export default function ResumePage() {
                 </div>
 
                 {/* Sidebar (Right) */}
-                <div className="bg-white/[0.02] p-12 md:p-12 space-y-12 print:bg-white print:p-10 print:w-1/3">
+                <div className="bg-white/[0.02] p-6 md:p-12 space-y-12 print:bg-white print:p-10 print:w-1/3">
                    
                    {/* Hard Skills */}
                    <section>

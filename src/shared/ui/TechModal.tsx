@@ -25,7 +25,7 @@ export function TechModal({ tech, isOpen, onClose }: TechModalProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] grid place-items-center p-4"
+            className="fixed inset-0 bg-black/80 backdrop-blur-md z-[100] grid place-items-center p-2 md:p-4"
           >
             {/* Modal Content */}
             <motion.div
@@ -49,18 +49,18 @@ export function TechModal({ tech, isOpen, onClose }: TechModalProps) {
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="px-8 pb-8 -mt-12 relative z-10">
+              <div className="px-5 md:px-8 pb-8 -mt-8 md:-mt-12 relative z-10">
                 {/* Icon/Title */}
-                <div className="flex items-end gap-6 mb-6">
-                  <div className="w-24 h-24 rounded-2xl bg-black border border-white/10 shadow-xl flex items-center justify-center relative overflow-hidden group">
+                <div className="flex items-end gap-4 md:gap-6 mb-6">
+                  <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-black border border-white/10 shadow-xl flex items-center justify-center relative overflow-hidden group">
                      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-50" />
-                     <Cpu className="w-10 h-10 text-primary group-hover:scale-110 transition-transform duration-500" />
+                     <Cpu className="w-8 h-8 md:w-10 md:h-10 text-primary group-hover:scale-110 transition-transform duration-500" />
                   </div>
                   <div className="mb-2">
-                    <span className="text-xs font-mono text-primary/80 uppercase tracking-widest border border-primary/20 px-2 py-0.5 rounded mb-2 inline-block">
+                    <span className="text-[10px] md:text-xs font-mono text-primary/80 uppercase tracking-widest border border-primary/20 px-2 py-0.5 rounded mb-2 inline-block">
                         {tech.category || "Technology"}
                     </span>
-                    <h2 className="text-3xl font-bold font-display text-white">{tech.name}</h2>
+                    <h2 className="text-2xl md:text-3xl font-bold font-display text-white">{tech.name}</h2>
                   </div>
                 </div>
 

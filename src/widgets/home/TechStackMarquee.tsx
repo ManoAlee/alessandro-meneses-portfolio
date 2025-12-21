@@ -81,6 +81,9 @@ export function TechStackMarquee() {
             initial={{ x: 0 }}
             onHoverStart={() => controls.stop()}
             onHoverEnd={() => startAnimation()}
+            onTapStart={() => controls.stop()}
+            onTapCancel={() => startAnimation()}
+            onTap={() => controls.stop()}
           >
             {[...TECH_DATA, ...TECH_DATA, ...TECH_DATA].map((tech, index) => (
                <div 
