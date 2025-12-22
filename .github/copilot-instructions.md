@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This is a professional portfolio for Alessandro Meneses showcasing Infrastructure, Cloud, DevOps, and Security expertise. Built with React 18, TypeScript, Vite, Tailwind CSS, and Framer Motion (motion.dev).
+This is a professional portfolio for Alessandro Meneses showcasing Infrastructure, Cloud, DevOps, and Security expertise. Built with React 18, TypeScript, Vite, Tailwind CSS, and Framer Motion.
 
 **Live Site:** https://am-infrastructure.netlify.app/
 
@@ -101,7 +101,7 @@ npm run ci-check
 |----------|--------------|
 | **Core** | React 18, TypeScript, Vite |
 | **Styling** | Tailwind CSS, Lucide Icons |
-| **Animation** | Motion.dev (Framer Motion) |
+| **Animation** | Framer Motion |
 | **Routing** | React Router DOM v6 |
 | **Quality** | ESLint, TypeScript Strict Mode |
 
