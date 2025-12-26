@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
                     GitHub
                 </a>
                 <a 
-                    href="https://www.linkedin.com/in/alessandromeneses" 
+                    href="https://www.linkedin.com/in/alessandro-meneses/" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="hover:text-primary transition-colors"

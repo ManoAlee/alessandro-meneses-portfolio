@@ -76,7 +76,7 @@ export default function ContactPage() {
             <Github className="h-5 w-5" />
             GitHub
           </Button>
-          <Button variant="outline" size="lg" className="gap-2 w-full sm:w-auto" onClick={() => window.open("https://www.linkedin.com/in/alessandromeneses/", "_blank")}>
+          <Button variant="outline" size="lg" className="gap-2 w-full sm:w-auto" onClick={() => window.open("https://www.linkedin.com/in/alessandro-meneses/", "_blank")}>
             <Linkedin className="h-5 w-5" />
             LinkedIn
           </Button>
