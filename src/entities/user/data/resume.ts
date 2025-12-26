@@ -40,7 +40,7 @@ export const RESUME_CONTENT: ResumeData = {
     email: "ale_meneses2004@hotmail.com",
     phone: "+55 (15) 99801-7732",
     location: "Boituva, SP - Brasil",
-    linkedin: "https://linkedin.com/in/alessandromeneses",
+    linkedin: "https://www.linkedin.com/in/alessandro-meneses/",
     github: "https://github.com/ManoAlee",
   },
   summary: "Profissional de TI com 3+ anos de experiência focada em Infraestrutura e DevOps. Especialista em desenhar ambientes de alta disponibilidade utilizando Azure e AWS, com forte atuação em automação de processos (PowerShell/Python) e segurança de dados. Tenho um histórico comprovado de redução de custos operacionais (FinOps) e aumento de produtividade através da implementação de cultura CI/CD e infraestrutura como código (IaC).",

@@ -6,7 +6,7 @@ export const userData = {
     email: "ale_meneses2004@hotmail.com",
     phone: "+55 (15) 99801-7732",
     address: "Av. Alexandrina Bertoldi Vercellino, 461, Boituva - SP",
-    linkedin: "https://www.linkedin.com/in/alessandromeneses",
+    linkedin: "https://www.linkedin.com/in/alessandro-meneses/",
     github: "https://github.com/ManoAlee",
     location: "Boituva, São Paulo, Brasil"
   },
