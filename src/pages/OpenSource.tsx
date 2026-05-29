@@ -1,10 +1,145 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, MouseEvent } from "react";
 import { Button } from "@/shared/ui/Button";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionTemplate, useMotionValue, useSpring } from "framer-motion";
 import { FADE_UP_VARIANTS, STAGGER_CONTAINER_VARIANTS } from "@/shared/lib/motion";
 import { Github, Lock, Globe, Code2, Terminal, Database, Search, Filter, Monitor } from "lucide-react";
 import { OpenSourceVisual } from "@/widgets/OpenSourceVisual";
 import { GITHUB_PROJECTS } from "@/entities/project/data/github-projects";
+
+interface ProjectCardProps {
+  project: typeof GITHUB_PROJECTS[0];
+}
+
+function ProjectCard({ project }: ProjectCardProps) {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const rotateX = useSpring(useMotionValue(0), { stiffness: 200, damping: 20 });
+  const rotateY = useSpring(useMotionValue(0), { stiffness: 200, damping: 20 });
+
+  function onMouseMove({ currentTarget, clientX, clientY }: MouseEvent) {
+    const { left, top, width, height } = currentTarget.getBoundingClientRect();
+    const x = clientX - left;
+    const y = clientY - top;
+    
+    mouseX.set(x);
+    mouseY.set(y);
+
+    const rotateXValue = ((y - height / 2) / height) * -8; // Max -8 to 8 deg
+    const rotateYValue = ((x - width / 2) / width) * 8;   // Max -8 to 8 deg
+
+    rotateX.set(rotateXValue);
+    rotateY.set(rotateYValue);
+  }
+
+  function onMouseLeave() {
+    mouseX.set(0);
+    mouseY.set(0);
+    rotateX.set(0);
+    rotateY.set(0);
+  }
+
+  return (
+    <motion.div 
+      layout
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.2 }}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      style={{ 
+        rotateX, 
+        rotateY, 
+        transformStyle: "preserve-3d" 
+      }}
+      className="group relative flex flex-col overflow-hidden rounded-xl border border-white/10 bg-card/40 backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10"
+    >
+      {/* Dynamic Lighting Overlay */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100 z-10"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              350px circle at ${mouseX}px ${mouseY}px,
+              rgba(14, 165, 233, 0.15),
+              transparent 80%
+            )
+          `,
+        }}
+      />
+
+      {/* SKETCH HEADER */}
+      <div className="relative h-48 w-full overflow-hidden bg-black/50 border-b border-white/10" style={{ transform: "translateZ(10px)" }}>
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
+          <img 
+              src={project.imageUrl} 
+              alt={project.name} 
+              className="h-full w-full object-cover opacity-60 transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0"
+          />
+          {/* Project Type Icon Overlay */}
+          <div className="absolute top-3 right-3 z-20 p-2 rounded-full bg-black/50 backdrop-blur border border-white/10 text-white/80">
+              {project.type === 'Web' && <Globe className="w-4 h-4" />}
+              {project.type === 'Data' && <Database className="w-4 h-4" />}
+              {project.type === 'Automation' && <Terminal className="w-4 h-4" />}
+          </div>
+
+          {/* Status Badge & Link Overlay */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30 pointer-events-none group-hover:pointer-events-auto bg-black/40 backdrop-blur-[2px]">
+              {project.status === 'Public' && project.repoUrl && (
+                  <a 
+                      href={project.repoUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 hover:scale-105 shadow-xl pointer-events-auto"
+                  >
+                      <Github className="w-4 h-4" /> Ver Código
+                  </a>
+              )}
+          </div>
+
+          <div className="absolute top-3 left-3 z-20">
+              {project.status === 'Private' ? (
+                  <span className="flex items-center gap-1.5 px-2 py-1 rounded bg-red-500/20 border border-red-500/30 text-[10px] font-bold text-red-400 uppercase tracking-wider backdrop-blur-md">
+                      <Lock className="w-3 h-3" /> Private
+                  </span>
+              ) : (
+                  <span className="flex items-center gap-1.5 px-2 py-1 rounded bg-green-500/20 border border-green-500/30 text-[10px] font-bold text-green-400 uppercase tracking-wider backdrop-blur-md">
+                      <Globe className="w-3 h-3" /> Public
+                  </span>
+              )}
+          </div>
+      </div>
+
+      {/* CONTENT BODY */}
+      <div className="flex flex-1 flex-col p-5 gap-3" style={{ transform: "translateZ(20px)" }}>
+          <div>
+              <h3 className="font-bold text-lg leading-snug group-hover:text-primary transition-colors line-clamp-1" title={project.name}>
+                  {project.name}
+              </h3>
+              <p className="text-xs text-muted-foreground mt-1 line-clamp-2 min-h-[2.5em]">
+                  {project.description}
+              </p>
+          </div>
+
+          <div className="mt-auto flex items-center justify-between pt-4 border-t border-white/5">
+              <div className="flex items-center gap-2">
+                  <span className={`w-2 h-2 rounded-full ${
+                      project.language === 'TypeScript' ? 'bg-blue-500' :
+                      project.language === 'Python' ? 'bg-yellow-500' :
+                      project.language === 'JavaScript' ? 'bg-yellow-300' :
+                      'bg-orange-500'
+                  }`} />
+                  <span className="text-xs font-medium text-muted-foreground">{project.language}</span>
+              </div>
+              <span className="text-[10px] text-muted-foreground/60">
+                  {project.lastUpdated}
+              </span>
+          </div>
+      </div>
+    </motion.div>
+  );
+}
 
 interface TerminalLine {
   text: string | React.ReactNode;
@@ -116,7 +251,7 @@ export default function OpenSourcePage() {
               <p className="font-bold border-b border-white/10 pb-1">Status do Ambiente</p>
               <p>● Servidor Principal: <span className="text-green-400">srv-automotion-01 (10.0.0.7) - Online</span></p>
               <p>● Virtualizador: <span className="text-green-400">Proxmox VE (Clusters de Produção e VDI ativos)</span></p>
-              <p>● GPU Runtime: <span className="text-green-400">NVIDIA RTX 2060 (Docker runtime ativo)</span></p>
+              <p>● GPU Runtime: <span className="text-green-400">NVIDIA RTX 2060 (Docker runtime active)</span></p>
               <p>● Backup System: <span className="text-green-400">Restic + Rclone (Jobs imutáveis diários ativos)</span></p>
               <p>● Orchestrator: <span className="text-green-400">LocalAGI (Porta 8090 - Online)</span></p>
             </div>
@@ -318,84 +453,7 @@ export default function OpenSourcePage() {
                   >
                     <AnimatePresence mode="popLayout">
                       {filteredProjects.map((project) => (
-                          <motion.div 
-                              layout
-                              initial={{ opacity: 0, scale: 0.9 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              exit={{ opacity: 0, scale: 0.9 }}
-                              transition={{ duration: 0.2 }}
-                              key={project.id}
-                              className="group relative flex flex-col overflow-hidden rounded-xl border bg-card/40 backdrop-blur-sm transition-all hover:border-primary/50 hover:shadow-2xl hover:-translate-y-1"
-                          >
-                              {/* SKETCH HEADER */}
-                              <div className="relative h-48 w-full overflow-hidden bg-black/50 border-b border-white/10">
-                                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
-                                  <img 
-                                      src={project.imageUrl} 
-                                      alt={project.name} 
-                                      className="h-full w-full object-cover opacity-60 transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0"
-                                  />
-                                  {/* Project Type Icon Overlay */}
-                                  <div className="absolute top-3 right-3 z-20 p-2 rounded-full bg-black/50 backdrop-blur border border-white/10 text-white/80">
-                                      {project.type === 'Web' && <Globe className="w-4 h-4" />}
-                                      {project.type === 'Data' && <Database className="w-4 h-4" />}
-                                      {project.type === 'Automation' && <Terminal className="w-4 h-4" />}
-                                  </div>
-
-                                  {/* Status Badge & Link Overlay */}
-                                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30 pointer-events-none group-hover:pointer-events-auto bg-black/40 backdrop-blur-[2px]">
-                                      {project.status === 'Public' && project.repoUrl && (
-                                          <a 
-                                              href={project.repoUrl} 
-                                              target="_blank" 
-                                              rel="noopener noreferrer"
-                                              className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 hover:scale-105 shadow-xl"
-                                          >
-                                              <Github className="w-4 h-4" /> Ver Código
-                                          </a>
-                                      )}
-                                  </div>
-
-                                  <div className="absolute top-3 left-3 z-20">
-                                      {project.status === 'Private' ? (
-                                          <span className="flex items-center gap-1.5 px-2 py-1 rounded bg-red-500/20 border border-red-500/30 text-[10px] font-bold text-red-400 uppercase tracking-wider backdrop-blur-md">
-                                              <Lock className="w-3 h-3" /> Private
-                                          </span>
-                                      ) : (
-                                          <span className="flex items-center gap-1.5 px-2 py-1 rounded bg-green-500/20 border border-green-500/30 text-[10px] font-bold text-green-400 uppercase tracking-wider backdrop-blur-md">
-                                              <Globe className="w-3 h-3" /> Public
-                                          </span>
-                                      )}
-                                  </div>
-                              </div>
-
-                              {/* CONTENT BODY */}
-                              <div className="flex flex-1 flex-col p-5 gap-3">
-                                  <div>
-                                      <h3 className="font-bold text-lg leading-snug group-hover:text-primary transition-colors line-clamp-1" title={project.name}>
-                                          {project.name}
-                                      </h3>
-                                      <p className="text-xs text-muted-foreground mt-1 line-clamp-2 min-h-[2.5em]">
-                                          {project.description}
-                                      </p>
-                                  </div>
-
-                                  <div className="mt-auto flex items-center justify-between pt-4 border-t border-white/5">
-                                      <div className="flex items-center gap-2">
-                                          <span className={`w-2 h-2 rounded-full ${
-                                              project.language === 'TypeScript' ? 'bg-blue-500' :
-                                              project.language === 'Python' ? 'bg-yellow-500' :
-                                              project.language === 'JavaScript' ? 'bg-yellow-300' :
-                                              'bg-orange-500'
-                                          }`} />
-                                          <span className="text-xs font-medium text-muted-foreground">{project.language}</span>
-                                      </div>
-                                      <span className="text-[10px] text-muted-foreground/60">
-                                          {project.lastUpdated}
-                                      </span>
-                                  </div>
-                              </div>
-                          </motion.div>
+                          <ProjectCard key={project.id} project={project} />
                       ))}
                     </AnimatePresence>
 
