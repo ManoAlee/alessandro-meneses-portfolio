@@ -34,39 +34,6 @@ export const GITHUB_PROJECTS: ProjectSketch[] = [
     repoUrl: "https://github.com/ManoAlee/MCP-SSH-TOOL"
   },
   {
-    id: "portal-ativos",
-    name: "Portal-de-Ativos-Automotion",
-    description: "Sistema completo de automação e controle de inventário de hardware, termos de responsabilidade e ciclo de vida de ativos corporativos.",
-    language: "Python",
-    status: "Public",
-    type: "Automation",
-    imageUrl: "/images/projects/sketch-data.png",
-    lastUpdated: "Updated recently",
-    repoUrl: "https://github.com/ManoAlee/Portal-de-Ativos-Automotion"
-  },
-  {
-    id: "backup-orch",
-    name: "automacao-backup-orquestrador",
-    description: "Orquestrador de backups corporativos automatizados, com relatórios inteligentes e suporte a Restic/Rclone.",
-    language: "Python",
-    status: "Public",
-    type: "Automation",
-    imageUrl: "/images/projects/sketch-data.png",
-    lastUpdated: "Updated recently",
-    repoUrl: "https://github.com/ManoAlee/automacao-backup-orquestrador"
-  },
-  {
-    id: "pouso-medola",
-    name: "pouso medola",
-    description: "Plataforma web interativa desenvolvida com foco em turismo, reserva e experiência do usuário final.",
-    language: "JavaScript",
-    status: "Public",
-    type: "Web",
-    imageUrl: "/images/projects/sketch-app.png",
-    lastUpdated: "Updated recently",
-    repoUrl: "https://github.com/ManoAlee/pouso-medola"
-  },
-  {
     id: "cartela",
     name: "Cartela",
     description: "Interface gráfica e ferramentas analíticas para sugestões e backtesting estatístico do sorteio da Mega da Virada.",
@@ -78,25 +45,53 @@ export const GITHUB_PROJECTS: ProjectSketch[] = [
     repoUrl: "https://github.com/ManoAlee/Cartela"
   },
   {
-    id: "petyoo-web",
-    name: "petyoo-web",
-    description: "Plataforma web moderna em TypeScript para agendamentos, serviços pet e gerenciamento administrativo.",
-    language: "TypeScript",
-    status: "Public",
+    id: "portal-ativos",
+    name: "Portal-de-Ativos-Automotion",
+    description: "Sistema completo de automação e controle de inventário de hardware, termos de responsabilidade e ciclo de vida de ativos corporativos. (Projeto Corporativo / Privado)",
+    language: "Python",
+    status: "Private",
+    type: "Automation",
+    imageUrl: "/images/projects/sketch-data.png",
+    lastUpdated: "Updated recently"
+  },
+  {
+    id: "backup-orch",
+    name: "automacao-backup-orquestrador",
+    description: "Orquestrador de backups corporativos automatizados, com relatórios inteligentes e suporte a Restic/Rclone. (Projeto Corporativo / Privado)",
+    language: "Python",
+    status: "Private",
+    type: "Automation",
+    imageUrl: "/images/projects/sketch-data.png",
+    lastUpdated: "Updated recently"
+  },
+  {
+    id: "pouso-medola",
+    name: "pouso medola",
+    description: "Plataforma web interativa desenvolvida com foco em turismo, reserva e experiência do usuário final. (Projeto Confidencial)",
+    language: "JavaScript",
+    status: "Private",
     type: "Web",
     imageUrl: "/images/projects/sketch-app.png",
-    lastUpdated: "Updated recently",
-    repoUrl: "https://github.com/ManoAlee/petyoo-web"
+    lastUpdated: "Updated recently"
+  },
+  {
+    id: "petyoo-web",
+    name: "petyoo-web",
+    description: "Plataforma web moderna em TypeScript para agendamentos, serviços pet e gerenciamento administrativo. (Projeto Confidencial)",
+    language: "TypeScript",
+    status: "Private",
+    type: "Web",
+    imageUrl: "/images/projects/sketch-app.png",
+    lastUpdated: "Updated recently"
   },
   {
     id: "gpo-plus",
     name: "GPO-Plus",
-    description: "Interface e scripts utilitários para criação, auditoria e facilitação de distribuição de diretivas de grupo (GPO).",
+    description: "Interface e scripts utilitários para criação, auditoria e facilitação de distribuição de diretivas de grupo (GPO). (Projeto Corporativo / Privado)",
     language: "VB.NET",
-    status: "Public",
+    status: "Private",
     type: "Automation",
     imageUrl: "/images/projects/sketch-data.png",
-    lastUpdated: "Updated recently",
-    repoUrl: "https://github.com/ManoAlee/GPO-Plus"
+    lastUpdated: "Updated recently"
   }
 ];
