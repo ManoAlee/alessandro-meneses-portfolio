@@ -2,7 +2,7 @@ export interface ProjectSketch {
   id: string;
   name: string;
   description: string;
-  language: "TypeScript" | "Python" | "HTML" | "JavaScript" | "CSS" | "VB.NET" | "Shell" | "Rich Text" | "Other";
+  language: "TypeScript" | "Python" | "HTML" | "JavaScript";
   status: "Public" | "Private";
   type: "Web" | "Data" | "Automation";
   imageUrl: string;
@@ -13,8 +13,8 @@ export interface ProjectSketch {
 export const GITHUB_PROJECTS: ProjectSketch[] = [
   {
     id: "portfolio",
-    name: "alessandro-meneses-portfólio",
-    description: "Meu portfólio profissional de Infraestrutura, Cloud & DevOps. Arquitetura FSD, React, TypeScript e Tailwind CSS.",
+    name: "alessandro-meneses-portfolio",
+    description: "Meu portfólio profissional. Arquitetura FSD, React, Framer Motion e UX avançada.",
     language: "TypeScript",
     status: "Public",
     type: "Web",
@@ -25,7 +25,7 @@ export const GITHUB_PROJECTS: ProjectSketch[] = [
   {
     id: "mcp-ssh",
     name: "MCP-SSH-TOOL",
-    description: "Servidor Model Context Protocol (MCP) desenvolvido para gerenciamento e execução de comandos SSH de forma integrada.",
+    description: "Servidor MCP para conexões SSH.",
     language: "Python",
     status: "Public",
     type: "Automation",
@@ -36,7 +36,7 @@ export const GITHUB_PROJECTS: ProjectSketch[] = [
   {
     id: "cartela",
     name: "Cartela",
-    description: "Interface gráfica e ferramentas analíticas para sugestões e backtesting estatístico do sorteio da Mega da Virada.",
+    description: "Cartela — Interface gráfica e ferramentas para análise, sugestões e backtesting do Mega da Virada. Projeto reorganizado para distribuição.",
     language: "Python",
     status: "Public",
     type: "Data",
@@ -45,39 +45,9 @@ export const GITHUB_PROJECTS: ProjectSketch[] = [
     repoUrl: "https://github.com/ManoAlee/Cartela"
   },
   {
-    id: "portal-ativos",
-    name: "Portal-de-Ativos-Automotion",
-    description: "Sistema completo de automação e controle de inventário de hardware, termos de responsabilidade e ciclo de vida de ativos corporativos. (Projeto Corporativo / Privado)",
-    language: "Python",
-    status: "Private",
-    type: "Automation",
-    imageUrl: "/images/projects/sketch-data.png",
-    lastUpdated: "Updated recently"
-  },
-  {
-    id: "backup-orch",
-    name: "automacao-backup-orquestrador",
-    description: "Orquestrador de backups corporativos automatizados, com relatórios inteligentes e suporte a Restic/Rclone. (Projeto Corporativo / Privado)",
-    language: "Python",
-    status: "Private",
-    type: "Automation",
-    imageUrl: "/images/projects/sketch-data.png",
-    lastUpdated: "Updated recently"
-  },
-  {
-    id: "pouso-medola",
-    name: "pouso medola",
-    description: "Plataforma web interativa desenvolvida com foco em turismo, reserva e experiência do usuário final. (Projeto Confidencial)",
-    language: "JavaScript",
-    status: "Private",
-    type: "Web",
-    imageUrl: "/images/projects/sketch-app.png",
-    lastUpdated: "Updated recently"
-  },
-  {
-    id: "petyoo-web",
+    id: "petyoo",
     name: "petyoo-web",
-    description: "Plataforma web moderna em TypeScript para agendamentos, serviços pet e gerenciamento administrativo. (Projeto Confidencial)",
+    description: "Plataforma web para gestão de serviços pet e agendamentos. (Projeto Confidencial)",
     language: "TypeScript",
     status: "Private",
     type: "Web",
@@ -85,13 +55,43 @@ export const GITHUB_PROJECTS: ProjectSketch[] = [
     lastUpdated: "Updated recently"
   },
   {
-    id: "gpo-plus",
-    name: "GPO-Plus",
-    description: "Interface e scripts utilitários para criação, auditoria e facilitação de distribuição de diretivas de grupo (GPO). (Projeto Corporativo / Privado)",
-    language: "VB.NET",
+    id: "portal-ativos",
+    name: "Portal-de-Ativos-Automotion",
+    description: "Sistema de automação para controle de ativos corporativos.",
+    language: "Python",
     status: "Private",
     type: "Automation",
     imageUrl: "/images/projects/sketch-data.png",
+    lastUpdated: "Updated recently"
+  },
+  {
+    id: "app-chamados",
+    name: "app-chamados-ti",
+    description: "Sistema de HelpDesk para gestão de tickets e incidentes de TI.",
+    language: "JavaScript",
+    status: "Private",
+    type: "Web",
+    imageUrl: "/images/projects/sketch-app.png",
+    lastUpdated: "Updated recently"
+  },
+  {
+    id: "backup-orch",
+    name: "automacao-backup-orquestrador",
+    description: "Orquestrador de backups automatizados com verificação de integridade.",
+    language: "Python",
+    status: "Private",
+    type: "Automation",
+    imageUrl: "/images/projects/sketch-data.png",
+    lastUpdated: "Updated recently"
+  },
+  {
+    id: "medola",
+    name: "pouso medola",
+    description: "Landing page de alta conversão para cliente corporativo.",
+    language: "JavaScript",
+    status: "Private",
+    type: "Web",
+    imageUrl: "/images/projects/sketch-app.png",
     lastUpdated: "Updated recently"
   }
 ];

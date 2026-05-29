@@ -52,10 +52,8 @@ export const RESUME_CONTENT: ResumeData = {
       location: "Boituva, SP (Híbrido)",
       isCurrent: true,
       highlights: [
-        "Liderança técnica e sustentação de infraestrutura de missão crítica local e em nuvem.",
-        "Desenho e administração de ambientes virtualizados de alta disponibilidade.",
-        "Implementação de pipelines de CI/CD, orquestração de containers (Docker/Kubernetes) e cultura DevOps.",
-        "Automação avançada com scripts em PowerShell, Python e Bash para processos corporativos."
+        "Liderança técnica e sustentação de ambientes de missão crítica.",
+        "Foco em arquitetura de nuvem (AWS/Azure), cultura DevOps (CI/CD), orquestração de containers (Docker/Kubernetes) e automação de processos complexos."
       ]
     },
     {
