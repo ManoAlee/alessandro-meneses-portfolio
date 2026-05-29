@@ -1,18 +1,30 @@
+import { useState } from "react";
 import { Button } from "@/shared/ui/Button";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { FADE_UP_VARIANTS, STAGGER_CONTAINER_VARIANTS } from "@/shared/lib/motion";
-import { Github, Lock, Globe, Code2, Terminal, Database } from "lucide-react";
+import { Github, Lock, Globe, Code2, Terminal, Database, Search, Filter } from "lucide-react";
 import { OpenSourceVisual } from "@/widgets/OpenSourceVisual";
 import { GITHUB_PROJECTS } from "@/entities/project/data/github-projects";
 
 export default function OpenSourcePage() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeFilter, setActiveFilter] = useState<"All" | "Web" | "Data" | "Automation">("All");
+
+  const filteredProjects = GITHUB_PROJECTS.filter((project) => {
+    const matchesSearch = project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.language.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesFilter = activeFilter === "All" || project.type === activeFilter;
+    return matchesSearch && matchesFilter;
+  });
+
   return (
     <div className="container py-12 md:py-20 min-h-[85vh]">
       <motion.div 
         initial="hidden"
         animate="visible"
         variants={STAGGER_CONTAINER_VARIANTS}
-        className="space-y-16"
+        className="space-y-12"
       >
         {/* Header Grid Section */}
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -37,6 +49,43 @@ export default function OpenSourcePage() {
             </motion.div>
         </div>
 
+        {/* Search & Filter Controls */}
+        <motion.div 
+          variants={FADE_UP_VARIANTS} 
+          className="flex flex-col md:flex-row gap-4 items-center justify-between bg-card/20 backdrop-blur-sm border p-4 rounded-xl border-white/5"
+        >
+          {/* Search input */}
+          <div className="relative w-full md:max-w-xs">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <input 
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Buscar projetos ou tecnologias..."
+              className="w-full pl-9 pr-4 py-2 text-sm rounded-lg border bg-background/50 border-white/10 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:text-muted-foreground/50"
+            />
+          </div>
+
+          {/* Filter Tabs */}
+          <div className="flex flex-wrap gap-2 w-full md:w-auto">
+            {(["All", "Automation", "Web", "Data"] as const).map((filter) => (
+              <button
+                key={filter}
+                onClick={() => setActiveFilter(filter)}
+                className={`px-4 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
+                  activeFilter === filter
+                    ? "bg-primary border-primary text-primary-foreground shadow-md shadow-primary/20"
+                    : "bg-background/40 hover:bg-card/60 text-muted-foreground border-transparent hover:border-white/10"
+                }`}
+              >
+                {filter === "All" ? "Todos" :
+                 filter === "Automation" ? "Automação" :
+                 filter === "Web" ? "Web / Frontend" : "Dados / Analytics"}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+
         {/* PROJETOS GRID - GRAPHIC INTERFACE */}
         <div className="space-y-8">
             <motion.h2 variants={FADE_UP_VARIANTS} className="text-2xl font-bold font-display border-l-4 border-primary pl-4 flex items-center gap-3">
@@ -45,13 +94,19 @@ export default function OpenSourcePage() {
             </motion.h2>
 
             <motion.div 
+              layout
               variants={STAGGER_CONTAINER_VARIANTS}
-              className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" // 4 columns for dense grid
+              className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-h-[300px]"
             >
-                {GITHUB_PROJECTS.map((project) => (
+              <AnimatePresence mode="popLayout">
+                {filteredProjects.map((project) => (
                     <motion.div 
+                        layout
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        transition={{ duration: 0.2 }}
                         key={project.id}
-                        variants={FADE_UP_VARIANTS}
                         className="group relative flex flex-col overflow-hidden rounded-xl border bg-card/40 backdrop-blur-sm transition-all hover:border-primary/50 hover:shadow-2xl hover:-translate-y-1"
                     >
                         {/* SKETCH HEADER */}
@@ -124,6 +179,19 @@ export default function OpenSourcePage() {
                         </div>
                     </motion.div>
                 ))}
+              </AnimatePresence>
+
+              {filteredProjects.length === 0 && (
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="col-span-full flex flex-col items-center justify-center py-12 text-center text-muted-foreground"
+                >
+                  <Code2 className="w-12 h-12 mb-4 opacity-50" />
+                  <p className="text-lg font-semibold">Nenhum projeto encontrado</p>
+                  <p className="text-sm opacity-60">Tente buscar por outro termo ou limpar os filtros.</p>
+                </motion.div>
+              )}
             </motion.div>
         </div>
       </motion.div>
