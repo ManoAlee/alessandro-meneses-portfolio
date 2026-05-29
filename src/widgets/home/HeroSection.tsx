@@ -5,6 +5,55 @@ import { useNavigate } from "react-router-dom";
 import { AvatarVisual } from "./AvatarVisual";
 import { useState, useEffect } from "react";
 
+interface MolecularTextProps {
+  text: string;
+  gravity: { x: number; y: number; active: boolean };
+  className?: string;
+}
+
+function MolecularText({ text, gravity, className }: MolecularTextProps) {
+  return (
+    <span className={className}>
+      {text.split("").map((char, index) => {
+        // Characters closer to the right (closer to the black hole) get sucked in stronger
+        const normIndex = index / text.length;
+        const sensitivity = 0.4 + normIndex * 1.6;
+        
+        // Physics offsets
+        const pullX = gravity.active ? 28 * sensitivity : 0;
+        const pullY = gravity.active ? gravity.y * 22 * sensitivity : 0;
+        const skew = gravity.active ? (1 + gravity.y) * 6 * sensitivity : 0;
+
+        return (
+          <motion.span
+            key={index}
+            className="inline-block whitespace-pre origin-center"
+            animate={{
+              x: pullX,
+              y: pullY,
+              skewX: skew,
+              scale: gravity.active ? 1 + (sensitivity * 0.08) : 1,
+              // Glow effect changes to hot gas orange near the horizon
+              color: gravity.active ? "#f97316" : "#38bdf8",
+              textShadow: gravity.active 
+                ? "0 0 8px rgba(249, 115, 22, 0.6)" 
+                : "0 0 8px rgba(56, 189, 248, 0)",
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 80,
+              damping: 13,
+              mass: 0.6,
+            }}
+          >
+            {char}
+          </motion.span>
+        );
+      })}
+    </span>
+  );
+}
+
 export function HeroSection() {
   const navigate = useNavigate();
   const [gravityOffset, setGravityOffset] = useState({ x: 0, y: 0, active: false });
@@ -18,8 +67,6 @@ export function HeroSection() {
     };
     const handleMove = (e: Event) => {
       const customEvent = e as CustomEvent<{ x: number; y: number }>;
-      // The black hole is on the right, pull X slightly towards it (+16px)
-      // Pull Y matching the vertical displacement of the mouse within the accretion disk
       const pullX = 16; 
       const pullY = customEvent.detail.y * 12;
       setGravityOffset({ x: pullX, y: pullY, active: true });
@@ -48,8 +95,8 @@ export function HeroSection() {
         animate={{
           x: gravityOffset.active ? gravityOffset.x : 0,
           y: gravityOffset.active ? gravityOffset.y : 0,
-          skewX: gravityOffset.active ? 1.5 : 0, // Stretch space representing tidal shear forces
-          scaleX: gravityOffset.active ? 1.015 : 1,
+          skewX: gravityOffset.active ? 1 : 0,
+          scaleX: gravityOffset.active ? 1.01 : 1,
         }}
         transition={{ type: "spring", stiffness: 120, damping: 18 }}
         className="flex flex-col items-start gap-6 text-left origin-left"
@@ -58,9 +105,11 @@ export function HeroSection() {
           variants={FADE_UP_VARIANTS}
           className="text-4xl font-extrabold leading-tight tracking-tighter md:text-6xl lg:text-7xl font-display drop-shadow-2xl"
         >
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-400 to-blue-600 animate-pulse">
-            DevOps & Cloud.
-          </span>
+          <MolecularText 
+            text="DevOps & Cloud." 
+            gravity={gravityOffset} 
+            className="block"
+          />
         </motion.h1>
         <motion.p 
           variants={FADE_UP_VARIANTS}

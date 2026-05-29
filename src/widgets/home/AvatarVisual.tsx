@@ -110,7 +110,72 @@ export function AvatarVisual() {
       const centerY = height / 2 + y.get() * 15;
       const singularityRadius = 38;
 
-      // 1. Draw Background Gravitational Lens Distortion / Space Glow
+      // 1. Draw Warped Space-Time Grid Mesh (Relativity visualizer)
+      ctx.strokeStyle = "rgba(99, 102, 241, 0.08)"; 
+      ctx.lineWidth = 1;
+      const gridSize = 20;
+
+      // Draw horizontal grid lines warped by gravity well
+      for (let gy = 0; gy < height; gy += gridSize) {
+        ctx.beginPath();
+        for (let gx = 0; gx <= width; gx += 8) {
+          const dx = gx - centerX;
+          const dy = gy - centerY;
+          const d = Math.sqrt(dx * dx + dy * dy);
+
+          let bentX = gx;
+          let bentY = gy;
+
+          if (d > singularityRadius) {
+            const warpFactor = (singularityRadius * singularityRadius * 1.8) / d;
+            const finalWarp = Math.min(warpFactor, d - singularityRadius + 2);
+            bentX -= (dx / d) * finalWarp;
+            bentY -= (dy / d) * finalWarp;
+          } else {
+            bentX = centerX;
+            bentY = centerY;
+          }
+
+          if (gx === 0) {
+            ctx.moveTo(bentX, bentY);
+          } else {
+            ctx.lineTo(bentX, bentY);
+          }
+        }
+        ctx.stroke();
+      }
+
+      // Draw vertical grid lines warped by gravity well
+      for (let gx = 0; gx < width; gx += gridSize) {
+        ctx.beginPath();
+        for (let gy = 0; gy <= height; gy += 8) {
+          const dx = gx - centerX;
+          const dy = gy - centerY;
+          const d = Math.sqrt(dx * dx + dy * dy);
+
+          let bentX = gx;
+          let bentY = gy;
+
+          if (d > singularityRadius) {
+            const warpFactor = (singularityRadius * singularityRadius * 1.8) / d;
+            const finalWarp = Math.min(warpFactor, d - singularityRadius + 2);
+            bentX -= (dx / d) * finalWarp;
+            bentY -= (dy / d) * finalWarp;
+          } else {
+            bentX = centerX;
+            bentY = centerY;
+          }
+
+          if (gy === 0) {
+            ctx.moveTo(bentX, bentY);
+          } else {
+            ctx.lineTo(bentX, bentY);
+          }
+        }
+        ctx.stroke();
+      }
+
+      // 2. Draw Background Gravitational Lens Distortion / Space Glow
       const glowGrad = ctx.createRadialGradient(
         centerX,
         centerY,
@@ -127,7 +192,7 @@ export function AvatarVisual() {
       ctx.arc(centerX, centerY, singularityRadius * 4, 0, Math.PI * 2);
       ctx.fill();
 
-      // 2. Sort particles by Z and Angle to render background accretion disk (behind event horizon)
+      // 3. Sort particles by Z and Angle to render background accretion disk (behind event horizon)
       // We render particles behind first (those moving away)
       particles.forEach((p) => {
         // Update physics
@@ -171,7 +236,7 @@ export function AvatarVisual() {
         }
       });
 
-      // 3. Render Singularity & Photon Ring boundary (Einstein ring glow)
+      // 4. Render Singularity & Photon Ring boundary (Einstein ring glow)
       // Outer photon boundary ring
       ctx.shadowBlur = 20;
       ctx.shadowColor = "rgba(249, 115, 22, 0.8)";
@@ -188,7 +253,7 @@ export function AvatarVisual() {
       ctx.arc(centerX, centerY, singularityRadius, 0, Math.PI * 2);
       ctx.fill();
 
-      // 4. Render foreground accretion disk particles (crossing in front of event horizon)
+      // 5. Render foreground accretion disk particles (crossing in front of event horizon)
       particles.forEach((p) => {
         const rawX = Math.cos(p.angle) * p.radius;
         let rawY = Math.sin(p.angle) * p.radius * 0.28;
@@ -215,7 +280,7 @@ export function AvatarVisual() {
         }
       });
 
-      // 5. Bright relativistic jet reflection line
+      // 6. Bright relativistic jet reflection line
       const lineGrad = ctx.createLinearGradient(centerX - 100, centerY, centerX + 100, centerY);
       lineGrad.addColorStop(0, "rgba(255,140,0,0)");
       lineGrad.addColorStop(0.3, "rgba(255,200,50,0.4)");
