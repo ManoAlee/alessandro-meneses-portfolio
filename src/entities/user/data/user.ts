@@ -1,7 +1,7 @@
 export const userData = {
   profile: {
     name: "Alessandro Meneses",
-    role: "Graduado em Gestão da Tecnologia da Informação | Assistente de Infraestrutura JR | HelpDesk | Suporte Técnico",
+    role: "Analista de Infraestrutura & DevOps | DevOps Engineer | Cloud Architect",
     bio: "Profissional de TI graduado em Gestão da Tecnologia da Informação, com experiência prática em infraestrutura, suporte técnico e administração de banco de dados. Focado em automação, análise de dados e melhoria contínua de processos.",
     email: "ale_meneses2004@hotmail.com",
     phone: "+55 (15) 99801-7732",
@@ -13,26 +13,34 @@ export const userData = {
   skills: {
     core: [
       "Pesquisa e análise",
-      "Administrador de banco de dados",
+      "Administração de banco de dados",
       "Suporte Técnico e Infraestrutura de TI",
+      "DevOps & Cultura de Automação",
       "Power BI",
       "Data Science Fundamentals"
     ],
     infrastructure: [
-      "Windows Server", "Linux", "Active Directory (AD)", "DNS/DHCP", "VPN/SSH", "TCP/IP", "Hyper-V", "VMware", "Proxmox", "Office 365", "Hardware & Cabling"
+      "AWS", "Azure", "Linux", "Windows Server", "Active Directory (AD)", "Proxmox", "Docker", "Kubernetes", "DNS/DHCP", "VPN/SSH", "TCP/IP", "Hyper-V"
     ],
     automation: [
-      "PowerShell", "Bash", "Python", "Restic", "Rclone"
+      "CI/CD (GitHub Actions)", "Terraform", "Ansible", "PowerShell", "Bash", "Python", "Restic", "Rclone"
     ],
     languages: [
-      "Português (Nativo)", "Inglês (Elementar)"
+      "Português (Nativo)", "Inglês (Técnico B1)"
     ]
   },
   experience: [
     {
       company: "Automotion",
+      role: "Analista de Infraestrutura & DevOps",
+      period: "Junho 2026 - Presente",
+      description: "Liderança técnica e sustentação de ambientes de missão crítica. Foco em arquitetura de nuvem (AWS/Azure), cultura DevOps (CI/CD), orquestração de containers (Docker/Kubernetes) e automação de processos complexos.",
+      tags: ["DevOps", "Cloud", "Kubernetes", "Automação"]
+    },
+    {
+      company: "Automotion",
       role: "Assistente de TI JR",
-      period: "Junho 2025 - Presente",
+      period: "Junho 2025 - Junho 2026",
       description: "Atendimento de suporte e troubleshooting (N1/N2/N3) local e remoto (RDP, VNC, SSH). Administração de redes (TCP/IP, VPN, Firewall), servidores (Windows/Linux/Proxmox) e gestão de ativos. Automação de processos com PowerShell/Bash e implementação de backups robustos com Restic/Rclone.",
       tags: ["Infraestrutura", "Suporte", "Proxmox", "Backup"]
     },

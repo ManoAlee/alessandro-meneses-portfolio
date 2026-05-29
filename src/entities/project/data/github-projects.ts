@@ -2,7 +2,7 @@ export interface ProjectSketch {
   id: string;
   name: string;
   description: string;
-  language: "TypeScript" | "Python" | "HTML" | "JavaScript";
+  language: "TypeScript" | "Python" | "HTML" | "JavaScript" | "CSS" | "VB.NET" | "Shell" | "Rich Text" | "Other";
   status: "Public" | "Private";
   type: "Web" | "Data" | "Automation";
   imageUrl: string;
@@ -13,8 +13,8 @@ export interface ProjectSketch {
 export const GITHUB_PROJECTS: ProjectSketch[] = [
   {
     id: "portfolio",
-    name: "alessandro-meneses-portfolio",
-    description: "Meu portfólio profissional. Arquitetura FSD, React, Framer Motion e UX avançada.",
+    name: "alessandro-meneses-portfólio",
+    description: "Meu portfólio profissional de Infraestrutura, Cloud & DevOps. Arquitetura FSD, React, TypeScript e Tailwind CSS.",
     language: "TypeScript",
     status: "Public",
     type: "Web",
@@ -23,75 +23,80 @@ export const GITHUB_PROJECTS: ProjectSketch[] = [
     repoUrl: "https://github.com/ManoAlee/alessandro-meneses-portfolio"
   },
   {
-    id: "freelanceros",
-    name: "FreelancerOS",
-    description: "The Ultimate Agentic Framework for Freelancers. Sistema operacional agêntico para gestão autônoma.",
-    language: "HTML",
-    status: "Public",
-    type: "Web",
-    imageUrl: "/images/projects/sketch-data.png", // Fits "Framework/OS"
-    lastUpdated: "Updated 2 days ago",
-    repoUrl: "https://github.com/ManoAlee/FreelancerOS"
-  },
-  {
-    id: "cartela",
-    name: "Cartela",
-    description: "GUI and tools for Mega da Virada analysis, suggestions and backtesting. Project reorganized for distribution.",
+    id: "mcp-ssh",
+    name: "MCP-SSH-TOOL",
+    description: "Servidor Model Context Protocol (MCP) desenvolvido para gerenciamento e execução de comandos SSH de forma integrada.",
     language: "Python",
     status: "Public",
-    type: "Data",
+    type: "Automation",
     imageUrl: "/images/projects/sketch-data.png",
-    lastUpdated: "Updated 4 days ago",
-    repoUrl: "https://github.com/ManoAlee/Cartela"
-  },
-  {
-    id: "petyoo",
-    name: "petyoo-web",
-    description: "Plataforma web para gestão de serviços pet e agendamentos. (Projeto Confidencial)",
-    language: "TypeScript",
-    status: "Private",
-    type: "Web",
-    imageUrl: "/images/projects/sketch-app.png",
-    lastUpdated: "Updated 36 minutes ago"
+    lastUpdated: "Updated recently",
+    repoUrl: "https://github.com/ManoAlee/MCP-SSH-TOOL"
   },
   {
     id: "portal-ativos",
     name: "Portal-de-Ativos-Automotion",
-    description: "Sistema de automação para controle de ativos corporativos.",
+    description: "Sistema completo de automação e controle de inventário de hardware, termos de responsabilidade e ciclo de vida de ativos corporativos.",
     language: "Python",
-    status: "Private",
+    status: "Public",
     type: "Automation",
     imageUrl: "/images/projects/sketch-data.png",
-    lastUpdated: "Updated 3 days ago"
-  },
-  {
-    id: "app-chamados",
-    name: "app-chamados-ti",
-    description: "Sistema de HelpDesk para gestão de tickets e incidentes de TI.",
-    language: "JavaScript",
-    status: "Private",
-    type: "Web",
-    imageUrl: "/images/projects/sketch-app.png",
-    lastUpdated: "Updated 4 days ago"
+    lastUpdated: "Updated recently",
+    repoUrl: "https://github.com/ManoAlee/Portal-de-Ativos-Automotion"
   },
   {
     id: "backup-orch",
     name: "automacao-backup-orquestrador",
-    description: "Orquestrador de backups automatizados com verificação de integridade.",
+    description: "Orquestrador de backups corporativos automatizados, com relatórios inteligentes e suporte a Restic/Rclone.",
     language: "Python",
-    status: "Private",
+    status: "Public",
     type: "Automation",
     imageUrl: "/images/projects/sketch-data.png",
-    lastUpdated: "Updated 4 days ago"
+    lastUpdated: "Updated recently",
+    repoUrl: "https://github.com/ManoAlee/automacao-backup-orquestrador"
   },
   {
-    id: "medola",
-    name: "medola-landing",
-    description: "Landing page de alta conversão para cliente corporativo.",
+    id: "pouso-medola",
+    name: "pouso medola",
+    description: "Plataforma web interativa desenvolvida com foco em turismo, reserva e experiência do usuário final.",
     language: "JavaScript",
-    status: "Private",
+    status: "Public",
     type: "Web",
     imageUrl: "/images/projects/sketch-app.png",
-    lastUpdated: "Updated last week"
+    lastUpdated: "Updated recently",
+    repoUrl: "https://github.com/ManoAlee/pouso-medola"
+  },
+  {
+    id: "cartela",
+    name: "Cartela",
+    description: "Interface gráfica e ferramentas analíticas para sugestões e backtesting estatístico do sorteio da Mega da Virada.",
+    language: "Python",
+    status: "Public",
+    type: "Data",
+    imageUrl: "/images/projects/sketch-data.png",
+    lastUpdated: "Updated recently",
+    repoUrl: "https://github.com/ManoAlee/Cartela"
+  },
+  {
+    id: "petyoo-web",
+    name: "petyoo-web",
+    description: "Plataforma web moderna em TypeScript para agendamentos, serviços pet e gerenciamento administrativo.",
+    language: "TypeScript",
+    status: "Public",
+    type: "Web",
+    imageUrl: "/images/projects/sketch-app.png",
+    lastUpdated: "Updated recently",
+    repoUrl: "https://github.com/ManoAlee/petyoo-web"
+  },
+  {
+    id: "gpo-plus",
+    name: "GPO-Plus",
+    description: "Interface e scripts utilitários para criação, auditoria e facilitação de distribuição de diretivas de grupo (GPO).",
+    language: "VB.NET",
+    status: "Public",
+    type: "Automation",
+    imageUrl: "/images/projects/sketch-data.png",
+    lastUpdated: "Updated recently",
+    repoUrl: "https://github.com/ManoAlee/GPO-Plus"
   }
 ];

@@ -47,10 +47,22 @@ export const RESUME_CONTENT: ResumeData = {
   experience: [
     {
       company: "Automotion",
-      role: "Assistente de TI (Infra & DevOps) - Nível JR",
-      period: "Jun 2025 - Presente",
+      role: "Analista de Infraestrutura & DevOps",
+      period: "Jun 2026 - Presente",
       location: "Boituva, SP (Híbrido)",
       isCurrent: true,
+      highlights: [
+        "Liderança técnica e sustentação de infraestrutura de missão crítica local e em nuvem.",
+        "Desenho e administração de ambientes virtualizados de alta disponibilidade.",
+        "Implementação de pipelines de CI/CD, orquestração de containers (Docker/Kubernetes) e cultura DevOps.",
+        "Automação avançada com scripts em PowerShell, Python e Bash para processos corporativos."
+      ]
+    },
+    {
+      company: "Automotion",
+      role: "Assistente de TI (Infra & DevOps) - Nível JR",
+      period: "Jun 2025 - Jun 2026",
+      location: "Boituva, SP (Híbrido)",
       highlights: [
         "Sustentação de Missão Crítica: Responsável pela estabilidade de servidores Windows/Linux, garantindo SLA de atendimento N3.",
         "Automação de Rotinas: Desenvolvi scripts em PowerShell que automatizaram o onboarding de usuários, poupando 15h+ mês da equipe.",
