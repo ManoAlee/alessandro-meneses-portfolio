@@ -25,18 +25,42 @@ export function AvatarVisual() {
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
     
-    x.set((e.clientX - centerX) / (rect.width / 2));
-    y.set((e.clientY - centerY) / (rect.height / 2));
+    // Calculate distance from center normalized (-1 to 1)
+    const normX = (e.clientX - centerX) / (rect.width / 2);
+    const normY = (e.clientY - centerY) / (rect.height / 2);
+    x.set(normX);
+    y.set(normY);
+
+    // Dispatch gravity pull event for text/elements on the page
+    window.dispatchEvent(new CustomEvent('blackhole-move', { detail: { x: normX, y: normY } }));
+
+    // Dispatch cursor gravity event (pulling the cursor dot to center)
+    const distance = Math.sqrt(normX * normX + normY * normY);
+    const strength = Math.max(0, 1 - distance);
+    window.dispatchEvent(new CustomEvent('cursor-gravity', { 
+      detail: { 
+        x: centerX + window.scrollX, 
+        y: centerY + window.scrollY, 
+        active: true,
+        strength: strength
+      } 
+    }));
   };
 
   const handleMouseLeave = () => {
     x.set(0);
     y.set(0);
     setIsHovered(false);
+    
+    // Reset page elements gravity
+    window.dispatchEvent(new CustomEvent('blackhole-leave'));
+    // Reset cursor gravity
+    window.dispatchEvent(new CustomEvent('cursor-gravity', { detail: { active: false } }));
   };
 
   const handleMouseEnter = () => {
     setIsHovered(true);
+    window.dispatchEvent(new CustomEvent('blackhole-hover'));
   };
 
   // Parallax Tilt Configuration (Physics-based springs)
@@ -263,7 +287,7 @@ export function AvatarVisual() {
 
         {/* Floating Badge - Available for Work */}
         <motion.div 
-            className="absolute -right-8 top-12 z-20 flex items-center gap-2 rounded-full border border-white/10 bg-background/80 px-4 py-2 shadow-xl backdrop-blur-xl"
+            className="absolute -right-8 top-12 z-20 flex items-center gap-2 rounded-full border border-white/10 bg-background/80 px-4 py-2 shadow-xl backdrop-blur-xl animate-float"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.8 }}
@@ -277,21 +301,6 @@ export function AvatarVisual() {
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
             </span>
             <span className="text-xs font-bold tracking-wide">Available for Work</span>
-        </motion.div>
-
-        {/* Floating Badge - DevOps Engineer */}
-        <motion.div 
-            className="absolute -left-8 bottom-12 z-20 rounded-full border border-white/10 bg-background/80 px-5 py-2 shadow-xl backdrop-blur-xl flex items-center gap-2"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1 }}
-            style={{ 
-              x: useTransform(x, val => val * -18), 
-              y: useTransform(y, val => val * -10) 
-            }}
-        >
-            <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">ROLE:</span>
-            <span className="text-xs font-extrabold text-primary tracking-wide">DEVOPS ENGINEER</span>
         </motion.div>
 
       </motion.div>

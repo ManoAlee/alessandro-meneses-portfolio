@@ -3,9 +3,39 @@ import { motion } from "framer-motion";
 import { FADE_UP_VARIANTS, STAGGER_CONTAINER_VARIANTS } from "@/shared/lib/motion";
 import { useNavigate } from "react-router-dom";
 import { AvatarVisual } from "./AvatarVisual";
+import { useState, useEffect } from "react";
 
 export function HeroSection() {
   const navigate = useNavigate();
+  const [gravityOffset, setGravityOffset] = useState({ x: 0, y: 0, active: false });
+
+  useEffect(() => {
+    const handleHover = () => {
+      setGravityOffset(prev => ({ ...prev, active: true }));
+    };
+    const handleLeave = () => {
+      setGravityOffset({ x: 0, y: 0, active: false });
+    };
+    const handleMove = (e: Event) => {
+      const customEvent = e as CustomEvent<{ x: number; y: number }>;
+      // The black hole is on the right, pull X slightly towards it (+16px)
+      // Pull Y matching the vertical displacement of the mouse within the accretion disk
+      const pullX = 16; 
+      const pullY = customEvent.detail.y * 12;
+      setGravityOffset({ x: pullX, y: pullY, active: true });
+    };
+
+    window.addEventListener("blackhole-hover", handleHover);
+    window.addEventListener("blackhole-leave", handleLeave);
+    window.addEventListener("blackhole-move", handleMove);
+
+    return () => {
+      window.removeEventListener("blackhole-hover", handleHover);
+      window.removeEventListener("blackhole-leave", handleLeave);
+      window.removeEventListener("blackhole-move", handleMove);
+    };
+  }, []);
+
   return (
     <motion.section 
       initial="hidden"
@@ -13,7 +43,17 @@ export function HeroSection() {
       variants={STAGGER_CONTAINER_VARIANTS}
       className="container grid lg:grid-cols-2 items-center gap-12 pb-8 pt-20 md:py-32 min-h-[85vh]"
     >
-      <div className="flex flex-col items-start gap-6 text-left">
+      {/* Left Column with Spaghettification Gravity Warp */}
+      <motion.div 
+        animate={{
+          x: gravityOffset.active ? gravityOffset.x : 0,
+          y: gravityOffset.active ? gravityOffset.y : 0,
+          skewX: gravityOffset.active ? 1.5 : 0, // Stretch space representing tidal shear forces
+          scaleX: gravityOffset.active ? 1.015 : 1,
+        }}
+        transition={{ type: "spring", stiffness: 120, damping: 18 }}
+        className="flex flex-col items-start gap-6 text-left origin-left"
+      >
         <motion.h1 
           variants={FADE_UP_VARIANTS}
           className="text-4xl font-extrabold leading-tight tracking-tighter md:text-6xl lg:text-7xl font-display drop-shadow-2xl"
@@ -50,7 +90,7 @@ export function HeroSection() {
             Fale Comigo
           </Button>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Right Side Visual - Fills the empty space */}
       <motion.div variants={FADE_UP_VARIANTS} className="relative flex justify-center lg:justify-center">
