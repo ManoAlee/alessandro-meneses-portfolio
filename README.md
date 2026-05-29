@@ -1,94 +1,116 @@
-# Portfólio Profissional — Alessandro Meneses
+# 🌐 Portfólio Profissional — Alessandro Meneses
 
-### Infraestrutura | Cloud | DevOps | Segurança
+> **Analista de Infraestrutura & DevOps | DevOps Engineer | Cloud Architect**
 
-![Status](https://img.shields.io/badge/Status-Complete-success)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/your-site-id/deploy-status)](https://am-infrastructure.netlify.app/)
-![Stack](https://img.shields.io/badge/Stack-React_|_TypeScript_|_Tailwind_|_Framer_Motion-blue)
-![Theme](https://img.shields.io/badge/Theme-Dark%20%26%20Light_Mode-blueviolet)
-
-> 🚀 **Acesse o Projeto Online:** [https://am-infrastructure.netlify.app/](https://am-infrastructure.netlify.app/)
-
-Este repositório contém o código-fonte do portfólio profissional de **Alessandro Meneses**. O projeto foi arquitetado não apenas como um site de apresentação, mas como uma demonstração técnica de desenvolvimento frontend moderno, UX avançada e organização de código.
-
-## 🌟 Novas Funcionalidades (Atualização Dez/2025)
-
-### 1. Avatar "Cyber-Portrait" 2.0 🤖
-
-Uma experiência visual imersiva e interativa:
-
-- **Parallax 3D**: O avatar reage ao movimento do mouse com física de mola (spring physics).
-- **Iluminação Dinâmica**: Efeitos de luz interna seguem o cursor.
-- **Adaptação de Tema**: O fundo do avatar transita suavemente entre um "Portal Cósmico" (Dark Mode) e "Nuvens de Vidro" (Light Mode).
-- **Badges Físicos**: Elementos flutuantes com inércia e atraso (drag) realista.
-
-### 2. Catálogo de Serviços "Holográfico" 💎
-
-Uma nova página dedicada (`/services`) apresentando as capacidades técnicas:
-
-- **Infraestrutura Híbrida**: Gerenciamento de Proxmox/VMware, migração de servidores e administração de AD/Redes.
-- **Segurança de Dados**: Backups imutáveis (Restic/Rclone), criptografia AES-256 e conformidade LGPD.
-- **Automação & Scripting**: Scripts avançados (PowerShell/Python) para eliminar tarefas repetitivas e criar ferramentas CLI.
-- **Visual Recursivo**: Um renderizador 3D abstrato com esferas aninhadas e rotação perpétua.
-- **Navegação Inteligente**: Links diretos para detalhes técnicos profundos.
-
-### 3. Sistema de Temas (Dark/Light) 🌗
-
-- **Toggle Global**: Switch acessível integrado à `GooeyNavBar`.
-- **Persistência**: Design consistente e legível em ambos os modos.
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-Produção-success?style=for-the-badge&logo=github" alt="Status">
+  <img src="https://img.shields.io/badge/Deploy-Netlify-blueviolet?style=for-the-badge&logo=netlify" alt="Netlify">
+  <img src="https://img.shields.io/badge/Stack-React_|_TS_|_Tailwind_|_Motion-blue?style=for-the-badge&logo=react" alt="Stack">
+  <img src="https://img.shields.io/badge/Architecture-FSD%20Pattern-orange?style=for-the-badge" alt="FSD Architecture">
+</p>
 
 ---
 
-## 🛠️ Stack Tecnológico
+## 👁️ Visão Geral
 
-| Categoria       | Tecnologias                              |
-| :-------------- | :--------------------------------------- |
-| **Core**        | React 18, TypeScript, Vite               |
-| **Estilização** | Tailwind CSS, Lucide Icons               |
-| **Animação**    | Motion.dev (Framer Motion)               |
-| **Rotas**       | React Router DOM v6                      |
-| **Qualidade**   | ESLint, Prettier, TypeScript Strict Mode |
+Este repositório contém o código-fonte do meu portfólio profissional. Desenvolvido para servir não apenas como uma página de apresentação de projetos e experiências, mas também como uma **vitrine técnica** de engenharia de software frontend moderna, combinando alta performance, UX interativa e organização de código robusta.
 
-## 📂 Estrutura de Diretórios (FSD)
+🚀 **Acesse o portfólio online:** [am-infrastructure.netlify.app](https://am-infrastructure.netlify.app/)
 
-O projeto segue estritamente a metodologia **Feature-Sliced Design**:
+---
 
-```
+## 🌟 Funcionalidades em Destaque
+
+### 1. Cyber-Portrait 2.0 🤖
+* **Parallax 3D**: Efeito dinâmico do avatar reagindo ao movimento do cursor com física de molas.
+* **Iluminação Dinâmica**: Sistema de iluminação reativa que segue o cursor do mouse.
+* **Tema Fluido**: Transição suave do background entre o "Portal Cósmico" (Dark Mode) e "Nuvens de Vidro" (Light Mode).
+* **Badges Físicos**: Badges de ferramentas flutuantes com efeito realista de arraste e inércia.
+
+### 2. Catálogo Holográfico de Serviços 💎
+Apresentação interativa e animada das minhas capacidades em TI:
+* **Infraestrutura Híbrida**: Clusters Proxmox/VMware, servidores Linux/Windows e gestão de redes.
+* **Segurança & Compliance**: Backups imutáveis (Restic/Rclone), criptografia e conformidade LGPD.
+* **Automação & DevOps**: Pipelines de CI/CD, IaC (Terraform), Ansible e scripting avançado.
+* **Visual Recursivo**: Renderizadores abstratos com rotação perpétua de esferas e elementos 3D.
+
+### 3. Sistema de Temas Dinâmico 🌗
+* **Toggle Integrado**: Botão switch global na barra de navegação fluida.
+* **Persistência de Tema**: Design e contraste totalmente responsivos e otimizados para ambos os modos.
+
+---
+
+## ⚙️ Stack Tecnológico
+
+| Categoria | Tecnologias Utilizadas |
+| :--- | :--- |
+| **Core** | React 18, TypeScript, Vite |
+| **Estilização** | Tailwind CSS, Lucide Icons, Glassmorphism |
+| **Animações** | Framer Motion (Motion.dev) |
+| **Roteamento** | React Router DOM v6 |
+| **Arquitetura** | Feature-Sliced Design (FSD) |
+
+---
+
+## 📂 Arquitetura de Diretórios (FSD Pattern)
+
+O projeto é estruturado de acordo com a metodologia **Feature-Sliced Design (FSD)**, garantindo desacoplamento, testabilidade e escalabilidade:
+
+```text
 src/
 ├── app/          # Configurações globais (Rotas, Estilos, Providers)
 ├── entities/     # Modelos de Domínio (User, Skill, Project - Dados Reais)
-├── features/     # Funcionalidades interativas
-├── pages/        # Telas da Aplicação (Home, Expertise, Services, Contact)
-├── shared/       # Componentes Reutilizáveis agnósticos (UI Kit, Libs)
-└── widgets/      # Componentes Compostos (Navbar, Footer, Hero, AvatarVisual)
+│   ├── user/     # Dados do profissional (Currículo, Cargos, Habilidades)
+│   └── project/  # Lista de repositórios do GitHub estruturada
+├── features/     # Funcionalidades interativas com estado
+├── pages/        # Telas da Aplicação (Home, Expertise, OpenSource, Contact)
+├── shared/       # Componentes agnósticos reutilizáveis (UI Kit, libs, motion helpers)
+└── widgets/      # Elementos compostos complexos (Navbar, Footer, Hero, AvatarVisual)
 ```
-
-## 🚀 Como Executar
-
-1.  **Instalar Dependências:**
-
-    ```bash
-    npm install
-    ```
-
-2.  **Rodar Servidor de Desenvolvimento:**
-
-    ```bash
-    npm run dev
-    ```
-
-3.  **Compilar para Produção:**
-    ```bash
-    npm run build
-    ```
-
-## 🎨 Funcionalidades de UX
-
-- **Gooey Navigation**: Menu de navegação fluido com física de mola.
-- **Linha do Tempo "System Logs"**: Histórico profissional estilizado como logs de sistema/terminal.
-- **Glassmorphism**: Uso extensivo de fundos translúcidos (vidro fosco) para modernidade.
-- **Micro-interações**: Botões e inputs reagem a hover e foco com escala e brilho.
 
 ---
 
-{{ ... }}
+## 🚀 Instalação e Execução Local
+
+### Pré-requisitos
+* Node.js v18+ instalado
+* NPM ou Yarn instalado
+
+### Passos para Rodar:
+
+1. **Clonar o Repositório:**
+   ```bash
+   git clone git@github.com:ManoAlee/alessandro-meneses-portfolio.git
+   cd alessandro-meneses-portfolio
+   ```
+
+2. **Instalar Dependências:**
+   ```bash
+   npm install
+   ```
+
+3. **Rodar em Modo de Desenvolvimento:**
+   ```bash
+   npm run dev
+   ```
+   *(Acesse o projeto em `http://localhost:5173`)*
+
+4. **Compilar para Produção (Build):**
+   ```bash
+   npm run build
+   ```
+
+---
+
+## 📩 Contato e Redes
+
+* **E-mail:** ale_meneses2004@hotmail.com
+* **LinkedIn:** [linkedin.com/in/alessandromeneses](https://www.linkedin.com/in/alessandromeneses)
+* **GitHub:** [github.com/ManoAlee](https://github.com/ManoAlee)
+
+---
+
+<p align="center">
+  <b>© 2026 Alessandro Meneses</b><br>
+  <i>Infraestrutura SRE, DevOps & Cloud com foco em Alta Disponibilidade e Segurança.</i>
+</p>
