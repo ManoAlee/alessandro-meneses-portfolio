@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FADE_UP_VARIANTS, STAGGER_CONTAINER_VARIANTS } from "@/shared/lib/motion";
 import { useNavigate } from "react-router-dom";
 import { AvatarVisual } from "./AvatarVisual";
+import { CosmicWeb } from "./CosmicWeb";
 import { useState, useEffect } from "react";
 
 interface MolecularTextProps {
@@ -88,8 +89,10 @@ export function HeroSection() {
       initial="hidden"
       animate="visible"
       variants={STAGGER_CONTAINER_VARIANTS}
-      className="container grid lg:grid-cols-2 items-center gap-12 pb-8 pt-20 md:py-32 min-h-[85vh]"
+      className="container grid lg:grid-cols-2 items-center gap-12 pb-8 pt-20 md:py-32 min-h-[85vh] relative overflow-hidden"
     >
+      {/* Cosmic Web Background */}
+      <CosmicWeb />
       {/* Left Column with Spaghettification Gravity Warp */}
       <motion.div 
         animate={{
@@ -99,7 +102,7 @@ export function HeroSection() {
           scaleX: gravityOffset.active ? 1.01 : 1,
         }}
         transition={{ type: "spring", stiffness: 120, damping: 18 }}
-        className="flex flex-col items-start gap-6 text-left origin-left"
+        className="flex flex-col items-start gap-6 text-left origin-left relative z-10"
       >
         <motion.h1 
           variants={FADE_UP_VARIANTS}
@@ -142,7 +145,7 @@ export function HeroSection() {
       </motion.div>
 
       {/* Right Side Visual - Fills the empty space */}
-      <motion.div variants={FADE_UP_VARIANTS} className="relative flex justify-center lg:justify-center">
+      <motion.div variants={FADE_UP_VARIANTS} className="relative z-10 flex justify-center lg:justify-center">
          <AvatarVisual />
       </motion.div>
     </motion.section>
