@@ -17,7 +17,7 @@ export interface EducationItem {
 export const CAREER_DATA: CareerItem[] = [
   {
     company: "Automotion",
-    role: "Analista de Infraestrutura & DevOps",
+    role: "Analista de TI",
     period: "Junho 2026 - Presente",
     description: "Liderança técnica e sustentação de ambientes de missão crítica. Foco em arquitetura de nuvem (AWS/Azure), cultura DevOps (CI/CD), orquestração de containers (Docker/Kubernetes) e automação de processos complexos.",
     tags: ["DevOps", "Cloud", "Kubernetes", "Automação"]

@@ -47,7 +47,7 @@ export const RESUME_CONTENT: ResumeData = {
   experience: [
     {
       company: "Automotion",
-      role: "Analista de Infraestrutura & DevOps",
+      role: "Analista de TI",
       period: "Jun 2026 - Presente",
       location: "Boituva, SP (Híbrido)",
       isCurrent: true,
@@ -58,7 +58,7 @@ export const RESUME_CONTENT: ResumeData = {
     },
     {
       company: "Automotion",
-      role: "Assistente de TI (Infra & DevOps) - Nível JR",
+      role: "Assistente de TI JR",
       period: "Jun 2025 - Jun 2026",
       location: "Boituva, SP (Híbrido)",
       highlights: [
