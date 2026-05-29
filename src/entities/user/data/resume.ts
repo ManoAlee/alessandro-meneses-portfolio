@@ -36,14 +36,14 @@ export interface ResumeData {
 export const RESUME_CONTENT: ResumeData = {
   personal: {
     name: "Alessandro Meneses",
-    role: "DevOps Engineer & Cloud Architect",
+    role: "DevOps Engineer | Especialista de Infraestrutura",
     email: "ale_meneses2004@hotmail.com",
     phone: "+55 (15) 99801-7732",
     location: "Boituva, SP - Brasil",
     linkedin: "https://linkedin.com/in/alessandromeneses",
     github: "https://github.com/ManoAlee",
   },
-  summary: "Profissional de TI com 3+ anos de experiência focada em Infraestrutura e DevOps. Especialista em desenhar ambientes de alta disponibilidade utilizando Azure e AWS, com forte atuação em automação de processos (PowerShell/Python) e segurança de dados. Tenho um histórico comprovado de redução de custos operacionais (FinOps) e aumento de produtividade através da implementação de cultura CI/CD e infraestrutura como código (IaC).",
+  summary: "Profissional de TI com 3+ anos de experiência focada em Infraestrutura e DevOps. Especialista em desenhar e administrar ambientes virtualizados de alta disponibilidade (Proxmox/VMware/Hyper-V), com forte atuação em automação de processos (PowerShell/Python/Bash), segurança de dados e backups imutáveis. Foco na implementação de cultura DevOps, pipelines de CI/CD e infraestrutura como código (IaC).",
   experience: [
     {
       company: "Automotion",
@@ -53,7 +53,7 @@ export const RESUME_CONTENT: ResumeData = {
       isCurrent: true,
       highlights: [
         "Liderança técnica e sustentação de ambientes de missão crítica.",
-        "Foco em arquitetura de nuvem (AWS/Azure), cultura DevOps (CI/CD), orquestração de containers (Docker/Kubernetes) e automação de processos complexos."
+        "Foco em arquitetura de virtualização e nuvem privada (Proxmox/Hyper-V), cultura DevOps (CI/CD), orquestração de containers (Docker/Kubernetes) e automação de processos complexos."
       ]
     },
     {
@@ -81,8 +81,8 @@ export const RESUME_CONTENT: ResumeData = {
   ],
   skills: [
     {
-      category: "Cloud & Infra",
-      items: ["AWS", "Azure", "Proxmox", "Linux", "Windows Server", "Docker", "Kubernetes"]
+      category: "Infraestrutura & Virtualização",
+      items: ["Proxmox", "VMware", "Hyper-V", "Linux", "Windows Server", "Docker", "Kubernetes"]
     },
     {
       category: "DevOps & Automação",
