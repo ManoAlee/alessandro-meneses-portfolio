@@ -36,12 +36,12 @@ export function ExpertiseVisual() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mouse, setMouse] = useState({ x: -1000, y: -1000, active: false });
   const [nodes, setNodes] = useState<SkillNode[]>([
-    { id: "core", x: 200, y: 200, homeX: 200, homeY: 200, vx: 0, vy: 0, label: "Core", color: "#10b981", size: 65, iconName: "cpu" },
-    { id: "devops", x: 80, y: 120, homeX: 80, homeY: 120, vx: 0, vy: 0, label: "DevOps", color: "#3b82f6", size: 55, iconName: "terminal" },
-    { id: "iac", x: 320, y: 130, homeX: 320, homeY: 130, vx: 0, vy: 0, label: "IaC", color: "#a855f7", size: 55, iconName: "layers" },
-    { id: "docker", x: 100, y: 290, homeX: 100, homeY: 290, vx: 0, vy: 0, label: "Docker", color: "#06b6d4", size: 55, iconName: "box" },
-    { id: "proxmox", x: 300, y: 290, homeX: 300, homeY: 290, vx: 0, vy: 0, label: "Proxmox", color: "#f97316", size: 55, iconName: "shield" },
-    { id: "automation", x: 200, y: 70, homeX: 200, homeY: 70, vx: 0, vy: 0, label: "Automation", color: "#ec4899", size: 55, iconName: "zap" }
+    { id: "core", x: 200, y: 200, homeX: 200, homeY: 200, vx: 0, vy: 0, label: "Fullstack", color: "#38bdf8", size: 65, iconName: "cpu" },
+    { id: "typescript", x: 80, y: 120, homeX: 80, homeY: 120, vx: 0, vy: 0, label: "TypeScript", color: "#3b82f6", size: 55, iconName: "terminal" },
+    { id: "react", x: 320, y: 130, homeX: 320, homeY: 130, vx: 0, vy: 0, label: "React", color: "#06b6d4", size: 55, iconName: "layers" },
+    { id: "python", x: 100, y: 290, homeX: 100, homeY: 290, vx: 0, vy: 0, label: "Python", color: "#10b981", size: 55, iconName: "box" },
+    { id: "powershell", x: 300, y: 290, homeX: 300, homeY: 290, vx: 0, vy: 0, label: "PowerShell", color: "#8b5cf6", size: 55, iconName: "zap" },
+    { id: "systems", x: 200, y: 70, homeX: 200, homeY: 70, vx: 0, vy: 0, label: "Sistemas", color: "#f59e0b", size: 55, iconName: "shield" }
   ]);
 
   const shockwavesRef = useRef<Shockwave[]>([]);
@@ -99,14 +99,14 @@ export function ExpertiseVisual() {
     const height = (canvas.height = 400);
 
     const connections = [
-      [0, 1], // Core - DevOps
-      [0, 2], // Core - IaC
-      [0, 3], // Core - Docker
-      [0, 4], // Core - Proxmox
-      [0, 5], // Core - Automation
-      [1, 5], // DevOps - Automation
-      [2, 4], // IaC - Proxmox
-      [1, 3]  // DevOps - Docker
+      [0, 1], // Fullstack - TypeScript
+      [0, 2], // Fullstack - React
+      [0, 3], // Fullstack - Python
+      [0, 4], // Fullstack - PowerShell
+      [0, 5], // Fullstack - Sistemas
+      [1, 2], // TypeScript - React
+      [3, 4], // Python - PowerShell
+      [1, 3]  // TypeScript - Python
     ];
 
     // Data packets travelling through the network connections

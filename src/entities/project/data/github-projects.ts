@@ -2,7 +2,7 @@ export interface ProjectSketch {
   id: string;
   name: string;
   description: string;
-  language: "TypeScript" | "Python" | "HTML" | "JavaScript";
+  language: "TypeScript" | "Python" | "HTML" | "JavaScript" | "Shell";
   status: "Public" | "Private";
   type: "Web" | "Data" | "Automation";
   imageUrl: string;
@@ -12,86 +12,89 @@ export interface ProjectSketch {
 
 export const GITHUB_PROJECTS: ProjectSketch[] = [
   {
+    id: "freelanceros",
+    name: "FreelancerOS",
+    description: "Framework agêntico para freelancers — orquestração inteligente de tarefas, pipelines de trabalho e automações.",
+    language: "TypeScript",
+    status: "Public",
+    type: "Automation",
+    imageUrl: "/images/projects/sketch-app.png",
+    lastUpdated: "2026",
+    repoUrl: "https://github.com/ManoAlee/FreelancerOS"
+  },
+  {
     id: "portfolio",
     name: "alessandro-meneses-portfolio",
-    description: "Meu portfólio profissional. Arquitetura FSD, React, Framer Motion e UX avançada.",
+    description: "Portfólio profissional moderno construído com React, TypeScript, TailwindCSS e arquitetura modular.",
     language: "TypeScript",
     status: "Public",
     type: "Web",
     imageUrl: "/images/projects/sketch-app.png",
-    lastUpdated: "Updated now",
+    lastUpdated: "2026",
     repoUrl: "https://github.com/ManoAlee/alessandro-meneses-portfolio"
   },
   {
-    id: "mcp-ssh",
-    name: "MCP-SSH-TOOL",
-    description: "Servidor MCP para conexões SSH.",
-    language: "Python",
+    id: "dashboard-remuneracao",
+    name: "dashboard-remuneracao",
+    description: "Dashboard analítico e interativo para visualização clara de métricas, metas e remuneração.",
+    language: "TypeScript",
     status: "Public",
-    type: "Automation",
-    imageUrl: "/images/projects/sketch-data.png",
-    lastUpdated: "Updated recently",
-    repoUrl: "https://github.com/ManoAlee/MCP-SSH-TOOL"
+    type: "Web",
+    imageUrl: "/images/projects/sketch-app.png",
+    lastUpdated: "2026",
+    repoUrl: "https://github.com/ManoAlee/dashboard-remuneracao"
   },
   {
-    id: "cartela",
-    name: "Cartela",
-    description: "Cartela — Interface gráfica e ferramentas para análise, sugestões e backtesting do Mega da Virada. Projeto reorganizado para distribuição.",
+    id: "bits-coins-ia",
+    name: "Bits-coins-ia",
+    description: "Ferramenta em Python para análise e inteligência de dados de criptomoedas com processamento automatizado.",
     language: "Python",
     status: "Public",
     type: "Data",
     imageUrl: "/images/projects/sketch-data.png",
-    lastUpdated: "Updated recently",
+    lastUpdated: "2026",
+    repoUrl: "https://github.com/ManoAlee/Bits-coins-ia"
+  },
+  {
+    id: "cartela",
+    name: "Cartela",
+    description: "Aplicação GUI em Python para análise probabilística, filtros e backtesting estatístico com visualização clara.",
+    language: "Python",
+    status: "Public",
+    type: "Data",
+    imageUrl: "/images/projects/sketch-data.png",
+    lastUpdated: "2026",
     repoUrl: "https://github.com/ManoAlee/Cartela"
   },
   {
-    id: "petyoo",
-    name: "petyoo-web",
-    description: "Plataforma web para gestão de serviços pet e agendamentos. (Projeto Confidencial)",
+    id: "custom-binary-studio",
+    name: "custom-binary-studio",
+    description: "Interface web para inspeção, estúdio de formatos binários e análise estruturada.",
+    language: "HTML",
+    status: "Public",
+    type: "Web",
+    imageUrl: "/images/projects/sketch-app.png",
+    lastUpdated: "2026",
+    repoUrl: "https://github.com/ManoAlee/custom-binary-studio"
+  },
+  {
+    id: "portal-ativos",
+    name: "Portal de Ativos Corporativos",
+    description: "Sistema interno para inventário, gestão e controle automatizado de ativos de TI corporativos.",
+    language: "Python",
+    status: "Private",
+    type: "Automation",
+    imageUrl: "/images/projects/sketch-data.png",
+    lastUpdated: "Automotion"
+  },
+  {
+    id: "app-chamados",
+    name: "Sistema de Chamados & HelpDesk",
+    description: "Plataforma de gestão de chamados técnicos, SLA e atendimento N2/N3 para equipe de suporte.",
     language: "TypeScript",
     status: "Private",
     type: "Web",
     imageUrl: "/images/projects/sketch-app.png",
-    lastUpdated: "Updated recently"
-  },
-  {
-    id: "portal-ativos",
-    name: "Portal-de-Ativos-Automotion",
-    description: "Sistema de automação para controle de ativos corporativos.",
-    language: "Python",
-    status: "Private",
-    type: "Automation",
-    imageUrl: "/images/projects/sketch-data.png",
-    lastUpdated: "Updated recently"
-  },
-  {
-    id: "app-chamados",
-    name: "app-chamados-ti",
-    description: "Sistema de HelpDesk para gestão de tickets e incidentes de TI.",
-    language: "JavaScript",
-    status: "Private",
-    type: "Web",
-    imageUrl: "/images/projects/sketch-app.png",
-    lastUpdated: "Updated recently"
-  },
-  {
-    id: "backup-orch",
-    name: "automacao-backup-orquestrador",
-    description: "Orquestrador de backups automatizados com verificação de integridade.",
-    language: "Python",
-    status: "Private",
-    type: "Automation",
-    imageUrl: "/images/projects/sketch-data.png",
-    lastUpdated: "Updated recently"
-  },
-  {
-    id: "medola",
-    name: "pouso medola",
-    description: "Landing page de alta conversão para cliente corporativo.",
-    language: "JavaScript",
-    status: "Private",
-    type: "Web",
-    imageUrl: "/images/projects/sketch-app.png",
-    lastUpdated: "Updated recently"
+    lastUpdated: "Automotion"
   }
 ];

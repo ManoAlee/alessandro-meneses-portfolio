@@ -4,112 +4,127 @@ import { TechModal } from "@/shared/ui/TechModal";
 
 const TECH_DATA = [
   { 
-      name: "Docker", 
-      category: "Containerization",
-      desc: "Plataforma líder para desenvolvimento, envio e execução de aplicações em containers.",
-      useCase: "Criação de ambientes de desenvolvimento reproduzíveis e deploy de microsserviços isolados."
+    name: "TypeScript", 
+    category: "Linguagem",
+    desc: "Superset tipado do JavaScript que traz robustez, produtividade e menos erros em produção.",
+    useCase: "Desenvolvimento de aplicações web modulares e seguras com tipagem estrita."
   },
   { 
-      name: "Kubernetes", 
-      category: "Orchestration",
-      desc: "Sistema open-source para automação de deployment, escalabilidade e gerenciamento de aplicações em containers.",
-      useCase: "Gerenciamento de clusters de produção com self-healing e auto-scaling horizontal."
+    name: "React", 
+    category: "Frontend",
+    desc: "Biblioteca para construção de interfaces de usuário dinâmicas e reativas baseadas em componentes.",
+    useCase: "Desenvolvimento de portfólios, dashboards corporativos e aplicações SPA modernas."
   },
   { 
-      name: "AWS", 
-      category: "Cloud Provider",
-      desc: "Plataforma de computação em nuvem mais abrangente e adotada do mundo.",
-      useCase: "Hospedagem de infraestrutura escalável utilizando EC2, S3, RDS e arquiteturas Serverless."
+    name: "Python", 
+    category: "Linguagem & Automação",
+    desc: "Linguagem de alto nível ideal para desenvolvimento ágil, scripting e automações.",
+    useCase: "Criação de scripts de processamento de dados, automações corporativas e integrações de APIs."
   },
   { 
-      name: "Terraform", 
-      category: "IaC",
-      desc: "Ferramenta de infraestrutura como código (IaC) para construir, alterar e versionar infraestrutura com segurança.",
-      useCase: "Provisionamento declarativo de recursos multi-cloud (AWS/Azure) garantindo consistência entre ambientes."
+    name: "PowerShell", 
+    category: "Automação",
+    desc: "Ambiente de linha de comando e scripting focado em automação de tarefas e administração de sistemas.",
+    useCase: "Automação de rotinas corporativas, gestão de usuários e economia de tempo da equipe técnica."
   },
   { 
-      name: "Ansible", 
-      category: "Automation",
-      desc: "Ferramenta de automação de TI simples, sem agentes, que automatiza provisionamento e gerenciamento de configurações.",
-      useCase: "Automação de rotinas de patch management e configuração padronizada de servidores Linux/Windows."
+    name: "Tailwind CSS", 
+    category: "Estilização",
+    desc: "Framework CSS utility-first que permite construir designs rápidos, responsivos e de alto padrão.",
+    useCase: "Construção de layouts limpos, consistentes e com ótimo acabamento visual."
   },
   { 
-      name: "Python", 
-      category: "Language",
-      desc: "Linguagem de programação interpretada de alto nível, famosa por sua legibilidade e vasto ecossistema.",
-      useCase: "Desenvolvimento de scripts de automação, ferramentas CLI e análise de dados para observabilidade."
+    name: "Node.js", 
+    category: "Backend",
+    desc: "Ambiente de execução JavaScript assíncrono para construção de APIs e ferramentas CLI.",
+    useCase: "Desenvolvimento de pequenos microsserviços, automações e tooling de desenvolvimento."
   },
   { 
-      name: "Proxmox", 
-      category: "Virtualization",
-      desc: "Ambiente de gerenciamento de servidores open-source completo para virtualização empresarial.",
-      useCase: "Gestão do Homelab e ambientes de virtualização on-premise com containers LXC e VMs KVM."
+    name: "Git & GitHub", 
+    category: "Versionamento",
+    desc: "Controle de versão distribuído essencial para rastreabilidade de código e colaboração contínua.",
+    useCase: "Versionamento seguro de todos os projetos de software e repositórios open-source."
   },
   { 
-      name: "React", 
-      category: "Frontend",
-      desc: "Biblioteca JavaScript para criar interfaces de usuário baseadas em componentes.",
-      useCase: "Desenvolvimento deste portfólio e dashboards administrativos modernos e responsivos."
+    name: "Linux", 
+    category: "Sistema Operacional",
+    desc: "Sistema operacional robusto, estável e amplamente utilizado em servidores e ambientes de TI.",
+    useCase: "Configuração de serviços, servidores Debian/Ubuntu e scripts em Bash."
   },
   { 
-      name: "Git", 
-      category: "VCS",
-      desc: "Sistema de controle de versão distribuído gratuito e de código aberto.",
-      useCase: "Versionamento de código-fonte e colaboração segura com fluxos de CI/CD baseados em GitFlow."
+    name: "Windows Server", 
+    category: "Infraestrutura",
+    desc: "Plataforma de servidores para gestão centralizada de identidades, arquivos e recursos.",
+    useCase: "Administração de Active Directory, permissões, políticas e suporte N2/N3."
+  },
+  { 
+    name: "Power BI", 
+    category: "Dados & Métricas",
+    desc: "Ferramenta líder para análise de dados e geração de dashboards e relatórios interativos.",
+    useCase: "Modelagem de indicadores de TI e apresentação clara de métricas para tomada de decisão."
   }
 ];
 
 export function TechStackMarquee() {
-  const controls = useAnimationControls();
   const [selectedTech, setSelectedTech] = useState<typeof TECH_DATA[0] | null>(null);
+  const controls = useAnimationControls();
+  const [isHovered, setIsHovered] = useState(false);
 
-  const startAnimation = () => controls.start({ x: "-50%", transition: { duration: 40, ease: "linear", repeat: Infinity } });
-  
-  useEffect(() => { startAnimation(); }, []);
+  useEffect(() => {
+    if (isHovered) {
+      controls.stop();
+    } else {
+      controls.start({
+        x: [0, -1000],
+        transition: {
+          x: {
+            repeat: Infinity,
+            repeatType: "loop",
+            duration: 35,
+            ease: "linear",
+          },
+        },
+      });
+    }
+  }, [isHovered, controls]);
 
   return (
-    <>
-      <div className="w-full overflow-hidden bg-background/50 border-y border-white/5 py-8 backdrop-blur-sm relative group/marquee">
-        <div className="flex relative items-center">
-          {/* Gradient Masks */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+    <div className="py-12 border-y border-border/40 bg-muted/20 relative overflow-hidden">
+      <div className="container mb-6 text-center">
+        <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground">
+          Tecnologias & Ferramentas do Dia a Dia
+        </span>
+      </div>
 
-          <motion.div 
-            className="flex gap-20 whitespace-nowrap px-4 w-max"
-            animate={controls}
-            initial={{ x: 0 }}
-            onHoverStart={() => controls.stop()}
-            onHoverEnd={() => startAnimation()}
-            onTapStart={() => controls.stop()}
-            onTapCancel={() => startAnimation()}
-            onTap={() => controls.stop()}
-          >
-            {[...TECH_DATA, ...TECH_DATA, ...TECH_DATA].map((tech, index) => (
-               <div 
-                 key={`${tech.name}-${index}`}
-                 className="relative group cursor-pointer"
-                 onClick={() => setSelectedTech(tech)}
-               >
-                  <span className="text-2xl md:text-3xl font-display font-medium text-muted-foreground/30 transition-all duration-300 group-hover:text-primary group-hover:scale-110 group-hover:drop-shadow-[0_0_10px_rgba(59,130,246,0.5)] block">
-                    {tech.name}
-                  </span>
-                  
-                  {/* Click Hint */}
-                  <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                    Click to info
-                  </span>
-               </div>
-            ))}
-          </motion.div>
-        </div>
+      <div 
+        className="flex w-max relative cursor-pointer"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <motion.div
+          animate={controls}
+          className="flex gap-4 sm:gap-6 items-center px-4"
+        >
+          {/* Double items for smooth infinite loop */}
+          {[...TECH_DATA, ...TECH_DATA].map((tech, idx) => (
+            <div
+              key={idx}
+              onClick={() => setSelectedTech(tech)}
+              className="flex items-center gap-2.5 px-4 py-2.5 rounded-full border border-border/60 bg-card hover:border-primary/50 hover:bg-secondary/40 transition-all text-xs sm:text-sm font-medium shadow-sm hover:scale-105 active:scale-95 whitespace-nowrap"
+            >
+              <span className="w-2 h-2 rounded-full bg-primary/80" />
+              <span className="font-semibold text-foreground">{tech.name}</span>
+              <span className="text-muted-foreground text-[11px]">({tech.category})</span>
+            </div>
+          ))}
+        </motion.div>
       </div>
 
       <TechModal 
-        tech={selectedTech} 
         isOpen={!!selectedTech} 
         onClose={() => setSelectedTech(null)} 
+        tech={selectedTech} 
       />
-    </>
+    </div>
   );
 }

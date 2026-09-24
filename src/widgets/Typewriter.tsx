@@ -2,9 +2,9 @@ import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const ROLES = [
-  "Especialista em Infraestrutura",
-  "Engenheiro DevOps",
-  "Arquiteto de Nuvem"
+  "Desenvolvedor de Software",
+  "Analista de TI na Automotion",
+  "Especialista em Automação"
 ];
 
 export function TypewriterEffect() {

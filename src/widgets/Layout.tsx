@@ -1,93 +1,100 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { GooeyNavBar } from "@/widgets/GooeyNavBar";
 import { MagneticCursor } from "@/widgets/MagneticCursor";
 import Lenis from "@studio-freight/lenis";
 import { AnimatePresence, motion } from "framer-motion";
-import { SystemMonitor } from "@/widgets/SystemMonitor";
-
-import { Github, Linkedin } from "lucide-react";
-import { Button } from "@/shared/ui/Button";
+import { Github, Linkedin, Mail, ArrowUpRight } from "lucide-react";
 
 const Footer = () => (
-  <footer className="relative mt-32 border-t bg-card/20 backdrop-blur-lg">
-    <div className="absolute inset-0 bg-grid-white/5 [mask-image:linear-gradient(to_bottom,transparent,black)]" />
-    <div className="container relative z-10 py-16 grid gap-12 lg:grid-cols-4">
+  <footer className="relative mt-24 border-t border-border/40 bg-card/30 backdrop-blur-md">
+    <div className="container relative z-10 py-12 md:py-16 grid gap-10 md:grid-cols-4">
       {/* Brand */}
-      <div className="space-y-6">
-        <h3 className="text-2xl font-bold font-display bg-clip-text text-transparent bg-gradient-to-r from-foreground to-muted-foreground">
-          Alessandro Meneses
-        </h3>
-        <p className="text-base text-muted-foreground leading-relaxed max-w-xs">
-          Infraestrutura resiliente, automação inteligente e estratégias de nuvem para negócios que não podem parar.
+      <div className="md:col-span-2 space-y-4">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-xl bg-card border border-border/60 p-1.5 flex items-center justify-center shadow-xs">
+            <img 
+              src="/logo-dark.png" 
+              alt="Alessandro Meneses Logo" 
+              className="w-6 h-6 hidden dark:block object-contain"
+            />
+            <img 
+              src="/logo-light.png" 
+              alt="Alessandro Meneses Logo" 
+              className="w-6 h-6 block dark:hidden object-contain"
+            />
+          </div>
+          <h3 className="text-xl font-bold font-display tracking-tight text-foreground">
+            Alessandro Meneses
+          </h3>
+        </div>
+        <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
+          Desenvolvimento de software moderno, automações corporativas e soluções de TI que transformam desafios técnicos em resultados práticos.
         </p>
+        <div className="flex items-center gap-3 pt-2">
+          <a 
+            href="https://github.com/ManoAlee" 
+            target="_blank" 
+            rel="noreferrer" 
+            className="p-2.5 rounded-full bg-secondary/50 border border-border/50 hover:border-primary hover:text-primary transition-all shadow-sm"
+            aria-label="GitHub Profile"
+          >
+            <Github className="h-4 w-4" />
+          </a>
+          <a 
+            href="https://www.linkedin.com/in/alessandro-meneses/" 
+            target="_blank" 
+            rel="noreferrer" 
+            className="p-2.5 rounded-full bg-secondary/50 border border-border/50 hover:border-blue-500 hover:text-blue-500 transition-all shadow-sm"
+            aria-label="LinkedIn Profile"
+          >
+            <Linkedin className="h-4 w-4" />
+          </a>
+          <a 
+            href="mailto:ale_meneses2004@hotmail.com" 
+            className="p-2.5 rounded-full bg-secondary/50 border border-border/50 hover:border-primary hover:text-primary transition-all shadow-sm"
+            aria-label="Enviar Email"
+          >
+            <Mail className="h-4 w-4" />
+          </a>
+        </div>
       </div>
 
       {/* Navigation */}
-      <div className="space-y-6">
-        <h4 className="font-bold text-base tracking-wide uppercase text-foreground/80">Menu</h4>
-        <ul className="space-y-3 text-sm text-muted-foreground">
-          <li><a href="/" className="hover:text-primary transition-colors hover:translate-x-1 block duration-200">Início</a></li>
-          <li><a href="/services" className="hover:text-primary transition-colors hover:translate-x-1 block duration-200">Serviços</a></li>
-          <li><a href="/expertise" className="hover:text-primary transition-colors hover:translate-x-1 block duration-200">Especialidades</a></li>
-          <li><a href="/opensource" className="hover:text-primary transition-colors hover:translate-x-1 block duration-200">Projetos</a></li>
+      <div className="space-y-4">
+        <h4 className="font-semibold text-xs tracking-wider uppercase text-foreground/80">Navegação</h4>
+        <ul className="space-y-2.5 text-sm text-muted-foreground">
+          <li><Link to="/" className="hover:text-primary transition-colors">Início</Link></li>
+          <li><Link to="/opensource" className="hover:text-primary transition-colors">Projetos</Link></li>
+          <li><Link to="/expertise" className="hover:text-primary transition-colors">Especialidades</Link></li>
+          <li><Link to="/services" className="hover:text-primary transition-colors">Serviços</Link></li>
+          <li><Link to="/resume" className="hover:text-primary transition-colors">Currículo</Link></li>
+          <li><Link to="/contact" className="hover:text-primary transition-colors">Contato</Link></li>
         </ul>
       </div>
 
-      {/* Contact */}
-      <div className="space-y-6">
-        <h4 className="font-bold text-base tracking-wide uppercase text-foreground/80">Conexão</h4>
-        <ul className="space-y-3 text-sm text-muted-foreground">
-          <li>
-            <a href="mailto:ale_meneses2004@hotmail.com" className="hover:text-primary flex items-center gap-2 transition-colors">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-              ale_meneses2004@hotmail.com
-            </a>
-          </li>
-          <li>
-             <a href="tel:+5515998017732" className="hover:text-primary flex items-center gap-2 transition-colors">
-               <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-               (15) 99801-7732
-             </a>
-          </li>
-          <li>Boituva - SP, Brasil</li>
-        </ul>
-      </div>
-
-      {/* Social */}
-      <div className="space-y-6">
-        <h4 className="font-bold text-base tracking-wide uppercase text-foreground/80">Social</h4>
-        <div className="flex items-center gap-4">
-           <a 
-             href="https://github.com/ManoAlee" 
-             target="_blank" 
-             rel="noreferrer" 
-             className="p-3 rounded-full bg-background border hover:border-primary hover:text-primary transition-all hover:scale-110 shadow-sm"
-             aria-label="GitHub Profile"
-           >
-              <Github className="h-5 w-5" />
-           </a>
-           <a 
-             href="https://www.linkedin.com/in/alessandromeneses" 
-             target="_blank" 
-             rel="noreferrer" 
-             className="p-3 rounded-full bg-background border hover:border-blue-500 hover:text-blue-500 transition-all hover:scale-110 shadow-sm"
-             aria-label="LinkedIn Profile"
-           >
-              <Linkedin className="h-5 w-5" />
-           </a>
+      {/* Contact & Status */}
+      <div className="space-y-4">
+        <h4 className="font-semibold text-xs tracking-wider uppercase text-foreground/80">Status</h4>
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          Disponível para projetos
         </div>
+        <p className="text-xs text-muted-foreground">
+          Boituva, SP — Brasil<br />
+          Graduado em Gestão da TI (FATEC)
+        </p>
       </div>
     </div>
     
-    <div className="container relative z-10 py-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-      <p>© 2025 Alessandro Meneses. Todos os direitos reservados.</p>
-      <div className="flex items-center gap-4">
-        <span>DevOps</span>
+    <div className="container relative z-10 py-6 border-t border-border/30 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
+      <p>© 2026 Alessandro Meneses. Todos os direitos reservados.</p>
+      <div className="flex items-center gap-3">
+        <span>Software</span>
         <span>•</span>
-        <span>Cloud</span>
+        <span>Automação</span>
         <span>•</span>
-        <span>Security</span>
+        <span>TI</span>
       </div>
     </div>
   </footer>
@@ -101,7 +108,7 @@ export function MainLayout() {
     
     // Smooth Scroll (Lenis)
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.0,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       smoothWheel: true,
@@ -120,47 +127,29 @@ export function MainLayout() {
   }, [pathname]);
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col bg-background antialiased cursor-none selection:bg-primary/20 selection:text-primary overflow-x-hidden" style={{ maxWidth: "100vw", overflowX: "hidden" }}>
-       {/* Global Background Gradient & Grid */}
-       <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
-         {/* Grid Pattern */}
-         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-         
-         {/* Radial Gradient Mask for softness */}
-         <div className="absolute inset-0 bg-background [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-
-        {/* Aurora Blobs */}
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[30%] h-[30%] rounded-full bg-blue-500/10 blur-[100px] animate-pulse delay-1000" />
+    <div className="relative flex min-h-screen w-full flex-col bg-background antialiased selection:bg-primary/20 selection:text-primary overflow-x-hidden">
+      {/* Subtle Background Mesh */}
+      <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:32px_32px]" />
+        <div className="absolute -top-[20%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full bg-primary/5 blur-[120px]" />
       </div>
 
-       {/* <SystemMonitor />  Persona System Disabled by User Request */}
-       <MagneticCursor />
-       <GooeyNavBar />
+      <MagneticCursor />
+      <GooeyNavBar />
 
-       {/* Cinema Grain Texture (Global Overlay) */}
-       <div className="pointer-events-none fixed inset-0 z-[99] opacity-[0.03] mix-blend-overlay">
-         <svg className="h-full w-full">
-           <filter id="noiseFilter">
-             <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
-           </filter>
-           <rect width="100%" height="100%" filter="url(#noiseFilter)" />
-         </svg>
-       </div>
-
-       <AnimatePresence mode="wait">
-         <motion.main 
-           key={pathname}
-           initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-           exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
-           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-           className="flex-1 pt-24 relative"
-         > 
-           <Outlet />
-         </motion.main>
-       </AnimatePresence>
-       <Footer />
+      <AnimatePresence mode="wait">
+        <motion.main 
+          key={pathname}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -12 }}
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          className="flex-1 pt-24 relative"
+        > 
+          <Outlet />
+        </motion.main>
+      </AnimatePresence>
+      <Footer />
     </div>
   );
 }

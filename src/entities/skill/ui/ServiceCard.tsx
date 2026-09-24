@@ -4,6 +4,7 @@ import { FADE_UP_VARIANTS } from "@/shared/lib/motion";
 import * as Icons from "lucide-react";
 import { DomainData } from "@/entities/skill/data/expertise";
 import { MouseEvent } from "react";
+import { ArrowUpRight } from "lucide-react";
 
 const IconRenderer = ({ name, className }: { name: string; className?: string }) => {
   // @ts-ignore
@@ -31,8 +32,8 @@ export function ServiceCard({ domain, onNavigate }: ServiceCardProps) {
     mouseX.set(x);
     mouseY.set(y);
 
-    const rotateXValue = ((y - height / 2) / height) * -10; // Max -10 to 10 deg
-    const rotateYValue = ((x - width / 2) / width) * 10;   // Max -10 to 10 deg
+    const rotateXValue = ((y - height / 2) / height) * -6;
+    const rotateYValue = ((x - width / 2) / width) * 6;
 
     rotateX.set(rotateXValue);
     rotateY.set(rotateYValue);
@@ -58,82 +59,83 @@ export function ServiceCard({ domain, onNavigate }: ServiceCardProps) {
         rotateY, 
         transformStyle: "preserve-3d" 
       }}
-      className="group relative flex flex-col rounded-xl border border-white/10 bg-card/30 backdrop-blur-md overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10"
+      className="group relative rounded-[1.75rem] p-1.5 bg-gradient-to-b from-white/15 to-transparent ring-1 ring-border/60 hover:ring-primary/40 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10"
     >
-      {/* Dynamic Lighting Overlay */}
-      <motion.div
-        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100 z-10"
-        style={{
-          background: useMotionTemplate`
-            radial-gradient(
-              650px circle at ${mouseX}px ${mouseY}px,
-              rgba(14, 165, 233, 0.15),
-              transparent 80%
-            )
-          `,
-        }}
-      />
+      <div className="rounded-[calc(1.75rem-0.375rem)] bg-card/85 backdrop-blur-md overflow-hidden flex flex-col justify-between h-full border border-border/40">
+        {/* Dynamic Lighting Overlay */}
+        <motion.div
+          className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100 z-10"
+          style={{
+            background: useMotionTemplate`
+              radial-gradient(
+                500px circle at ${mouseX}px ${mouseY}px,
+                rgba(14, 165, 233, 0.12),
+                transparent 80%
+              )
+            `,
+          }}
+        />
 
-      {/* Technical Top Border Accent */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-50 group-hover:opacity-100 transition-opacity" />
-      
-      {/* Decorative Corner */}
-      <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-white/5 to-transparent -mr-8 -mt-8 rotate-45" />
-
-      <div className="p-6 md:p-8 flex-1 flex flex-col relative z-20" style={{ transform: "translateZ(20px)" }}>
-        {/* Header */}
-        <div className="flex items-start justify-between mb-6">
-          <div className="p-3 rounded-lg bg-primary/10 text-primary ring-1 ring-primary/20 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 shadow-[0_0_15px_-3px_rgba(59,130,246,0.3)]">
-             <IconRenderer name={domain.iconName} className="h-6 w-6" />
+        <div className="p-7 sm:p-8 flex-1 flex flex-col relative z-20">
+          {/* Header */}
+          <div className="flex items-start justify-between mb-6">
+            <div className="p-3.5 rounded-2xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 shadow-xs">
+              <IconRenderer name={domain.iconName} className="h-6 w-6" />
+            </div>
+            <span className="text-[11px] font-mono text-muted-foreground uppercase tracking-widest border border-border/50 bg-secondary/40 px-2.5 py-1 rounded-full">
+              Módulo: {domain.id.split('-')[0]?.toUpperCase() || 'SOLUÇÃO'}
+            </span>
           </div>
-          <span className="text-[10px] font-mono text-muted-foreground/60 uppercase tracking-widest border border-white/5 px-2 py-1 rounded">
-            Service_ID: {domain.id.split('-')[1]?.toUpperCase() || 'SYS'}
-          </span>
-        </div>
 
-        {/* Content */}
-        <div className="space-y-4 flex-1">
-           <h3 className="text-2xl font-bold font-display tracking-tight text-foreground group-hover:text-primary transition-colors">
-            {domain.title}
-           </h3>
-           <p className="text-sm md:text-base text-muted-foreground/90 leading-relaxed font-light border-l-2 border-primary/20 pl-4">
-            {domain.description}
-           </p>
-        </div>
+          {/* Content */}
+          <div className="space-y-3 flex-1">
+            <h3 className="text-2xl font-bold font-display tracking-tight text-foreground group-hover:text-primary transition-colors">
+              {domain.title}
+            </h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              {domain.description}
+            </p>
+          </div>
 
-        {/* Tech Specs */}
-        <div className="mt-8 pt-6 border-t border-white/5">
-             <span className="text-[10px] font-mono text-primary/60 uppercase tracking-widest mb-3 block">
-               Technical Specs
-             </span>
-             <div className="flex flex-wrap gap-2">
-               {domain.skills.slice(0, 6).map((skill: any) => (
-                 <span key={typeof skill === 'string' ? skill : skill.name} className="inline-flex items-center rounded-sm bg-secondary/50 border border-white/5 px-2 py-1 text-[11px] font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary hover:border-primary/20">
-                   {typeof skill === 'string' ? skill : skill.name}
-                 </span>
-               ))}
-               {domain.skills.length > 6 && (
-                 <span className="inline-flex items-center text-[10px] text-muted-foreground px-1">
-                   +{domain.skills.length - 6} more
-                 </span>
-               )}
-             </div>
+          {/* Tech Specs */}
+          <div className="mt-8 pt-6 border-t border-border/40">
+            <span className="text-[10px] font-mono text-primary uppercase tracking-widest mb-3 block font-semibold">
+              Competências & Tecnologias
+            </span>
+            <div className="flex flex-wrap gap-1.5">
+              {domain.skills.slice(0, 6).map((skill: any) => (
+                <span 
+                  key={typeof skill === 'string' ? skill : skill.name} 
+                  className="inline-flex items-center rounded-md bg-secondary/60 border border-border/40 px-2.5 py-1 text-xs font-medium text-foreground transition-colors hover:border-primary/40 hover:text-primary"
+                >
+                  {typeof skill === 'string' ? skill : skill.name}
+                </span>
+              ))}
+              {domain.skills.length > 6 && (
+                <span className="inline-flex items-center text-[11px] text-muted-foreground px-1.5 py-1">
+                  +{domain.skills.length - 6} outras
+                </span>
+              )}
+            </div>
+          </div>
         </div>
-      </div>
-      
-      {/* Action Footer */}
-      <div className="bg-muted/10 p-4 flex justify-between items-center border-t border-white/5 group-hover:bg-primary/5 transition-colors relative z-20" style={{ transform: "translateZ(10px)" }}>
-          <span className="text-xs text-muted-foreground group-hover:text-primary transition-colors">
-            Status: Active
+        
+        {/* Action Footer */}
+        <div className="bg-muted/30 px-7 py-4 flex justify-between items-center border-t border-border/40 relative z-20">
+          <span className="text-xs font-mono text-muted-foreground flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            Disponível para implementação
           </span>
-          <Button 
-            variant="ghost" 
-            size="sm"
-            className="text-primary hover:text-primary hover:bg-primary/10 gap-2 p-0 h-auto font-mono text-xs uppercase tracking-wider hover:underline underline-offset-4"
+          <button 
+            className="group/btn inline-flex items-center gap-2 text-xs font-semibold text-primary hover:underline"
             onClick={() => onNavigate(domain.id)}
           >
-            Access Module <Icons.ChevronRight className="w-3 h-3" />
-          </Button>
+            <span>Ver Detalhes</span>
+            <span className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform">
+              <ArrowUpRight className="w-3.5 h-3.5 text-primary" />
+            </span>
+          </button>
+        </div>
       </div>
     </motion.div>
   );

@@ -23,7 +23,7 @@ export function MagneticCursor() {
 
   const gravityRef = useRef({ x: 0, y: 0, active: false, strength: 0 });
   const lastPosRef = useRef({ x: 0, y: 0, time: Date.now() });
-  const movingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const movingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const handleGravity = (e: Event) => {

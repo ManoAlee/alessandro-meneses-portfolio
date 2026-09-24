@@ -1,29 +1,29 @@
 export const userData = {
   profile: {
     name: "Alessandro Meneses",
-    role: "Analista de Infraestrutura & DevOps | DevOps Engineer | Cloud Architect",
-    bio: "Profissional de TI graduado em Gestão da Tecnologia da Informação, com experiência prática em infraestrutura, suporte técnico e administração de banco de dados. Focado em automação, análise de dados e melhoria contínua de processos.",
+    role: "Desenvolvedor de Software & Analista de TI",
+    bio: "Profissional de TI graduado em Gestão da Tecnologia da Informação pela FATEC Tatuí, com experiência prática em desenvolvimento web, automação corporativa e sustentação de sistemas. Focado em código limpo, automações com Python e PowerShell e análise de dados.",
     email: "ale_meneses2004@hotmail.com",
     phone: "+55 (15) 99801-7732",
-    address: "Av. Alexandrina Bertoldi Vercellino, 461, Boituva - SP",
-    linkedin: "https://www.linkedin.com/in/alessandromeneses",
+    address: "Boituva - SP, Brasil",
+    linkedin: "https://www.linkedin.com/in/alessandro-meneses/",
     github: "https://github.com/ManoAlee",
     location: "Boituva, São Paulo, Brasil"
   },
   skills: {
     core: [
-      "Pesquisa e análise",
-      "Administração de banco de dados",
-      "Suporte Técnico e Infraestrutura de TI",
-      "DevOps & Cultura de Automação",
-      "Power BI",
-      "Data Science Fundamentals"
+      "Desenvolvimento Web (React, TypeScript)",
+      "Automação Corporativa (Python, PowerShell)",
+      "Suporte Técnico N2/N3 & Sistemas Corporativos",
+      "Administração de Banco de Dados & SQL",
+      "Power BI & Análise de Dados",
+      "Git & GitHub Actions"
     ],
     infrastructure: [
-      "Linux", "Windows Server", "Active Directory (AD)", "Proxmox", "Docker", "Kubernetes", "DNS/DHCP", "VPN/SSH", "TCP/IP", "Hyper-V"
+      "Linux", "Windows Server", "Active Directory (AD)", "Docker", "DNS/DHCP", "VPN/SSH", "TCP/IP", "Hyper-V"
     ],
     automation: [
-      "CI/CD (GitHub Actions)", "Terraform", "Ansible", "PowerShell", "Bash", "Python", "Restic", "Rclone"
+      "Python Scripts", "PowerShell", "Bash", "REST APIs", "CI/CD (GitHub Actions)", "Restic", "Rclone"
     ],
     languages: [
       "Português (Nativo)", "Inglês (Técnico B1)"
@@ -34,15 +34,15 @@ export const userData = {
       company: "Automotion",
       role: "Analista de TI",
       period: "Junho 2026 - Presente",
-      description: "Liderança técnica e sustentação de ambientes de missão crítica. Foco em arquitetura de virtualização e nuvem privada (Proxmox/Hyper-V), cultura DevOps (CI/CD), orquestração de containers (Docker/Kubernetes) e automação de processos complexos.",
-      tags: ["DevOps", "Virtualização", "Kubernetes", "Automação"]
+      description: "Desenvolvimento e sustentação de sistemas internos, painéis analíticos e ferramentas web. Automação de processos corporativos com Python e PowerShell, aumentando a produtividade das equipes e garantindo continuidade operacional.",
+      tags: ["Software", "TypeScript", "Python", "Automação"]
     },
     {
       company: "Automotion",
       role: "Assistente de TI JR",
       period: "Junho 2025 - Junho 2026",
-      description: "Atendimento de suporte e troubleshooting (N1/N2/N3) local e remoto (RDP, VNC, SSH). Administração de redes (TCP/IP, VPN, Firewall), servidores (Windows/Linux/Proxmox) e gestão de ativos. Automação de processos com PowerShell/Bash e implementação de backups robustos com Restic/Rclone.",
-      tags: ["Infraestrutura", "Suporte", "Proxmox", "Backup"]
+      description: "Atendimento de suporte técnico N2/N3 local e remoto. Administração de redes, servidores Windows/Linux, gestão de acessos no Active Directory, rotinas de backup e scripts em PowerShell para automação de tarefas manuais.",
+      tags: ["Sistemas", "Suporte N2/N3", "PowerShell", "Backup"]
     },
     {
       company: "Bellacor Indústria e Comércio de Tintas",

@@ -4,9 +4,9 @@ import { Activity, Shield, Cpu, Terminal, Wifi } from "lucide-react";
 import { PortfolioEventDetail } from "@/shared/lib/events";
 
 const PERSONAS = [
-  { id: "devops", name: "DevOps Agent", icon: Terminal, color: "text-green-500", bg: "bg-green-500/10" },
-  { id: "secops", name: "SecOps Guardian", icon: Shield, color: "text-blue-500", bg: "bg-blue-500/10" },
-  { id: "cloud", name: "Cloud Architect", icon: Cpu, color: "text-purple-500", bg: "bg-purple-500/10" },
+  { id: "software", name: "Software Engineer", icon: Terminal, color: "text-emerald-500", bg: "bg-emerald-500/10" },
+  { id: "automation", name: "Automation Specialist", icon: Shield, color: "text-blue-500", bg: "bg-blue-500/10" },
+  { id: "systems", name: "IT Systems Analyst", icon: Cpu, color: "text-purple-500", bg: "bg-purple-500/10" },
 ];
 
 export function SystemMonitor() {

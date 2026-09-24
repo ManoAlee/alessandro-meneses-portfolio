@@ -36,36 +36,36 @@ export interface ResumeData {
 export const RESUME_CONTENT: ResumeData = {
   personal: {
     name: "Alessandro Meneses",
-    role: "DevOps Engineer | Especialista de Infraestrutura",
+    role: "Desenvolvedor de Software & Analista de TI",
     email: "ale_meneses2004@hotmail.com",
     phone: "+55 (15) 99801-7732",
     location: "Boituva, SP - Brasil",
-    linkedin: "https://linkedin.com/in/alessandromeneses",
+    linkedin: "https://www.linkedin.com/in/alessandro-meneses/",
     github: "https://github.com/ManoAlee",
   },
-  summary: "Profissional de TI com 3+ anos de experiência focada em Infraestrutura e DevOps. Especialista em desenhar e administrar ambientes virtualizados de alta disponibilidade (Proxmox/VMware/Hyper-V), com forte atuação em automação de processos (PowerShell/Python/Bash), segurança de dados e backups imutáveis. Foco na implementação de cultura DevOps, pipelines de CI/CD e infraestrutura como código (IaC).",
+  summary: "Profissional de TI graduado em Gestão da Tecnologia da Informação pela FATEC. Atuo na Automotion desenvolvendo softwares, scripts de automação e sustentando soluções tecnológicas. Foco em desenvolvimento de aplicações modernas (TypeScript, React, Python), automação de rotinas corporativas e resolução ágil de problemas técnicos.",
   experience: [
     {
       company: "Automotion",
       role: "Analista de TI",
       period: "Jun 2026 - Presente",
-      location: "Boituva, SP (Híbrido)",
+      location: "Boituva, SP",
       isCurrent: true,
       highlights: [
-        "Liderança técnica e sustentação de ambientes de missão crítica.",
-        "Foco em arquitetura de virtualização e nuvem privada (Proxmox/Hyper-V), cultura DevOps (CI/CD), orquestração de containers (Docker/Kubernetes) e automação de processos complexos."
+        "Desenvolvimento e sustentação de sistemas, ferramentas internas e dashboards.",
+        "Automação de processos corporativos com Python e PowerShell, aumentando a produtividade operacional.",
+        "Suporte técnico avançado N2/N3 e administração de sistemas Windows e Linux."
       ]
     },
     {
       company: "Automotion",
       role: "Assistente de TI JR",
       period: "Jun 2025 - Jun 2026",
-      location: "Boituva, SP (Híbrido)",
+      location: "Boituva, SP",
       highlights: [
-        "Sustentação de Missão Crítica: Responsável pela estabilidade de servidores Windows/Linux, garantindo SLA de atendimento N3.",
-        "Automação de Rotinas: Desenvolvi scripts em PowerShell que automatizaram o onboarding de usuários, poupando 15h+ mês da equipe.",
-        "Modernização de Backup: Implementei estratégia de backup imutável com Restic e Rclone, mitigando riscos de ransomware.",
-        "Virtualização: Administração de clusters Proxmox e otimização de recursos de VDI."
+        "Automação de Rotinas: Criação de scripts em PowerShell para gestão de usuários, poupando 15h+ mensais da equipe.",
+        "Segurança & Backups: Implementação de rotinas seguras e automatizadas de backup corporativo.",
+        "Suporte & Diagnóstico: Atendimento N2/N3 e sustentação contínua de estações de trabalho e servidores."
       ]
     },
     {
@@ -74,23 +74,23 @@ export const RESUME_CONTENT: ResumeData = {
       period: "Jan 2024 - Fev 2024",
       location: "Boituva, SP",
       highlights: [
-        "Conectividade: Suporte direto e troubleshooting de redes TCP/IP e links de dados corporativos.",
-        "Satisfação do Cliente: Atuação focada em resolução rápida (First Call Resolution), mantendo altos índices de aprovação."
+        "Conectividade: Diagnóstico e suporte direto a redes TCP/IP e conectividade de links corporativos.",
+        "Satisfação do Cliente: Resolução ágil de chamados (First Call Resolution) mantendo alto índice de satisfação."
       ]
     }
   ],
   skills: [
     {
-      category: "Infraestrutura & Virtualização",
-      items: ["Proxmox", "VMware", "Hyper-V", "Linux", "Windows Server", "Docker", "Kubernetes"]
+      category: "Desenvolvimento de Software",
+      items: ["TypeScript", "JavaScript", "React", "Python", "Tailwind CSS", "Node.js", "REST APIs"]
     },
     {
-      category: "DevOps & Automação",
-      items: ["CI/CD", "Git", "GitHub Actions", "Terraform", "Ansible", "PowerShell", "Python"]
+      category: "Automação & Ferramentas",
+      items: ["PowerShell", "Python Scripts", "Bash", "Git", "GitHub", "Automações Corporativas"]
     },
     {
-      category: "Observabilidade",
-      items: ["Prometheus", "Grafana", "Zabbix", "CloudWatch"]
+      category: "Sistemas & Infraestrutura",
+      items: ["Linux", "Windows Server", "Redes TCP/IP", "Active Directory", "Segurança da Informação"]
     }
   ],
   education: [

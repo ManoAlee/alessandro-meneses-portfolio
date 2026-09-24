@@ -2,6 +2,7 @@ export interface CareerItem {
   company: string;
   role: string;
   period: string;
+  location?: string;
   description: string;
   tags: string[];
 }
@@ -19,43 +20,41 @@ export const CAREER_DATA: CareerItem[] = [
     company: "Automotion",
     role: "Analista de TI",
     period: "Junho 2026 - Presente",
-    description: "Liderança técnica e sustentação de ambientes de missão crítica. Foco em arquitetura de virtualização e nuvem privada (Proxmox/Hyper-V), cultura DevOps (CI/CD), orquestração de containers (Docker/Kubernetes) e automação de processos complexos.",
-    tags: ["DevOps", "Virtualização", "Kubernetes", "Automação"]
+    location: "Boituva, SP",
+    description: "Desenvolvimento e sustentação de sistemas internos, painéis analíticos e ferramentas web. Automação de processos corporativos com Python e PowerShell, aumentando a produtividade das equipes e garantindo continuidade operacional.",
+    tags: ["Software", "TypeScript", "Python", "Automação"]
   },
   {
     company: "Automotion",
     role: "Assistente de TI JR",
     period: "Junho 2025 - Junho 2026",
-    description: "Atendimento de suporte e troubleshooting (N1/N2/N3) local e remoto (RDP, VNC, SSH). Administração de redes (TCP/IP, VPN, Firewall), servidores (Windows/Linux/Proxmox) e gestão de ativos. Automação de processos com PowerShell/Bash e implementação de backups robustos com Restic/Rclone.",
-    tags: ["Infraestrutura", "Suporte", "Proxmox", "Backup"]
-  },
-  {
-    company: "Bellacor Indústria e Comércio de Tintas",
-    role: "Assistente de Produção",
-    period: "Abril 2024 - Dezembro 2024",
-    description: "Preparação de materiais, operação de máquinas de envase, controle de qualidade visual e etiquetagem. Manutenção da limpeza e organização do setor.",
-    tags: ["Produção", "Qualidade", "Processos"]
+    location: "Boituva, SP",
+    description: "Atendimento de suporte técnico N2/N3 aos colaboradores locais e remotos. Administração de servidores Windows/Linux, gestão de acessos no Active Directory, rotinas de backup e scripts em PowerShell para automação de tarefas manuais.",
+    tags: ["Suporte N2/N3", "Windows & Linux", "PowerShell", "Active Directory"]
   },
   {
     company: "BR Conecta",
-    role: "Analista de rede e comunicação de dados júnior",
+    role: "Analista de Redes Júnior",
     period: "Janeiro 2024 - Fevereiro 2024",
-    description: "Suporte técnico focado em conectividade. Atendimento ao cliente e resolução ágil de problemas técnicos de rede.",
-    tags: ["Redes", "Suporte", "Atendimento"]
+    location: "Boituva, SP",
+    description: "Suporte técnico focado em conectividade de dados e redes corporativas TCP/IP. Diagnóstico ágil de incidentes de rede com alto índice de satisfação do cliente.",
+    tags: ["Redes TCP/IP", "Diagnóstico", "Suporte Técnico"]
+  },
+  {
+    company: "Bellacor Indústria e Comércio",
+    role: "Assistente de Produção",
+    period: "Abril 2024 - Dezembro 2024",
+    location: "Boituva, SP",
+    description: "Preparação de materiais, operação de equipamentos e controle de qualidade operacional.",
+    tags: ["Processos", "Qualidade", "Organização"]
   },
   {
     company: "Schmersal Brasil",
-    role: "Assistente administrativo",
+    role: "Assistente Administrativo",
     period: "Janeiro 2023 - Dezembro 2023",
-    description: "Controle de qualidade, documentação e auditorias. Garantia de conformidade e inspeção de embalagens.",
-    tags: ["Administrativo", "Qualidade", "ISO"]
-  },
-  {
-    company: "Coocerqui",
-    role: "Repositor / Empacotador",
-    period: "Setembro 2020 - Janeiro 2023",
-    description: "Logística interna, reposição de mercadorias e atendimento direto ao cliente.",
-    tags: ["Logística", "Atendimento"]
+    location: "Boituva, SP",
+    description: "Controle de documentação, apoio em processos administrativos e conformidade com normas de qualidade.",
+    tags: ["Administrativo", "Processos"]
   }
 ];
 
@@ -63,17 +62,12 @@ export const EDUCATION_DATA: EducationItem[] = [
   {
     institution: "Fatec Tatuí",
     degree: "Gestão da Tecnologia da Informação",
-    period: "Fevereiro 2022 - Julho 2025",
+    period: "2022 - 2025",
     status: "Graduado"
   },
   {
     institution: "SENAI 'Ítalo Bologna'",
-    degree: "Assistente Administrativo",
-    period: "Janeiro 2023 - Dezembro 2023"
-  },
-  {
-    institution: "SENAI 'Ítalo Bologna'",
-    degree: "Power BI, Administração",
-    period: "Dezembro 2023"
+    degree: "Power BI e Administração",
+    period: "2023"
   }
 ];

@@ -17,95 +17,63 @@ export type SkillDomain = DomainData;
 
 export const EXPERTISE_DATA: DomainData[] = [
   {
-    id: "help-desk",
-    title: "Suporte Técnico & Help Desk",
-    description: "Operações de Nível 1, 2 e 3, garantindo continuidade de negócios e resolução ágil de incidentes.",
-    iconName: "Headset",
+    id: "software",
+    title: "Desenvolvimento de Software",
+    description: "Construção de aplicações modernas, responsivas e modulares utilizando o ecossistema TypeScript, React e Python.",
+    iconName: "Code2",
     skills: [
-      { name: "Service Desk", category: "Core", featured: true },
-      { name: "SLA Management", category: "Core" },
-      { name: "Hardware Troubleshooting", category: "Core" },
-      { name: "Gestão de Ativos", category: "Core" },
-      { name: "Office 365", category: "Tool", featured: true },
-      { name: "Jira / ServiceNow", category: "Tool" },
-      { name: "Acesso Remoto (AnyDesk/TeamViewer)", category: "Tool" },
-      { name: "Manutenção de Periféricos", category: "Core" },
-      { name: "Suporte a Usuário Final", category: "Core" }
+      { name: "TypeScript", category: "Lang", featured: true },
+      { name: "JavaScript (ES6+)", category: "Lang", featured: true },
+      { name: "React", category: "Core", featured: true },
+      { name: "HTML5 / Semantic Web", category: "Core" },
+      { name: "Tailwind CSS", category: "Tool", featured: true },
+      { name: "Node.js", category: "Core" },
+      { name: "REST APIs", category: "Core", featured: true },
+      { name: "Git & GitHub", category: "Tool", featured: true }
     ]
   },
   {
-    id: "sysadmin",
-    title: "Administração de Sistemas",
-    description: "Gerenciamento robusto de servidores Windows e Linux, focando em segurança e estabilidade.",
-    iconName: "Server",
+    id: "automation",
+    title: "Automação & Scripting",
+    description: "Desenvolvimento de scripts para automatizar processos manuais, integração de sistemas e rotinas corporativas.",
+    iconName: "Terminal",
     skills: [
-      { name: "Windows Server (2012-2022)", category: "Core", featured: true },
-      { name: "Linux (Ubuntu/Debian/CentOS)", category: "Core", featured: true },
-      { name: "Active Directory", category: "Core", featured: true },
-      { name: "Group Policy (GPO)", category: "Core" },
-      { name: "DNS / DHCP / TCP-IP", category: "Core" },
-      { name: "PowerShell Scripting", category: "Lang", featured: true },
-      { name: "Bash Scripting", category: "Lang" },
-      { name: "Gestão de Backups", category: "Core" }
+      { name: "Python Scripting", category: "Lang", featured: true },
+      { name: "PowerShell", category: "Lang", featured: true },
+      { name: "Bash", category: "Lang" },
+      { name: "Automação de Rotinas", category: "Core", featured: true },
+      { name: "Manipulação de Arquivos e APIs", category: "Core" },
+      { name: "CLI Tools", category: "Core" },
+      { name: "Integração de Sistemas", category: "Core" }
     ]
   },
   {
-    id: "cloud",
-    title: "Cloud Computing & FinOps",
-    description: "Arquitetura de nuvem escalável e otimização de custos em ambientes híbridos.",
-    iconName: "Cloud",
+    id: "systems-support",
+    title: "Sistemas & Suporte de TI",
+    description: "Sustentação contínua de infraestrutura de TI, atendimento técnico N2/N3 e administração de estações de trabalho.",
+    iconName: "Headphones",
     skills: [
-      { name: "AWS (EC2, S3, RDS)", category: "Tool", featured: true },
-      { name: "Azure (AD, VMs)", category: "Tool" },
-      { name: "Google Cloud", category: "Tool" },
-      { name: "Terraform (IaC)", category: "Tool", featured: true },
-      { name: "Cloudflare", category: "Tool" },
-      { name: "Otimização de Custos (FinOps)", category: "Core" },
-      { name: "Migração de Servidores", category: "Core" }
+      { name: "Windows Server & Desktop", category: "Core", featured: true },
+      { name: "Linux (Debian/Ubuntu)", category: "Core", featured: true },
+      { name: "Active Directory (AD)", category: "Core", featured: true },
+      { name: "Redes TCP/IP & VPN", category: "Core" },
+      { name: "Troubleshooting de Hardware", category: "Core" },
+      { name: "Gestão de Backups Corporativos", category: "Core", featured: true },
+      { name: "HelpDesk N2 / N3", category: "Core", featured: true }
     ]
   },
   {
-    id: "security",
-    title: "Cibersegurança & Compliance",
-    description: "Implementação de defesa em profundidade, análise de vulnerabilidades e conformidade LGPD.",
-    iconName: "ShieldAlert",
+    id: "data-bi",
+    title: "Dados & Dashboards",
+    description: "Organização, modelagem e visualização de dados operacionais para acompanhamento claro de indicadores.",
+    iconName: "BarChart3",
     skills: [
-      { name: "Firewall Configuration", category: "Core" },
-      { name: "VPN (OpenVPN/WireGuard)", category: "Tool" },
-      { name: "Análise de Vulnerabilidade", category: "Core" },
-      { name: "LGPD Compliance", category: "Core" },
-      { name: "ISO 27001 Práticas", category: "Core", featured: true },
-      { name: "Gestão de Identidade (IAM)", category: "Core" },
-      { name: "Antivírus Corporativo", category: "Tool" }
-    ]
-  },
-  {
-    id: "devops",
-    title: "DevOps & Automação",
-    description: "Criação de pipelines CI/CD e cultura de automação para acelerar entregas.",
-    iconName: "Infinity",
-    skills: [
-      { name: "Docker & Containers", category: "Tool", featured: true },
-      { name: "Kubernetes (K8s)", category: "Tool" },
-      { name: "CI/CD (GitHub Actions)", category: "Tool", featured: true },
-      { name: "Git & Version Control", category: "Tool" },
-      { name: "Jenkins", category: "Tool" },
-      { name: "Ansible", category: "Tool" },
-      { name: "Automação de Infraestrutura", category: "Core" }
-    ]
-  },
-  {
-    id: "data",
-    title: "Dados & Analytics",
-    description: "Transformando dados brutos em inteligência de negócios acionável.",
-    iconName: "Database",
-    skills: [
-      { name: "SQL (MySQL/PostgreSQL/SQL Server)", category: "Lang", featured: true },
       { name: "Power BI", category: "Tool", featured: true },
       { name: "Modelagem de Dados", category: "Core" },
-      { name: "ETL Processes", category: "Core" },
-      { name: "Excel Avançado / VBA", category: "Tool" },
-      { name: "Python Pandas", category: "Lang" }
+      { name: "Dashboards Interativos", category: "Core", featured: true },
+      { name: "Excel Avançado", category: "Tool" },
+      { name: "SQL Básico", category: "Lang" },
+      { name: "Indicadores e Métricas", category: "Core" }
     ]
   }
 ];

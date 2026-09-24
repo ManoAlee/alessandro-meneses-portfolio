@@ -1,153 +1,233 @@
+import { useState } from "react";
 import { Button } from "@/shared/ui/Button";
-import { motion } from "framer-motion";
-import { FADE_UP_VARIANTS, STAGGER_CONTAINER_VARIANTS } from "@/shared/lib/motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { AvatarVisual } from "./AvatarVisual";
-import { CosmicWeb } from "./CosmicWeb";
-import { useState, useEffect } from "react";
-
-interface MolecularTextProps {
-  text: string;
-  gravity: { x: number; y: number; active: boolean };
-  className?: string;
-}
-
-function MolecularText({ text, gravity, className }: MolecularTextProps) {
-  return (
-    <span className={className}>
-      {text.split("").map((char, index) => {
-        // Characters closer to the right (closer to the black hole) get sucked in stronger
-        const normIndex = index / text.length;
-        const sensitivity = 0.4 + normIndex * 1.6;
-        
-        // Physics offsets
-        const pullX = gravity.active ? 28 * sensitivity : 0;
-        const pullY = gravity.active ? gravity.y * 22 * sensitivity : 0;
-        const skew = gravity.active ? (1 + gravity.y) * 6 * sensitivity : 0;
-
-        return (
-          <motion.span
-            key={index}
-            className="inline-block whitespace-pre origin-center"
-            animate={{
-              x: pullX,
-              y: pullY,
-              skewX: skew,
-              scale: gravity.active ? 1 + (sensitivity * 0.08) : 1,
-              // Glow effect changes to hot gas orange near the horizon
-              color: gravity.active ? "#f97316" : "#38bdf8",
-              textShadow: gravity.active 
-                ? "0 0 8px rgba(249, 115, 22, 0.6)" 
-                : "0 0 8px rgba(56, 189, 248, 0)",
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 80,
-              damping: 13,
-              mass: 0.6,
-            }}
-          >
-            {char}
-          </motion.span>
-        );
-      })}
-    </span>
-  );
-}
+import { ArrowUpRight, FileText, Terminal, CheckCircle2, Sparkles, Code2, Database, Shield } from "lucide-react";
 
 export function HeroSection() {
   const navigate = useNavigate();
-  const [gravityOffset, setGravityOffset] = useState({ x: 0, y: 0, active: false });
-
-  useEffect(() => {
-    const handleHover = () => {
-      setGravityOffset(prev => ({ ...prev, active: true }));
-    };
-    const handleLeave = () => {
-      setGravityOffset({ x: 0, y: 0, active: false });
-    };
-    const handleMove = (e: Event) => {
-      const customEvent = e as CustomEvent<{ x: number; y: number }>;
-      const pullX = 16; 
-      const pullY = customEvent.detail.y * 12;
-      setGravityOffset({ x: pullX, y: pullY, active: true });
-    };
-
-    window.addEventListener("blackhole-hover", handleHover);
-    window.addEventListener("blackhole-leave", handleLeave);
-    window.addEventListener("blackhole-move", handleMove);
-
-    return () => {
-      window.removeEventListener("blackhole-hover", handleHover);
-      window.removeEventListener("blackhole-leave", handleLeave);
-      window.removeEventListener("blackhole-move", handleMove);
-    };
-  }, []);
+  const [activeTab, setActiveTab] = useState<"profile" | "automation" | "stack">("profile");
 
   return (
-    <motion.section 
-      initial="hidden"
-      animate="visible"
-      variants={STAGGER_CONTAINER_VARIANTS}
-      className="container grid lg:grid-cols-2 items-center gap-12 pb-8 pt-20 md:py-32 min-h-[85vh] relative overflow-hidden"
-    >
-      {/* Cosmic Web Background */}
-      <CosmicWeb />
-      {/* Left Column with Spaghettification Gravity Warp */}
-      <motion.div 
-        animate={{
-          x: gravityOffset.active ? gravityOffset.x : 0,
-          y: gravityOffset.active ? gravityOffset.y : 0,
-          skewX: gravityOffset.active ? 1 : 0,
-          scaleX: gravityOffset.active ? 1.01 : 1,
-        }}
-        transition={{ type: "spring", stiffness: 120, damping: 18 }}
-        className="flex flex-col items-start gap-6 text-left origin-left relative z-10"
-      >
-        <motion.h1 
-          variants={FADE_UP_VARIANTS}
-          className="text-4xl font-extrabold leading-tight tracking-tighter md:text-6xl lg:text-7xl font-display drop-shadow-2xl"
+    <section className="container py-12 md:py-24 relative">
+      <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        {/* Left Column: Headline & Intro */}
+        <motion.div 
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="lg:col-span-7 space-y-6 text-left"
         >
-          <MolecularText 
-            text="DevOps & Cloud." 
-            gravity={gravityOffset} 
-            className="block"
-          />
-        </motion.h1>
-        <motion.p 
-          variants={FADE_UP_VARIANTS}
-          className="max-w-[700px] text-lg text-muted-foreground md:text-xl leading-relaxed"
+          {/* Eyebrow Badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            <span>Alessandro Meneses • Boituva, SP</span>
+          </div>
+
+          {/* Main Title */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold font-display tracking-tight text-foreground leading-[1.1]">
+            Desenvolvedor de Software <br className="hidden sm:inline" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-500 to-indigo-600">
+              & Analista de TI.
+            </span>
+          </h1>
+
+          {/* Subtitle */}
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl">
+            Graduado em Gestão da TI pela FATEC. Atuo na <strong className="text-foreground font-semibold">Automotion</strong> desenvolvendo aplicações web com TypeScript e React, criando automações inteligentes em Python e PowerShell e otimizando processos corporativos.
+          </p>
+
+          {/* Action CTAs with Button-in-Button Pattern */}
+          <div className="flex flex-wrap items-center gap-3 pt-2">
+            <Button 
+              size="lg" 
+              onClick={() => navigate("/opensource")}
+              className="group gap-3 rounded-full pl-6 pr-2 py-2 shadow-md shadow-primary/20 hover:shadow-lg transition-all"
+            >
+              <span>Explorar Projetos</span>
+              <span className="w-8 h-8 rounded-full bg-primary-foreground/15 flex items-center justify-center group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200">
+                <ArrowUpRight className="w-4 h-4 text-primary-foreground" />
+              </span>
+            </Button>
+
+            <Button 
+              variant="outline" 
+              size="lg" 
+              onClick={() => navigate("/resume")}
+              className="gap-2 rounded-full px-6 border-border hover:bg-secondary/60 transition-all"
+            >
+              <FileText className="w-4 h-4" /> Ver Currículo
+            </Button>
+
+            <Button 
+              variant="ghost" 
+              size="lg" 
+              onClick={() => navigate("/contact")}
+              className="rounded-full px-5 text-muted-foreground hover:text-foreground"
+            >
+              Fale Comigo
+            </Button>
+          </div>
+
+          {/* Quick Highlights */}
+          <div className="pt-6 grid grid-cols-2 sm:grid-cols-3 gap-4 border-t border-border/40 text-xs text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+              <span>Fullstack TypeScript & React</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-blue-500 shrink-0" />
+              <span>Automações Python & PowerShell</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-purple-500 shrink-0" />
+              <span>Graduado FATEC Tatuí</span>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Right Column: Interactive Doppelrand Code & System Inspector */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="lg:col-span-5"
         >
-          Alessandro Meneses oferece soluções de nível corporativo em <span className="text-foreground font-semibold">DevOps</span>, 
-          <span className="text-foreground font-semibold"> Arquitetura de Nuvem</span> e 
-          <span className="text-foreground font-semibold"> Administração de Sistemas</span>. 
-          Transformando complexidade técnica em estabilidade operacional.
-        </motion.p>
+          {/* Doppelrand (Double-Bezel Hardware aesthetic) */}
+          <div className="rounded-[1.75rem] p-1.5 bg-gradient-to-b from-white/20 via-white/5 to-transparent dark:from-white/10 dark:via-white/5 dark:to-transparent ring-1 ring-black/10 dark:ring-white/10 shadow-2xl shadow-primary/5">
+            <div className="rounded-[calc(1.75rem-0.375rem)] bg-card/95 backdrop-blur-xl border border-border/60 overflow-hidden shadow-inner flex flex-col">
+              {/* Window Bar & Tabs */}
+              <div className="px-4 py-2.5 border-b border-border/40 bg-muted/40 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block" />
+                  <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
+                  <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
+                </div>
 
-        {/* Terminal Effect */}
-        <motion.div variants={FADE_UP_VARIANTS} className="font-mono text-sm text-primary/80 bg-primary/5 px-4 py-2 rounded border border-primary/10 mt-2 inline-flex items-center gap-2">
-            <span className="text-green-500">➜</span> 
-            <span className="text-blue-400">~/infrastructure</span>
-            <span className="animate-pulse">_</span>
-        </motion.div>
-        
-        <motion.div variants={FADE_UP_VARIANTS} className="flex flex-wrap gap-4 mt-2">
-          <Button size="lg" className="text-base px-8 h-12 shadow-lg shadow-primary/20" onClick={() => navigate("/expertise")}>
-            Ver Expertise
-          </Button>
-          <Button size="lg" variant="outline" className="text-base px-8 h-12 border-primary/20 hover:bg-primary/10" onClick={() => navigate("/resume")}>
-            Ver Currículo
-          </Button>
-          <Button size="lg" variant="ghost" className="text-base px-8 h-12 text-muted-foreground" onClick={() => navigate("/contact")}>
-            Fale Comigo
-          </Button>
-        </motion.div>
-      </motion.div>
+                {/* Interactive File Tabs */}
+                <div className="flex items-center gap-1 bg-background/60 p-0.5 rounded-lg border border-border/40 text-[11px] font-mono">
+                  <button
+                    onClick={() => setActiveTab("profile")}
+                    className={`px-2.5 py-1 rounded-md transition-all ${
+                      activeTab === "profile"
+                        ? "bg-card text-foreground font-semibold shadow-xs"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    perfil.ts
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("automation")}
+                    className={`px-2.5 py-1 rounded-md transition-all ${
+                      activeTab === "automation"
+                        ? "bg-card text-foreground font-semibold shadow-xs"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    automacao.py
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("stack")}
+                    className={`px-2.5 py-1 rounded-md transition-all ${
+                      activeTab === "stack"
+                        ? "bg-card text-foreground font-semibold shadow-xs"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    stack.json
+                  </button>
+                </div>
 
-      {/* Right Side Visual - Fills the empty space */}
-      <motion.div variants={FADE_UP_VARIANTS} className="relative z-10 flex justify-center lg:justify-center">
-         <AvatarVisual />
-      </motion.div>
-    </motion.section>
+                <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                  <Sparkles className="w-3 h-3" /> Online
+                </div>
+              </div>
+
+              {/* Code Snippet Content with Tab Animation */}
+              <div className="p-5 font-mono text-xs bg-card min-h-[220px]">
+                <AnimatePresence mode="wait">
+                  {activeTab === "profile" && (
+                    <motion.div
+                      key="profile-tab"
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.2 }}
+                      className="space-y-1 text-foreground/90 leading-relaxed"
+                    >
+                      <p className="text-muted-foreground pb-2 border-b border-border/30 flex justify-between">
+                        <span>// Perfil Profissional</span>
+                        <span className="text-primary text-[10px]">Automotion • TI</span>
+                      </p>
+                      <p><span className="text-purple-400">const</span> <span className="text-blue-400">profissional</span> = &#123;</p>
+                      <p className="pl-4"><span className="text-primary">nome</span>: <span className="text-emerald-400">"Alessandro Meneses"</span>,</p>
+                      <p className="pl-4"><span className="text-primary">cargo</span>: <span className="text-emerald-400">"Analista de TI na Automotion"</span>,</p>
+                      <p className="pl-4"><span className="text-primary">formacao</span>: <span className="text-emerald-400">"Gestão da TI (FATEC Tatuí)"</span>,</p>
+                      <p className="pl-4"><span className="text-primary">localizacao</span>: <span className="text-emerald-400">"Boituva, SP"</span>,</p>
+                      <p className="pl-4"><span className="text-primary">repositorios</span>: <span className="text-amber-400">14</span>,</p>
+                      <p className="pl-4"><span className="text-primary">foco</span>: <span className="text-emerald-400">"Aplicações web & automações eficientes"</span></p>
+                      <p>&#125;;</p>
+                    </motion.div>
+                  )}
+
+                  {activeTab === "automation" && (
+                    <motion.div
+                      key="automation-tab"
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.2 }}
+                      className="space-y-1 text-foreground/90 leading-relaxed"
+                    >
+                      <p className="text-muted-foreground pb-2 border-b border-border/30 flex justify-between">
+                        <span># Pipeline de Automação & Scripting</span>
+                        <span className="text-emerald-400 text-[10px]">Python 3.12</span>
+                      </p>
+                      <p><span className="text-purple-400">def</span> <span className="text-blue-400">executar_rotina_corporativa</span>():</p>
+                      <p className="pl-4 text-muted-foreground"># Integração de usuários e auditoria de sistemas</p>
+                      <p className="pl-4">rotina = <span className="text-amber-400">PipelineCorporativo</span>(empresa=<span className="text-emerald-400">"Automotion"</span>)</p>
+                      <p className="pl-4">rotina.<span className="text-blue-300">sincronizar_diretorio_ativo</span>()</p>
+                      <p className="pl-4">rotina.<span className="text-blue-300">gerar_relatorios_analiticos</span>()</p>
+                      <p className="pl-4"><span className="text-purple-400">return</span> &#123;<span className="text-primary">"status"</span>: <span className="text-emerald-400">"100% automatizado"</span>&#125;</p>
+                    </motion.div>
+                  )}
+
+                  {activeTab === "stack" && (
+                    <motion.div
+                      key="stack-tab"
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.2 }}
+                      className="space-y-1 text-foreground/90 leading-relaxed"
+                    >
+                      <p className="text-muted-foreground pb-2 border-b border-border/30 flex justify-between">
+                        <span>// Tecnologias em Produção</span>
+                        <span className="text-amber-400 text-[10px]">Stack 2026</span>
+                      </p>
+                      <p>&#123;</p>
+                      <p className="pl-4"><span className="text-primary">"frontend"</span>: [<span className="text-emerald-400">"React"</span>, <span className="text-emerald-400">"TypeScript"</span>, <span className="text-emerald-400">"TailwindCSS"</span>],</p>
+                      <p className="pl-4"><span className="text-primary">"automacao"</span>: [<span className="text-emerald-400">"Python"</span>, <span className="text-emerald-400">"PowerShell"</span>, <span className="text-emerald-400">"Bash"</span>],</p>
+                      <p className="pl-4"><span className="text-primary">"sistemas"</span>: [<span className="text-emerald-400">"Windows Server"</span>, <span className="text-emerald-400">"Linux"</span>, <span className="text-emerald-400">"Active Directory"</span>],</p>
+                      <p className="pl-4"><span className="text-primary">"dados"</span>: [<span className="text-emerald-400">"Power BI"</span>, <span className="text-emerald-400">"SQL"</span>, <span className="text-emerald-400">"REST APIs"</span>]</p>
+                      <p>&#125;</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Status Footer */}
+              <div className="px-5 py-3 border-t border-border/40 bg-muted/30 flex items-center justify-between text-[11px] text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <Terminal className="w-3.5 h-3.5 text-primary" />
+                  <span>Ambiente operacional ativo</span>
+                </div>
+                <span className="text-emerald-500 font-semibold">Boituva - SP</span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
   );
 }
