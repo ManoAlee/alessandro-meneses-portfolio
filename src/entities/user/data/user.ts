@@ -3,7 +3,7 @@ export const userData = {
     name: "Alessandro Meneses",
     role: "Desenvolvedor de Software & Analista de TI",
     bio: "Profissional de TI graduado em Gestão da Tecnologia da Informação pela FATEC Tatuí, com experiência prática em desenvolvimento web, automação corporativa e sustentação de sistemas. Focado em código limpo, automações com Python e PowerShell e análise de dados.",
-    email: "ale_meneses2004@hotmail.com",
+    email: "alessandro-meneses@hotmail.com",
     phone: "+55 (15) 99801-7732",
     address: "Boituva - SP, Brasil",
     linkedin: "https://www.linkedin.com/in/alessandro-meneses/",

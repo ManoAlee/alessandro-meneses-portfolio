@@ -110,7 +110,7 @@ npm run reverify-push  # executa verificação completa (typecheck + build) e fa
 
 ## Contato
 
-Para entrar em contato, envie um e-mail para: ale_meneses2004@hotmail.com
+Para entrar em contato, envie um e-mail para: alessandro-meneses@hotmail.com
 
 ---
 

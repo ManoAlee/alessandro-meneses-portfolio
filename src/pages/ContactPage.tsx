@@ -10,7 +10,7 @@ export default function ContactPage() {
   const [copiedEmail, setCopiedEmail] = useState(false);
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText("ale_meneses2004@hotmail.com");
+    navigator.clipboard.writeText("alessandro-meneses@hotmail.com");
     setCopiedEmail(true);
     toast.success("E-mail copiado para a área de transferência!");
     setTimeout(() => setCopiedEmail(false), 2500);
@@ -88,8 +88,8 @@ export default function ContactPage() {
                   </div>
                   <div className="overflow-hidden">
                     <p className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider">E-mail Profissional</p>
-                    <a href="mailto:ale_meneses2004@hotmail.com" className="text-sm font-semibold hover:text-primary transition-colors truncate block">
-                      ale_meneses2004@hotmail.com
+                    <a href="mailto:alessandro-meneses@hotmail.com" className="text-sm font-semibold hover:text-primary transition-colors truncate block">
+                      alessandro-meneses@hotmail.com
                     </a>
                   </div>
                 </div>

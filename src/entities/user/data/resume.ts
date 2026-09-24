@@ -37,7 +37,7 @@ export const RESUME_CONTENT: ResumeData = {
   personal: {
     name: "Alessandro Meneses",
     role: "Desenvolvedor de Software & Analista de TI",
-    email: "ale_meneses2004@hotmail.com",
+    email: "alessandro-meneses@hotmail.com",
     phone: "+55 (15) 99801-7732",
     location: "Boituva, SP - Brasil",
     linkedin: "https://www.linkedin.com/in/alessandro-meneses/",

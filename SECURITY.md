@@ -13,7 +13,7 @@ This is a personal portfolio project. The latest version on the `main` branch is
 
 If you discover a security vulnerability within this portfolio (e.g., exposed keys, XSS vulnerabilities in the contact form, dependency issues), please report it via email instead of opening a public issue.
 
-**Email:** ale_meneses2004@hotmail.com
+**Email:** alessandro-meneses@hotmail.com
 
 I will strive to acknowledge the receipt of your report within 48 hours and provide a timeline for the fix.
 
