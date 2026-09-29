@@ -248,24 +248,25 @@ export function MetalSlugGameModal({ isOpen, onClose }: MetalSlugGameModalProps)
           pDir = 1;
         }
 
-        // Jump
-        if ((keys.current["KeyW"] || keys.current["Space"] || keys.current["ArrowUp"]) && py === 0) {
+        // Jump: W, ArrowUp, KeyK
+        if ((keys.current["KeyW"] || keys.current["ArrowUp"] || keys.current["KeyK"]) && py === 0) {
           vy = 13;
           audio.playJump();
         }
 
-        // Shoot
+        // Shoot: Space, J, F, Z, X, Enter
         if (shootCooldown > 0) shootCooldown--;
-        if ((keys.current["KeyJ"] || keys.current["KeyF"] || keys.current["KeyZ"]) && shootCooldown <= 0) {
+        const wantsToShoot = keys.current["Space"] || keys.current["KeyJ"] || keys.current["KeyF"] || keys.current["KeyZ"] || keys.current["KeyX"] || keys.current["Enter"];
+        if (wantsToShoot && shootCooldown <= 0) {
           isShooting = true;
-          shootCooldown = 9; // rate of fire
+          shootCooldown = 8; // responsive rate of fire
           audio.playShoot();
           bullets.push({
-            x: pDir === 1 ? px + 54 : px + 6,
-            y: floorY - py - 32,
+            x: pDir === 1 ? px + 52 : px - 12,
+            y: floorY - py - 30,
             dir: pDir,
           });
-        } else {
+        } else if (!wantsToShoot) {
           isShooting = false;
         }
       }
@@ -281,25 +282,26 @@ export function MetalSlugGameModal({ isOpen, onClose }: MetalSlugGameModalProps)
       // --- 2. Update Bullets ---
       for (let i = bullets.length - 1; i >= 0; i--) {
         const b = bullets[i];
-        b.x += b.dir * 16;
-        if (b.x < 0 || b.x > W) {
+        b.x += b.dir * 18;
+        if (b.x < -20 || b.x > W + 20) {
           bullets.splice(i, 1);
         }
       }
 
       // --- 3. Spawn & Update Enemies ---
       spawnTimer++;
-      if (spawnTimer > 65 && currentLives > 0) {
+      if (spawnTimer > 55 && currentLives > 0) {
         spawnTimer = 0;
         const types: ("bug" | "server" | "glitch")[] = ["bug", "server", "glitch"];
         const type = types[Math.floor(Math.random() * types.length)];
+        const size = type === "server" ? 34 : 26;
         enemies.push({
           x: W + 20,
-          y: type === "server" ? floorY - 65 : floorY - 25,
+          y: type === "server" ? floorY - 50 : type === "glitch" ? floorY - 42 : floorY - 32,
           type,
-          speed: 1.5 + Math.random() * 1.5,
+          speed: 1.4 + Math.random() * 1.5,
           hp: type === "server" ? 2 : 1,
-          size: type === "server" ? 30 : 22,
+          size,
         });
       }
 
@@ -307,15 +309,16 @@ export function MetalSlugGameModal({ isOpen, onClose }: MetalSlugGameModalProps)
         const e = enemies[i];
         e.x -= e.speed;
 
-        // Collision with bullets
+        // Collision with bullets (Generous AABB box detection with hit margin)
         for (let j = bullets.length - 1; j >= 0; j--) {
           const b = bullets[j];
-          if (
-            b.x > e.x &&
-            b.x < e.x + e.size &&
-            b.y > e.y &&
-            b.y < e.y + e.size
-          ) {
+          const bW = 20;
+          const bH = 10;
+          
+          const hitX = (b.x + bW >= e.x - 6) && (b.x <= e.x + e.size + 6);
+          const hitY = Math.abs((b.y + bH / 2) - (e.y + e.size / 2)) <= (e.size / 2 + 16);
+
+          if (hitX && hitY) {
             e.hp--;
             bullets.splice(j, 1);
 
@@ -333,18 +336,18 @@ export function MetalSlugGameModal({ isOpen, onClose }: MetalSlugGameModalProps)
 
             if (e.hp <= 0) {
               audio.playExplosion();
-              currentScore += e.type === "server" ? 250 : 100;
+              currentScore += e.type === "server" ? 300 : e.type === "glitch" ? 200 : 100;
               setScore(currentScore);
 
               // Death explosion
-              for (let k = 0; k < 14; k++) {
+              for (let k = 0; k < 16; k++) {
                 particles.push({
                   x: e.x + e.size / 2,
                   y: e.y + e.size / 2,
-                  vx: (Math.random() - 0.5) * 8,
-                  vy: (Math.random() - 0.5) * 8,
+                  vx: (Math.random() - 0.5) * 9,
+                  vy: (Math.random() - 0.5) * 9,
                   color: e.type === "bug" ? "#22c55e" : e.type === "server" ? "#ef4444" : "#a855f7",
-                  life: 25,
+                  life: 26,
                 });
               }
               enemies.splice(i, 1);
@@ -594,7 +597,15 @@ export function MetalSlugGameModal({ isOpen, onClose }: MetalSlugGameModalProps)
 
           {/* Screen Canvas Area */}
           <div className="relative aspect-[16/9] w-full bg-black flex items-center justify-center overflow-hidden">
-            <canvas ref={canvasRef} className="w-full h-full object-contain" />
+            <canvas 
+              ref={canvasRef} 
+              onClick={() => {
+                keys.current["Space"] = true;
+                setTimeout(() => { keys.current["Space"] = false; }, 90);
+              }}
+              className="w-full h-full object-contain cursor-crosshair" 
+              title="Clique na tela para atirar!"
+            />
 
             {/* Game Over Screen */}
             {gameOver && (
@@ -632,28 +643,34 @@ export function MetalSlugGameModal({ isOpen, onClose }: MetalSlugGameModalProps)
           <div className="px-4 py-3 bg-slate-950 border-t border-slate-800 flex items-center justify-between text-xs font-mono text-muted-foreground select-none">
             {/* Desktop Key Helper */}
             <div className="hidden sm:flex items-center gap-3 text-[11px]">
-              <span>🎮 <strong className="text-white">A / D</strong> ou <strong className="text-white">← / →</strong> para Andar</span>
+              <span>🎮 <strong className="text-white">A / D</strong> para Andar</span>
               <span>•</span>
-              <span><strong className="text-white">W / Espaço</strong> para Pular</span>
+              <span><strong className="text-white">W / ↑</strong> para Pular</span>
               <span>•</span>
-              <span><strong className="text-white">J / F</strong> para Atirar</span>
+              <span><strong className="text-white">Espaço / F / J</strong> para Atirar</span>
+              <span>•</span>
+              <span className="text-amber-400 font-semibold">🖱️ Clique na tela para Atirar</span>
             </div>
 
-            {/* Mobile Touch Controller (only shown on touch screens) */}
+            {/* Mobile Touch Controller */}
             <div className="flex sm:hidden items-center justify-between w-full">
               {/* D-Pad */}
               <div className="flex items-center gap-2">
                 <button
                   onTouchStart={() => touchStart("KeyA")}
                   onTouchEnd={() => touchEnd("KeyA")}
-                  className="w-11 h-11 rounded-xl bg-slate-800 active:bg-slate-700 text-white font-bold flex items-center justify-center border border-slate-700 active:scale-95"
+                  onMouseDown={() => touchStart("KeyA")}
+                  onMouseUp={() => touchEnd("KeyA")}
+                  className="w-11 h-11 rounded-xl bg-slate-800 active:bg-slate-700 text-white font-bold flex items-center justify-center border border-slate-700 active:scale-95 select-none"
                 >
                   ◀
                 </button>
                 <button
                   onTouchStart={() => touchStart("KeyD")}
                   onTouchEnd={() => touchEnd("KeyD")}
-                  className="w-11 h-11 rounded-xl bg-slate-800 active:bg-slate-700 text-white font-bold flex items-center justify-center border border-slate-700 active:scale-95"
+                  onMouseDown={() => touchStart("KeyD")}
+                  onMouseUp={() => touchEnd("KeyD")}
+                  className="w-11 h-11 rounded-xl bg-slate-800 active:bg-slate-700 text-white font-bold flex items-center justify-center border border-slate-700 active:scale-95 select-none"
                 >
                   ▶
                 </button>
@@ -664,14 +681,18 @@ export function MetalSlugGameModal({ isOpen, onClose }: MetalSlugGameModalProps)
                 <button
                   onTouchStart={() => touchStart("KeyW")}
                   onTouchEnd={() => touchEnd("KeyW")}
-                  className="w-12 h-12 rounded-full bg-amber-600 active:bg-amber-500 text-white font-bold text-xs flex items-center justify-center border border-amber-400 active:scale-95 shadow-md"
+                  onMouseDown={() => touchStart("KeyW")}
+                  onMouseUp={() => touchEnd("KeyW")}
+                  className="w-12 h-12 rounded-full bg-amber-600 active:bg-amber-500 text-white font-bold text-xs flex items-center justify-center border border-amber-400 active:scale-95 shadow-md select-none"
                 >
                   PULAR
                 </button>
                 <button
-                  onTouchStart={() => touchStart("KeyJ")}
-                  onTouchEnd={() => touchEnd("KeyJ")}
-                  className="w-14 h-14 rounded-full bg-red-600 active:bg-red-500 text-white font-black text-sm flex items-center justify-center border-2 border-red-400 active:scale-95 shadow-lg"
+                  onTouchStart={() => touchStart("Space")}
+                  onTouchEnd={() => touchEnd("Space")}
+                  onMouseDown={() => touchStart("Space")}
+                  onMouseUp={() => touchEnd("Space")}
+                  className="w-14 h-14 rounded-full bg-red-600 active:bg-red-500 text-white font-black text-sm flex items-center justify-center border-2 border-red-400 active:scale-95 shadow-lg select-none"
                 >
                   FOGO
                 </button>

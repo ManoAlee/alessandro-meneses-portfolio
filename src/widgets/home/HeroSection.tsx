@@ -52,11 +52,11 @@ export function HeroSection() {
           </p>
 
           {/* Action CTAs with Button-in-Button Pattern */}
-          <div className="flex flex-wrap items-center gap-3 pt-2">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
             <Button 
               size="lg" 
               onClick={() => navigate("/opensource")}
-              className="group gap-3 rounded-full pl-6 pr-2 py-2 shadow-md shadow-primary/20 hover:shadow-lg transition-all"
+              className="group gap-3 rounded-full pl-6 pr-2 py-2 shadow-md shadow-primary/20 hover:shadow-lg transition-all w-full sm:w-auto justify-between sm:justify-center"
             >
               <span>Explorar Projetos</span>
               <span className="w-8 h-8 rounded-full bg-primary-foreground/15 flex items-center justify-center group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200">
@@ -68,7 +68,7 @@ export function HeroSection() {
               variant="outline" 
               size="lg" 
               onClick={() => navigate("/resume")}
-              className="gap-2 rounded-full px-6 border-border hover:bg-secondary/60 transition-all"
+              className="gap-2 rounded-full px-6 border-border hover:bg-secondary/60 transition-all w-full sm:w-auto justify-center"
             >
               <FileText className="w-4 h-4" /> Ver Currículo
             </Button>
@@ -77,7 +77,7 @@ export function HeroSection() {
               variant="ghost" 
               size="lg" 
               onClick={() => navigate("/contact")}
-              className="rounded-full px-5 text-muted-foreground hover:text-foreground"
+              className="rounded-full px-5 text-muted-foreground hover:text-foreground w-full sm:w-auto justify-center"
             >
               Fale Comigo
             </Button>
@@ -111,15 +111,15 @@ export function HeroSection() {
           <div className="rounded-[1.75rem] p-1.5 bg-gradient-to-b from-white/20 via-white/5 to-transparent dark:from-white/10 dark:via-white/5 dark:to-transparent ring-1 ring-black/10 dark:ring-white/10 shadow-2xl shadow-primary/5">
             <div className="rounded-[calc(1.75rem-0.375rem)] bg-card/95 backdrop-blur-xl border border-border/60 overflow-hidden shadow-inner flex flex-col">
               {/* Window Bar & Tabs */}
-              <div className="px-4 py-2.5 border-b border-border/40 bg-muted/40 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block" />
-                  <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
-                  <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
+              <div className="px-3 sm:px-4 py-2.5 border-b border-border/40 bg-muted/40 flex items-center justify-between gap-2 overflow-hidden">
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
                 </div>
 
                 {/* Interactive File Tabs */}
-                <div className="flex items-center gap-1 bg-background/60 p-0.5 rounded-lg border border-border/40 text-[11px] font-mono overflow-x-auto">
+                <div className="flex items-center gap-1 bg-background/60 p-0.5 rounded-lg border border-border/40 text-[11px] font-mono overflow-x-auto no-scrollbar max-w-[210px] sm:max-w-none">
                   <button
                     onClick={() => setActiveTab("avatar")}
                     className={`px-2.5 py-1 rounded-md transition-all flex items-center gap-1.5 whitespace-nowrap ${
@@ -163,7 +163,7 @@ export function HeroSection() {
                   </button>
                 </div>
 
-                <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20 shrink-0">
+                <div className="hidden sm:flex items-center gap-1.5 text-[10px] font-mono text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20 shrink-0">
                   <Sparkles className="w-3 h-3" /> Online
                 </div>
               </div>

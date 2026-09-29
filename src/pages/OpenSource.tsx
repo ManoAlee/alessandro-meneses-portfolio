@@ -140,12 +140,12 @@ export default function OpenSourcePage() {
     { text: "Alessandro Meneses CLI v2.0", type: "output" },
     { text: "Digite ou clique em um comando para executar:", type: "output" }
   ]);
-  const terminalEndRef = useRef<HTMLDivElement>(null);
+  const terminalScrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (viewMode === "cli" && terminalEndRef.current) {
-      terminalEndRef.current.scrollIntoView({ behavior: "smooth" });
+    if (viewMode === "cli" && terminalScrollRef.current) {
+      terminalScrollRef.current.scrollTop = terminalScrollRef.current.scrollHeight;
     }
   }, [terminalHistory, viewMode]);
 
@@ -159,7 +159,7 @@ export default function OpenSourcePage() {
     const cmd = rawCmd.trim().toLowerCase();
     if (!cmd) return;
 
-    const newHistory = [...terminalHistory, { text: `alessandro@automotion:~$ ${cmd}`, type: "input" as const }];
+    const newHistory = [...terminalHistory, { text: `alessandro@portfolio:~$ ${cmd}`, type: "input" as const }];
 
     switch (cmd) {
       case "help":
@@ -167,10 +167,10 @@ export default function OpenSourcePage() {
           text: (
             <div className="space-y-1 text-emerald-400">
               <p>Comandos disponíveis no terminal:</p>
-              <p>  <span className="text-cyan-400 font-bold">about</span>     - Perfil e atuação na Automotion</p>
-              <p>  <span className="text-cyan-400 font-bold">skills</span>    - Habilidades técnicas e linguagens</p>
+              <p>  <span className="text-cyan-400 font-bold">about</span>     - Perfil e trajetória profissional</p>
+              <p>  <span className="text-cyan-400 font-bold">skills</span>    - Habilidades técnicas e ecossistema</p>
               <p>  <span className="text-cyan-400 font-bold">projects</span>  - Catálogo de repositórios GitHub</p>
-              <p>  <span className="text-cyan-400 font-bold">status</span>    - Disponibilidade e ambiente ativo</p>
+              <p>  <span className="text-cyan-400 font-bold">status</span>    - Disponibilidade e localização</p>
               <p>  <span className="text-cyan-400 font-bold">clear</span>     - Limpar o terminal</p>
             </div>
           ),
@@ -183,9 +183,9 @@ export default function OpenSourcePage() {
           text: (
             <div className="space-y-1 text-foreground">
               <p className="font-bold border-b border-border/40 pb-1 text-primary">Alessandro Meneses</p>
-              <p>● Cargo: Analista de TI na Automotion</p>
+              <p>● Perfil: Engenheiro de Software & Analista de TI</p>
               <p>● Formação: Graduado em Gestão da TI pela FATEC Tatuí (2022 - 2025)</p>
-              <p>● Foco: Desenvolvimento web moderno com TypeScript/React e automações em Python/PowerShell.</p>
+              <p>● Foco: Desenvolvimento web moderno com TypeScript/React, servidores MCP e automações em Python/PowerShell.</p>
             </div>
           ),
           type: "output"
@@ -197,9 +197,9 @@ export default function OpenSourcePage() {
           text: (
             <div className="space-y-1 text-purple-300">
               <p className="font-bold border-b border-border/40 pb-1">Habilidades Técnicas</p>
-              <p>├─ <span className="text-foreground">Desenvolvimento:</span> TypeScript, React, Python, Node.js, TailwindCSS, REST APIs</p>
-              <p>├─ <span className="text-foreground">Automação:</span> Python Scripts, PowerShell, Bash, Git, GitHub Actions</p>
-              <p>└─ <span className="text-foreground">Sistemas:</span> Linux, Windows Server, Active Directory, Redes TCP/IP, HelpDesk N2/N3</p>
+              <p>├─ <span className="text-foreground">Desenvolvimento:</span> TypeScript, React, Next.js, Python, Node.js, TailwindCSS, REST APIs</p>
+              <p>├─ <span className="text-foreground">Automação & IA:</span> Model Context Protocol (MCP), Python Scripts, PowerShell, CI/CD Actions</p>
+              <p>└─ <span className="text-foreground">Infra & SRE:</span> Linux, Windows Server, Active Directory, SNMP, Docker, Observabilidade</p>
             </div>
           ),
           type: "output"
@@ -227,9 +227,8 @@ export default function OpenSourcePage() {
           text: (
             <div className="space-y-1 text-cyan-300">
               <p className="font-bold border-b border-border/40 pb-1">Status Operacional</p>
-              <p>● Empresa: <span className="text-emerald-400">Automotion</span></p>
               <p>● Localização: <span className="text-emerald-400">Boituva - SP, Brasil</span></p>
-              <p>● Status: <span className="text-emerald-400">Disponível para novos projetos e demandas técnicas</span></p>
+              <p>● Status: <span className="text-emerald-400">Disponível para novos projetos, contratos e consultorias</span></p>
             </div>
           ),
           type: "output"
@@ -334,7 +333,7 @@ export default function OpenSourcePage() {
                     <span className="w-3 h-3 rounded-full bg-yellow-500/80 inline-block" />
                     <span className="w-3 h-3 rounded-full bg-green-500/80 inline-block" />
                   </div>
-                  <span className="text-xs text-muted-foreground font-mono">alessandro@automotion:~</span>
+                  <span className="text-xs text-muted-foreground font-mono">alessandro@portfolio:~</span>
                   <div className="flex gap-1.5">
                     {(["help", "about", "skills", "projects", "status", "clear"] as const).map((c) => (
                       <button
@@ -351,7 +350,7 @@ export default function OpenSourcePage() {
                   </div>
                 </div>
 
-                <div className="h-80 overflow-y-auto space-y-2 pr-2 no-scrollbar">
+                <div ref={terminalScrollRef} className="h-80 overflow-y-auto space-y-2 pr-2 no-scrollbar">
                   {terminalHistory.map((line, idx) => (
                     <div 
                       key={idx} 
@@ -363,11 +362,10 @@ export default function OpenSourcePage() {
                       {line.text}
                     </div>
                   ))}
-                  <div ref={terminalEndRef} />
                 </div>
 
                 <form onSubmit={handleCommand} className="flex items-center gap-2 border-t border-border/40 pt-3">
-                  <span className="text-emerald-400 font-bold select-none text-xs sm:text-sm">alessandro@automotion:~$</span>
+                  <span className="text-emerald-400 font-bold select-none text-xs sm:text-sm">alessandro@portfolio:~$</span>
                   <input
                     ref={inputRef}
                     type="text"
