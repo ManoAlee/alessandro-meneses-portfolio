@@ -96,6 +96,8 @@ const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(({ project }, r
               project.language === 'Python' ? 'bg-emerald-500' :
               project.language === 'JavaScript' ? 'bg-yellow-400' :
               project.language === 'HTML' ? 'bg-orange-500' :
+              project.language === 'CSS' ? 'bg-pink-500' :
+              project.language === 'Visual Basic .NET' ? 'bg-violet-500' :
               'bg-purple-500'
             }`} />
             <span className="font-medium text-foreground text-xs">{project.language}</span>

@@ -12,18 +12,19 @@ export const userData = {
   },
   skills: {
     core: [
-      "Desenvolvimento Web (React, TypeScript)",
-      "Automação Corporativa (Python, PowerShell)",
-      "Suporte Técnico N2/N3 & Sistemas Corporativos",
-      "Administração de Banco de Dados & SQL",
-      "Power BI & Análise de Dados",
-      "Git & GitHub Actions"
+      "Desenvolvimento Web (React, TypeScript, Next.js)",
+      "Servidores MCP & IA Agêntica (Model Context Protocol, Python)",
+      "Automação Corporativa & Infraestrutura (Python, PowerShell, SSH)",
+      "Observabilidade SRE & Monitoramento (SNMP, Telemetria, Backups)",
+      "Sistemas Corporativos (Microsoft 365, Active Directory, Windows/Linux)",
+      "Power BI, Modelagem Matemática & Análise de Dados",
+      "Git & GitHub CI/CD Actions"
     ],
     infrastructure: [
-      "Linux", "Windows Server", "Active Directory (AD)", "Docker", "DNS/DHCP", "VPN/SSH", "TCP/IP", "Hyper-V"
+      "Linux", "Windows Server", "Active Directory (AD)", "Docker", "DNS/DHCP", "VPN/SSH", "TCP/IP", "Hyper-V", "SNMP"
     ],
     automation: [
-      "Python Scripts", "PowerShell", "Bash", "REST APIs", "CI/CD (GitHub Actions)", "Restic", "Rclone"
+      "Python Scripts", "PowerShell", "Model Context Protocol (MCP)", "Bash", "REST APIs", "CI/CD (GitHub Actions)", "Restic", "Rclone"
     ],
     languages: [
       "Português (Nativo)", "Inglês (Técnico B1)"

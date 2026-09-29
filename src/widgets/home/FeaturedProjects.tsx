@@ -73,7 +73,12 @@ export function FeaturedProjects() {
                 <div className="flex items-center gap-2">
                   <span className={`w-2.5 h-2.5 rounded-full ${
                     project.language === 'TypeScript' ? 'bg-blue-500' :
-                    project.language === 'Python' ? 'bg-emerald-500' : 'bg-amber-400'
+                    project.language === 'Python' ? 'bg-emerald-500' :
+                    project.language === 'JavaScript' ? 'bg-yellow-400' :
+                    project.language === 'HTML' ? 'bg-orange-500' :
+                    project.language === 'CSS' ? 'bg-pink-500' :
+                    project.language === 'Visual Basic .NET' ? 'bg-violet-500' :
+                    'bg-cyan-500'
                   }`} />
                   <span className="text-xs font-medium text-foreground">{project.language}</span>
                 </div>

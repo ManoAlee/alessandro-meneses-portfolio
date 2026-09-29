@@ -2,7 +2,6 @@ import { Outlet, useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { GooeyNavBar } from "@/widgets/GooeyNavBar";
 import { MagneticCursor } from "@/widgets/MagneticCursor";
-import Lenis from "@studio-freight/lenis";
 import { AnimatePresence, motion } from "framer-motion";
 import { Github, Linkedin, Mail, ArrowUpRight } from "lucide-react";
 
@@ -104,26 +103,7 @@ export function MainLayout() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    
-    // Smooth Scroll (Lenis)
-    const lenis = new Lenis({
-      duration: 1.0,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      smoothWheel: true,
-    });
-
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-    };
+    window.scrollTo({ top: 0, behavior: "instant" });
   }, [pathname]);
 
   return (
